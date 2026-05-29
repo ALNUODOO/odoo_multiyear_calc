@@ -1,0 +1,3078 @@
+<!;
+DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title id="page-title">Planes de Odoo Enterprise</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --p:#714B67;--pl:#9B6E8E;--pp:#F5EFF3;
+  --g:#017E84;--gl:#E6F5F5;
+  --c0:#52525B;--c1:#017E84;--c2:#2980B9;--c3:#714B67;--c4:#8E44AD;--c5:#D4891A;
+  --g50:#FAFAFA;--g100:#F4F4F5;--g200:#E4E4E7;--g300:#D4D4D8;--g400:#A1A1AA;--g500:#71717A;--g600:#52525B;--g700:#3F3F46;--g800:#27272A;--g900:#18181B;
+  --r:12px;--rs:8px;--sh:0 1px 3px rgba(0,0,0,.07),0 4px 16px rgba(0,0,0,.05);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--g50);color:var(--g900);min-height:100vh}
+
+/* ── HEADER ── */
+.app-hdr{background:white;border-bottom:1px solid var(--g200);height:52px;padding:0 1.25rem;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:200;box-shadow:var(--sh)}
+.logo{display:flex;align-items:center;gap:7px}
+.logo-box{width:27px;height:27px;background:var(--p);border-radius:6px;display:flex;align-items:center;justify-content:center}
+.logo-dot{width:11px;height:11px;background:white;border-radius:50%}
+.logo-name{font-size:13px;font-weight:600;color:var(--g900);white-space:nowrap}
+.logo-name span{color:var(--g400);font-weight:400}
+.div{width:1px;height:20px;background:var(--g200);flex-shrink:0}
+.hc{display:flex;align-items:center;gap:5px;flex-shrink:0}
+.hlbl{font-size:10px;font-weight:600;color:var(--g400);text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+.seg{display:flex;background:var(--g100);border-radius:5px;padding:2px;gap:1px}
+.sb{padding:3px 9px;border:none;background:transparent;border-radius:4px;font-size:11px;font-weight:500;color:var(--g500);cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap}
+.sb.on{background:white;color:var(--g900);box-shadow:0 1px 2px rgba(0,0,0,.1)}
+.inf-btn{display:flex;align-items:center;gap:4px;padding:3px 9px;border:1px solid var(--g200);border-radius:5px;cursor:pointer;background:white;font-size:11px;font-weight:500;color:var(--g600);transition:all .15s;white-space:nowrap;flex-shrink:0}
+.inf-btn input{accent-color:#E65100;width:12px;height:12px;pointer-events:none}
+.inf-btn.on{border-color:#E65100;background:#FFF3E0;color:#E65100}
+.vtabs{display:flex;background:var(--g100);border-radius:5px;padding:2px;gap:1px}
+.vt{padding:3px 9px;border:none;background:transparent;border-radius:4px;font-size:11px;font-weight:500;color:var(--g500);cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap}
+.vt.on{background:white;color:var(--g900);box-shadow:0 1px 2px rgba(0,0,0,.1)}
+.hsp{flex:1}
+.hbtn{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:5px;font-size:11px;font-weight:500;cursor:pointer;border:1px solid transparent;font-family:inherit;transition:all .15s;white-space:nowrap}
+.hbtn-g{background:transparent;border-color:var(--g200);color:var(--g600)}
+.hbtn-g:hover{background:var(--g100)}
+.hbtn-p{background:var(--p);color:white}
+.hbtn-p:hover{background:var(--pl)}
+
+/* ── CONFIG BAR ── */
+.cfg-bar{background:white;border-bottom:1px solid var(--g200);padding:.55rem 1.25rem;display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px}
+.cf{display:flex;flex-direction:column;gap:2px}
+.cf label{font-size:9px;font-weight:600;color:var(--g400);text-transform:uppercase;letter-spacing:.05em}
+.cf select,.cf input[type=number],.cf input[type=text]{padding:5px 7px;border:1px solid var(--g200);border-radius:5px;font-size:12px;font-weight:500;color:var(--g900);background:white;font-family:inherit}
+.cf select:focus,.cf input:focus{outline:none;border-color:var(--p)}
+.cseg{display:flex;background:var(--g100);border-radius:5px;padding:2px;gap:1px}
+.csb{padding:4px 8px;border:none;background:transparent;border-radius:4px;font-size:11px;font-weight:500;color:var(--g500);cursor:pointer;font-family:inherit;transition:all .15s}
+.csb.on{background:white;color:var(--g900);box-shadow:0 1px 2px rgba(0,0,0,.1)}
+.hm-wrap{display:flex;gap:3px}
+.hm{padding:4px 7px;border:1px solid var(--g200);border-radius:5px;font-size:11px;font-weight:500;color:var(--g500);cursor:pointer;background:white;transition:all .15s;white-space:nowrap}
+.hm.on{border-color:var(--g);background:var(--gl);color:var(--g)}
+.hm.dis{opacity:.35;cursor:not-allowed;pointer-events:none}
+.vig-wrap{display:flex;gap:5px;align-items:center}
+.vig-in{width:3ch;min-width:3ch;padding:2px 6px;border:1px solid var(--g300);border-radius:6px;font-family:monospace;font-size:13px;font-weight:600;text-align:center}
+.ep{padding:3px 8px;border-radius:20px;font-size:10px;font-weight:600;font-family:'DM Mono',monospace;white-space:nowrap}
+.ep-none{background:var(--g100);color:var(--g400)}
+.ep-ok{background:#E8F5E9;color:#2E7D32}
+.ep-warn{background:#FFF8E1;color:#F57F17}
+.ep-danger{background:#FFEBEE;color:#C62828}
+
+/* ── SH BAR ── */
+.sh-bar{background:#F0FAF9;border-bottom:1px solid #C3E8E8;padding:.4rem 1.25rem;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.sh-cp{background:var(--g);color:white;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600;font-family:'DM Mono',monospace;margin-left:auto}
+.db{font-size:9px;padding:2px 7px;border-radius:20px;font-weight:500}
+.db-ok{background:var(--gl);color:var(--g)}
+.db-hot{background:#FFF3E0;color:#E65100}
+
+/* ── OPTIONS BAR ── */
+.opts-bar{background:white;border-bottom:1px solid var(--g200);padding:.4rem 1.25rem;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.oblbl{font-size:9px;font-weight:600;color:var(--g400);text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+.chips{display:flex;flex-wrap:wrap;gap:4px}
+.chip{padding:3px 9px;border:1.5px solid var(--g200);border-radius:20px;font-size:11px;font-weight:500;color:var(--g500);cursor:pointer;transition:all .15s;user-select:none}
+.chip.on{border-color:var(--p);background:var(--pp);color:var(--p)}
+.disc-fs{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.df{display:flex;align-items:center;gap:3px}
+.df label{font-size:10px;color:var(--g500);font-weight:500;white-space:nowrap}
+.df input{width:58px;padding:3px 6px;border:1px solid var(--g200);border-radius:4px;font-size:11px;font-weight:500;font-family:'DM Mono',monospace;text-align:right}
+.df input:focus{outline:none;border-color:var(--p)}
+.df .mx{font-size:9px;color:var(--g400)}
+.pt-wrap{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.pt-lbl{display:flex;align-items:center;gap:4px;font-size:11px;font-weight:500;color:var(--g600);cursor:pointer}
+.pt-lbl input{accent-color:var(--p);width:12px;height:12px}
+.ptb{display:inline-flex;align-items:center;gap:2px;font-size:9px;font-weight:500;padding:2px 6px;border-radius:20px}
+.ptb-d{background:var(--pp);color:var(--p);border:1px solid var(--p)}
+.ptb-a{background:#E8F5E9;color:#2E7D32}
+.ptb-s{background:#FFF8E1;color:#F57F17}
+
+/* ── PAGE ── */
+.page{max-width:100%;margin:0;padding:1.25rem 1.5rem}
+.content{display:flex;flex-direction:column;gap:1rem}
+.chdr{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem}
+.ctitle{font-size:22px;font-weight:700;color:var(--g900)}
+.csub{font-size:12px;color:var(--g400);margin-top:2px}
+/* Proposal header */
+.proposal-hdr{text-align:center;padding:2.25rem 2rem 1.75rem;background:white;border:0.5px solid var(--g200);border-radius:var(--r);box-shadow:var(--sh);margin-bottom:1rem}
+.ph-label{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--g400);margin-bottom:.5rem}
+.ph-product{font-size:14px;font-weight:700;color:var(--p);margin-bottom:1.1rem;display:flex;align-items:center;justify-content:center;gap:7px}
+.ph-dot{width:7px;height:7px;border-radius:50%;background:var(--p);display:inline-block;opacity:.5}
+.ph-divider{width:36px;height:2px;background:var(--p);border-radius:2px;margin:0 auto 1.1rem;opacity:.25}
+.ph-client{font-size:30px;font-weight:700;color:var(--g900);line-height:1.15;margin-bottom:1.1rem;letter-spacing:-.02em}
+.ph-hr{width:100%;height:0.5px;background:var(--g200);margin-bottom:1rem}
+.ph-pills{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:7px}
+.ph-pill{font-size:11px;font-weight:500;color:var(--g600);background:var(--g50);border:0.5px solid var(--g200);padding:3px 10px;border-radius:20px}
+.ph-pill-hl{font-size:11px;font-weight:500;color:var(--p);background:var(--pp);border:0.5px solid var(--p);padding:3px 10px;border-radius:20px}
+
+/* ── PLAN GRID — always horizontal ── */
+.plans-grid{
+  display:grid;
+  gap:10px;
+  /* columns set dynamically via JS */
+  align-items:start;
+  width:100%;
+}
+
+/* ── PLAN CARD ── */
+.pc{background:white;border:1.5px solid var(--g100);border-radius:14px;overflow:hidden;box-shadow:var(--sh);transition:transform .18s,box-shadow .18s;position:relative}
+.pc:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.12)}
+.pc.rec{border-color:var(--pcol,var(--g));box-shadow:0 6px 24px rgba(1,126,132,.18)!important;transform:translateY(-3px)}
+.pc:not(.rec){opacity:.82}
+.pc:not(.rec) .pc-ph{color:var(--g400)!important}
+.pc:not(.rec) .pc-hint,.pc:not(.rec) .pc-hsym,.pc:not(.rec) .pc-hdec{color:var(--g400)!important}
+
+/* Banner */
+.pcb{padding:14px 16px;color:white;position:relative}
+.pcb-months{font-size:11px;font-weight:600;opacity:.85;letter-spacing:.04em;text-transform:uppercase;margin-bottom:3px}
+.pcb-name{font-size:14px;font-weight:700;color:white;line-height:1.2}
+.pcb-badge{display:inline-block;background:rgba(255,255,255,.25);padding:3px 9px;border-radius:20px;font-size:10px;font-weight:700;color:white;margin-top:6px;white-space:nowrap}
+
+/* Price hero */
+.pc-ph{padding:13px 13px 10px}
+/* Normalmente row */
+.pc-normally-row{display:flex;align-items:center;gap:6px;margin-bottom:8px}
+.pc-normally-lbl{font-size:10px;color:var(--g400)}
+.pc-strike-wrap{position:relative;display:inline-block}
+.pc-strike{font-size:12px;font-weight:500;color:var(--g500);font-family:'DM Mono',monospace}
+.pc-strike-line{position:absolute;left:-2px;right:-2px;top:50%;height:1.5px;background:rgba(220,38,38,.4);transform:translateY(-50%) rotate(-6deg);pointer-events:none}
+/* Total — big hero */
+.pc-total-lbl{font-size:10px;color:var(--g400);margin-bottom:2px}
+.pc-total-big{font-size:44px;font-weight:800;line-height:1;font-family:'Inter',sans-serif;color:var(--g900);letter-spacing:-.02em}
+.pc-total-big.rec-col{color:#017E84}
+/* Saving */
+.pc-saving-row{margin-top:6px}
+.pc-saving-num{font-size:14px;font-weight:700;color:#059669;display:block}
+.pc-saving-months{font-size:11px;color:#059669;font-weight:500}
+/* Per user secondary */
+.pc-per-user{padding:0 16px 10px;font-size:11px;color:var(--g400)}
+.pc-havg{font-size:10px;color:var(--g400);margin-bottom:8px}
+
+/* Card body */
+.pc-bd{padding:0 12px 12px}
+.pc-tags{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:7px;min-height:16px}
+.tag{font-size:9px;font-weight:600;padding:1px 5px;border-radius:20px}
+.ty1{background:#F3E5F5;color:#7B1FA2}
+.tdisc{background:#EDE7F6;color:#6A1B9A}
+.tfrz{background:#E3F2FD;color:#1565C0}
+.tinf{background:#FFF3E0;color:#E65100}
+
+.pcls{border-top:1px solid var(--g100);padding-top:6px;margin-bottom:6px}
+.pcl{display:flex;justify-content:space-between;align-items:center;padding:1px 0}
+.pcl span:first-child{font-size:10px;color:var(--g500)}
+.pcl span:last-child{font-size:10px;font-weight:600;color:var(--g800);font-family:'DM Mono',monospace}
+.pc-tot{display:flex;justify-content:space-between;align-items:center;padding:7px 9px;border-radius:6px;margin-bottom:5px;color:white}
+.pc-tot span:first-child{font-size:10px;font-weight:600}
+.pc-tot span:last-child{font-size:13px;font-weight:700;font-family:'DM Mono',monospace}
+.pc-sav{text-align:center;padding:5px 4px;border-radius:6px;font-size:10px;font-weight:600;background:#E8F5E9;color:#2E7D32;margin-bottom:6px}
+.pc-sav b{display:block;font-size:14px;font-family:'DM Mono',monospace;margin-top:1px}
+
+/* Checklist */
+.fl-ttl{font-size:9px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--g300);margin:5px 0 3px}
+.fi{display:flex;align-items:flex-start;gap:5px;padding:2px 0}
+.fck{width:13px;height:13px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.fck-y{background:#E8F5E9}
+.fck-n{background:var(--g100)}
+.ft{font-size:10.5px;color:var(--g700);line-height:1.35}
+.ft.dim{color:var(--g300);text-decoration:line-through}
+
+/* PT in card */
+.pc-pt{border-top:1px solid var(--g100);padding-top:6px;margin-top:4px}
+.pc-pt-ttl{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--g400);margin-bottom:3px}
+
+/* ── IMPACT VIEW ── */
+.impact-grid{display:grid;gap:10px;align-items:start}
+.ic{background:white;border:1px solid var(--g200);border-radius:var(--r);padding:13px;box-shadow:var(--sh)}
+.ic-title{font-size:12px;font-weight:700;color:var(--g700);margin-bottom:9px}
+.ic-vs{display:flex;gap:6px;margin-bottom:8px}
+.ic-col{flex:1;padding:8px;border-radius:var(--rs);text-align:center}
+.ic-cl{font-size:9px;font-weight:600;color:var(--g400);text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px}
+.ic-cv{font-size:16px;font-weight:700;font-family:'DM Mono',monospace}
+.ic-cs{font-size:9px;color:var(--g400);margin-top:1px}
+.ic-bar-w{margin-bottom:7px}
+.ic-bl{display:flex;justify-content:space-between;font-size:9px;color:var(--g400);margin-bottom:2px}
+.ic-bar{height:8px;border-radius:4px;background:var(--g100);overflow:hidden;margin-bottom:3px}
+.ic-bfill{height:100%;border-radius:4px;transition:width .5s}
+.ic-sv{border-radius:var(--rs);padding:7px;text-align:center}
+.ic-svl{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--g400)}
+.ic-svv{font-size:18px;font-weight:700;font-family:'DM Mono',monospace;color:#2E7D32}
+.ic-svp{font-size:10px;color:var(--g400)}
+
+/* ── FEATURES SECTION ── */
+.fs{background:white;border:1px solid var(--g200);border-radius:var(--r);padding:1.5rem;box-shadow:var(--sh)}
+.fs-hdr{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1.1rem}
+.fs-title{font-size:18px;font-weight:700;color:var(--g900);margin-bottom:.2rem}
+.fs-sub{font-size:12px;color:var(--g500)}
+.fs-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 11px;background:var(--gl);color:var(--g);border-radius:20px;font-size:11px;font-weight:600;white-space:nowrap;flex-shrink:0}
+.fs-banner{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;background:#714B67;border-radius:var(--r);color:white;margin-bottom:1.1rem}
+.fs-bi{font-size:26px;flex-shrink:0}
+.fs-bt{font-size:14px;font-weight:700;margin-bottom:3px}
+.fs-bs{font-size:11px;opacity:.85;line-height:1.5;margin-bottom:8px}
+.fs-bs a{color:rgba(255,255,255,.8)}
+.fs-banner-pills{display:flex;flex-wrap:wrap;gap:5px}
+.fs-bpill{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.2);color:white;font-size:10px;font-weight:500;padding:2px 9px;border-radius:20px}
+
+
+/* ── FROZEN PRICE BANNER (above cards) ── */
+.frozen-bar{background:linear-gradient(135deg,#714B67,#5a3a52);border-radius:var(--r);padding:1rem 1.25rem;margin-bottom:.85rem;display:flex;align-items:center;gap:14px;color:white;position:relative;overflow:hidden}
+.frozen-bar::after{content:'';position:absolute;right:-20px;top:-20px;width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.06)}
+.fb-lock{width:38px;height:38px;border-radius:9px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.fb-body{flex:1}
+.fb-title{font-size:13px;font-weight:700;margin-bottom:2px}
+.fb-sub{font-size:11px;opacity:.85;line-height:1.45}
+.fb-pills{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}
+.fb-pill{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);color:white;font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px}
+/* ── USERS WARNING ── */
+.users-warn{display:flex;align-items:flex-start;gap:9px;background:#FFFBEB;border:1.5px solid #F59E0B;border-radius:var(--rs);padding:.75rem .9rem;margin-bottom:.85rem}
+.uw-icon{font-size:15px;flex-shrink:0;margin-top:1px}
+.uw-text{font-size:11px;color:#78350F;line-height:1.5}
+.uw-text strong{font-weight:600;color:#451A03}
+/* ── ERP COMPARISON ── */
+.erp-section{background:white;border:1px solid var(--g200);border-radius:var(--r);padding:1.1rem 1.25rem;box-shadow:var(--sh);margin-bottom:.85rem}
+.erp-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:.85rem;gap:1rem}
+.erp-title{font-size:15px;font-weight:700;color:var(--g900)}
+.erp-sub{font-size:11px;color:var(--g500);margin-top:2px}
+.erp-rtabs{display:flex;gap:4px}
+.erp-rtab{padding:3px 10px;border:0.5px solid var(--g200);border-radius:20px;font-size:11px;font-weight:500;color:var(--g500);cursor:pointer;background:white;transition:.15s}
+.erp-rtab.on{background:var(--p);border-color:var(--p);color:white}
+.erp-bars{display:flex;flex-direction:column;gap:8px}
+.erp-row{display:flex;align-items:flex-start;gap:10px;padding:4px 0}
+.erp-name{font-size:11px;font-weight:500;color:var(--g700);min-width:150px;max-width:150px;flex-shrink:0;line-height:1.3}
+.erp-bar-wrap{height:14px;background:var(--g100);border-radius:5px;overflow:hidden}
+.erp-bar-fill{height:100%;border-radius:5px;display:flex;align-items:center;padding:0 8px;transition:width .4s ease}
+.erp-bar-label{font-size:10px;font-weight:600;color:white;white-space:nowrap}
+.erp-mult{font-size:11px;font-weight:700;min-width:55px;text-align:right;flex-shrink:0}
+.erp-note{font-size:10px;color:var(--g400);margin-top:.6rem}
+/* ── FROZEN DATE badge in card banner ── */
+.frozen-date-badge{display:inline-flex;align-items:center;gap:3px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);color:white;font-size:9px;font-weight:600;padding:2px 7px;border-radius:20px;margin-top:4px}
+
+.exp-banner{padding:10px 16px;border-radius:var(--rs);font-size:13px;font-weight:500;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.exp-banner .exp-days{font-size:11px;font-weight:600;opacity:.8}
+.fn{font-size:10px;color:var(--g400)}
+.fn a{color:var(--p);text-decoration:none}
+
+/* ── PRINT ── */
+@page{margin:1cm;size:auto}
+@media print{
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  .np,.app-hdr .hbtn-g,.app-hdr .hbtn-p,.cfg-bar,.sh-bar,.opts-bar,
+  .users-warn,.app-hdr .vtabs,.app-hdr .inf-btn,.erp-section,
+  select,.pc-pt-screen{display:none!important}
+  .app-hdr{display:none!important}
+  body{background:white;margin:0}
+  .chdr{display:none!important}
+  .print-only-hdr{display:block!important}
+  .proposal-hdr{display:none!important}
+  .print-only-hdr{display:block!important;text-align:center;padding:.75rem 0 .5rem;border-bottom:1px solid var(--g200);margin-bottom:.75rem}
+  .page{padding:.75rem 1rem;max-width:100%}
+  .plans-grid{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))!important;gap:8px!important}
+  .pc{break-inside:avoid;transform:none!important;box-shadow:0 0 0 1px rgba(0,0,0,.1)!important}
+  .pc.rec{transform:none!important;box-shadow:0 0 0 2px #017E84!important}
+  .pcb{-webkit-print-color-adjust:exact!important}
+  .fs,.impact-section{break-inside:avoid}
+  .pc-pt-chosen{display:block!important}
+  .exp-banner{break-inside:avoid}
+}
+.pc-pt-chosen{display:none}
+.pc-pt-screen{display:block}
+.hidden{display:none!important}
+
+/* ── CARD REDESIGN v2 ── */
+
+/* Per-user inline (moved to price block) */
+.pc-per-user-inline{font-size:11px;color:var(--g400);margin-top:2px;margin-bottom:4px}
+
+/* Savings hero block */
+.pc-savings-block{background:#F0FDF4;border:1px solid #BBF7D0;border-radius:8px;padding:8px 11px;margin-top:10px}
+.pc-savings-months{display:flex;align-items:flex-start;gap:5px;font-size:14px;font-weight:700;color:#059669;line-height:1.2}
+.pc-savings-amount{font-size:10.5px;color:#6EE7B7;margin-top:3px;font-weight:500}
+
+/* Rec card savings block gets stronger green */
+.pc.rec .pc-savings-block{background:rgba(5,150,105,.08);border-color:rgba(5,150,105,.2)}
+.pc.rec .pc-savings-months{color:#047857}
+.pc.rec .pc-savings-amount{color:#059669}
+
+/* Feature divider */
+.pc-feat-divider{height:1px;background:var(--g100);margin:0 0 10px}
+
+/* Features compact list — only available ones shown */
+.pc-feats{display:flex;flex-direction:column;gap:3px;margin-bottom:8px}
+
+
+/* Rec card — taller feel via header */
+.pc.rec .pcb{padding:18px 16px}
+
+/* Badge repositioned to top-right */
+.pcb-badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);color:white;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:20px;white-space:nowrap}
+
+/* Remove old per-user (now inline) */
+.pc-per-user{display:none}
+
+/* Tag pills refined */
+.tag{font-size:9px;font-weight:600;padding:2px 7px;border-radius:12px;border:1px solid;white-space:nowrap}
+
+/* Mobile responsive */
+@media(max-width:640px){
+  .plans-grid{grid-template-columns:1fr!important}
+  .pc.rec{transform:none}
+  .pc-total-big{font-size:36px!important}
+}
+
+/* ══ FEATURES SECTION REDESIGN ══════════════════════════════ */
+
+/* Section header */
+.fs-title{font-size:22px;font-weight:700;color:var(--g900);margin-bottom:.3rem;line-height:1.2}
+.fs-sub{font-size:12px;color:var(--g500);line-height:1.4}
+.fs-badge{font-size:12px;padding:6px 14px;font-weight:600}
+.fs-hdr{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:1.5rem;flex-wrap:wrap}
+
+/* Group label */
+.feat-group-label{display:flex;align-items:center;gap:10px;margin:1.5rem 0 .85rem;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g400)}
+.feat-group-line{flex:1;height:1px;background:var(--g100)}
+
+/* Feature grid: 2 hero + 4 compact */
+.feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:.5rem}
+.feat-card{background:white;border:1px solid var(--g100);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px;transition:box-shadow .15s}
+.feat-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.07);border-color:var(--g200)}
+.feat-hero{grid-column:span 2;flex-direction:row;align-items:flex-start;gap:14px;padding:18px}
+.feat-icon-wrap{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.feat-hero .feat-icon-wrap{width:46px;height:46px;border-radius:12px}
+.feat-content{flex:1}
+.feat-title{font-size:13px;font-weight:600;color:var(--g900);line-height:1.3;margin-bottom:4px}
+.feat-hero .feat-title{font-size:14px}
+.feat-desc{font-size:11.5px;color:var(--g500);line-height:1.5}
+.feat-hero .feat-desc{font-size:12px}
+
+/* Multi-year banner — section CLIMAX */
+.feat-multiyear-banner{background:linear-gradient(135deg,#4A2545 0%,#6B3D65 50%,#714B67 100%);border-radius:16px;padding:28px 32px;margin-bottom:2rem;color:white}
+.fmt-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:24px}
+.fmt-lock{width:44px;height:44px;background:rgba(255,255,255,.15);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.fmt-title{font-size:18px;font-weight:700;color:white;margin-bottom:4px}
+.fmt-sub{font-size:12px;color:rgba(255,255,255,.75);line-height:1.4;max-width:520px}
+.fmt-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.fmt-pillar{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:18px 16px}
+.fmt-pillar-icon{width:44px;height:44px;background:rgba(255,255,255,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.fmt-pillar-title{font-size:13px;font-weight:700;color:white;margin-bottom:6px}
+.fmt-pillar-sub{font-size:11px;color:rgba(255,255,255,.65);line-height:1.45}
+
+/* Host band */
+.host-band{background:var(--g50);border:1px solid var(--g100);border-radius:12px;padding:18px 20px;display:flex;align-items:flex-start;gap:16px;margin-bottom:1.25rem}
+.host-band-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.host-band-title{font-size:13px;font-weight:600;color:var(--g900);margin-bottom:3px}
+.host-band-sub{font-size:11.5px;color:var(--g500);margin-bottom:12px;line-height:1.4}
+.host-band-items{display:flex;flex-direction:column;gap:6px}
+.host-item{display:flex;align-items:flex-start;gap:8px;font-size:11.5px;color:var(--g600);line-height:1.4}
+.host-item-t{color:var(--g800);font-weight:500}
+.host-item-d{color:var(--g500)}
+
+/* Mobile */
+@media(max-width:768px){
+  .feat-grid{grid-template-columns:1fr 1fr}
+  .feat-hero{grid-column:span 2}
+  .fmt-pillars{grid-template-columns:1fr}
+  .feat-multiyear-banner{padding:20px}
+}
+@media(max-width:480px){
+  .feat-grid{grid-template-columns:1fr}
+  .feat-hero{flex-direction:column}
+}
+
+/* ══ INLINE EDITING SYSTEM ══════════════════════════════════════════════ */
+
+/* Client name input */
+.ph-client-wrap{position:relative;margin-bottom:6px}
+.ph-client-input{
+  width:100%;border:none;background:transparent;outline:none;
+  font-size:32px;font-weight:700;color:var(--g900);letter-spacing:-.02em;
+  font-family:inherit;text-align:center;
+  border-bottom:2px solid transparent;transition:border-color .15s;
+  padding:4px 8px;cursor:text;
+}
+.ph-client-input::placeholder{color:var(--g300);font-weight:400}
+.ph-client-input:focus{border-bottom-color:var(--p);color:var(--g900)}
+.ph-client-wrap.editing .ph-client-input{background:rgba(113,75,103,.03)}
+
+/* Inline pills row */
+.ph-inline-pills{
+  display:flex;flex-wrap:wrap;justify-content:center;
+  gap:5px;margin-top:8px;
+}
+
+/* Base pill style */
+.pip{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:4px 11px;border-radius:20px;font-size:11.5px;font-weight:500;
+  cursor:pointer;transition:all .15s;position:relative;
+  border:1.5px solid var(--g200);background:white;color:var(--g600);
+  user-select:none;white-space:nowrap;
+}
+.pip:hover{border-color:var(--p);color:var(--p);background:rgba(113,75,103,.04)}
+.pip:active{transform:scale(.97)}
+
+/* Billing group */
+.pip-group{display:flex;border:1.5px solid var(--g200);border-radius:20px;overflow:hidden;background:white}
+.pip-group .pip{border:none;border-radius:0;padding:4px 13px}
+.pip-group .pip-active{background:var(--p);color:white;font-weight:600}
+.pip-group .pip-active:hover{background:var(--p);color:white;border-color:transparent}
+
+/* Users pill — input inside */
+.pip-users{cursor:default}
+.pip-users input{cursor:text}
+.pip-users:focus-within{border-color:var(--p);color:var(--p)}
+
+/* Plan pill — toggles */
+.pip-toggle.plan-custom{background:#F5EFF3;border-color:#C4A4BF;color:#714B67}
+
+/* Hosting pill */
+.pip-cycle{background:#F0FAFA;border-color:#A8DCDC;color:#017E84}
+.pip-cycle:hover{background:#E1F5EE;border-color:var(--s)}
+
+/* Advanced button */
+.pip-adv{border-style:dashed;color:var(--g400);padding:4px 10px!important}
+.pip-adv:hover{border-color:var(--g400);color:var(--g600);border-style:solid}
+
+/* Region dropdown */
+.pip-select{position:relative}
+.pip-dd{
+  position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);
+  background:white;border:1px solid var(--g200);border-radius:12px;
+  box-shadow:0 8px 32px rgba(0,0,0,.12);min-width:220px;max-height:300px;
+  overflow-y:auto;z-index:1000;display:none;
+}
+.pip-dd.open{display:block}
+.pip-dd-group{padding:6px 0;border-bottom:1px solid var(--g100)}
+.pip-dd-group:last-child{border:none}
+.pip-dd-group-label{font-size:9px;font-weight:700;color:var(--g400);letter-spacing:.08em;text-transform:uppercase;padding:6px 14px 3px}
+.pip-dd-item{padding:7px 14px;font-size:12px;color:var(--g700);cursor:pointer;transition:background .1s}
+.pip-dd-item:hover{background:var(--g50);color:var(--p)}
+.pip-dd-item.active{color:var(--p);font-weight:600}
+
+/* Advanced panel */
+.adv-panel{
+  margin-top:10px;background:var(--g50);border:1px solid var(--g200);
+  border-radius:12px;overflow:hidden;
+  transition:all .2s;
+}
+.adv-panel.hidden{display:none!important}
+.adv-panel-inner{padding:16px;display:flex;flex-direction:column;gap:12px}
+.adv-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.adv-lbl{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--g400);white-space:nowrap;min-width:fit-content}
+.adv-field{display:flex;flex-direction:column;gap:3px}
+.adv-field label{font-size:10px;color:var(--g500)}
+
+/* Hosting 3-way toggle pills */
+.pip-host{border:none;border-radius:0;padding:4px 10px;font-size:11px}
+.pip-host-group,.pip-group{display:flex;border:1.5px solid var(--g200);border-radius:20px;overflow:hidden;background:white}
+.pip-host.pip-host-active,.pip-host.pip-active{
+  background:var(--s)!important;color:white!important;font-weight:600;
+}
+.pip-host:not(.pip-host-active):not(.pip-active){
+  background:white;color:var(--g500);
+}
+.pip-host.pip-active:hover{background:var(--s);color:white}
+.pip-host:not(.pip-active){color:var(--g500)}
+
+/* Progressive pills rows */
+.pip-row{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:5px;width:100%;}
+.pip-row-hosting{margin-top:4px;padding-top:6px;border-top:1px solid var(--g100);align-items:center}
+.pip-row-hosting.hidden{display:none!important}
+
+/* Plan pills in main row */
+.pip-plan{border:none;border-radius:0;padding:4px 12px}
+.pip-plan.pip-active{background:var(--p);color:white;font-weight:600}
+.pip-plan:not(.pip-active){color:var(--g500)}
+
+/* Hosting badge (Annual only) */
+.pip-host-badge{font-size:8px;background:var(--g200);color:var(--g500);padding:1px 5px;border-radius:8px;margin-left:3px;font-weight:600;letter-spacing:.03em}
+.pip-host.pip-host-active .pip-host-badge{background:rgba(255,255,255,.25);color:white}
+
+/* Unified plan chip with inline discount */
+.upc-wrap{display:flex;flex-direction:column;align-items:center;gap:3px}
+.upc-chip{min-width:52px;text-align:center}
+.upc-disc{display:flex;align-items:center;gap:1px;background:var(--g100);border-radius:8px;padding:2px 6px}
+.upc-input{width:30px;border:none;background:transparent;font-size:10px;font-weight:600;color:var(--p);outline:none;text-align:center;font-family:inherit}
+.upc-pct{font-size:10px;color:var(--g400);font-weight:500}
+
+/* Micro-label inside pill group */
+.pip-billing-group{padding-left:2px}
+.pip-micro-label{
+  font-size:7.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--g400);padding:0 6px 0 8px;white-space:nowrap;align-self:center;
+}
+/* Remove top margin on pills — keep everything on one line */
+.ph-inline-pills{margin-top:6px!important;gap:4px!important}
+.pip-row{gap:4px!important}
+
+.upc-chip-row{display:flex;align-items:center;gap:3px}
+.upc-star{font-size:12px;color:var(--g300);cursor:pointer;line-height:1;padding:1px;transition:color .15s}
+.upc-star:hover{color:#F59E0B}
+.upc-star-on{color:#F59E0B}
+
+.vig-chip{
+  padding:2px 7px;border-radius:10px;font-size:10px;font-weight:600;
+  cursor:pointer;border:1px solid var(--g200);background:white;color:var(--g500);
+  white-space:nowrap;transition:all .12s;
+}
+.vig-chip:hover{border-color:var(--p);color:var(--p);background:#F9F5F8}
+.vig-chip.active{background:var(--p);color:white;border-color:var(--p)}
+.upc-input{min-width:2ch;width:2ch;max-width:5ch}
+
+/* Hosting pills inside pip-group — match billing/plan style */
+.pip-group .pip-host.pip-host-active,
+.pip-group .pip-host.pip-active{
+  background:var(--s)!important;
+  color:white!important;
+  font-weight:600!important;
+}
+.pip-group .pip-host:not(.pip-host-active):not(.pip-active){
+  background:white;
+  color:var(--g600);
+  font-weight:500;
+}
+.pip-group .pip-host:not(.pip-host-active):not(.pip-active):hover{
+  color:var(--s);
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header class="app-hdr">
+  <div class="logo">
+    <div class="logo-box"><span class="logo-dot"></span></div>
+    <div class="logo-name">Odoo Enterprise <span>/ Calculadora</span></div>
+  </div>
+  <div class="hsp"></div>
+  <!-- Hidden inputs kept for JS compatibility -->
+  <input type="checkbox" id="show-plans" checked onchange="toggleSection('plans',this.checked)" style="display:none">
+  <input type="checkbox" id="show-impact" onchange="toggleSection('impact',this.checked)" style="display:none">
+  <input type="checkbox" id="inf-chk" style="display:none">
+  <button class="sb" id="bill-m" onclick="setBilling('monthly')" style="display:none"></button>
+  <button class="sb" id="bill-a" onclick="setBilling('annual')" style="display:none"></button>
+  <div class="seg np" style="margin-right:4px">
+    <button class="sb lang-btn on" data-lang="es" onclick="setLang('es')">ES</button>
+    <button class="sb lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+    <button class="sb lang-btn" data-lang="fr" onclick="setLang('fr')">FR</button>
+  </div>
+  <button class="hbtn hbtn-g np" onclick="copyProposal()">
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span id="copy-lbl">Copiar</span>
+  </button>
+  <button class="hbtn hbtn-p np" onclick="window.print()">
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg><span id="pdf-lbl">PDF</span>
+  </button>
+</header>
+
+<!-- ══ CONFIG BAR ══ -->
+<div class="cfg-bar np" style="display:none">
+  <div class="cf"><label id="lbl-region">Región</label>
+    <select id="region" onchange="onRegionChange()" style="min-width:180px">
+      <optgroup label="── North America ──">
+        <option value="North America">North America ($)</option>
+        <option value="US: North America (USD)">US: North America USD ($)</option>
+        <option value="US: North America (CAD)">US: North America CAD (CAD$)</option>
+      </optgroup>
+      <optgroup label="── Europe ──">
+        <option value="Europe High">Europe High (€)</option>
+        <option value="Europe Low">Europe Low (€)</option>
+        <option value="DE: Germany - Austria">DE: Germany - Austria (€)</option>
+        <option value="ES: Spain">ES: Spain (€)</option>
+        <option value="IT: Italy">IT: Italy (€)</option>
+        <option value="BE: United Kingdom (GBP)">BE: United Kingdom (£)</option>
+        <option value="UAE: Middle East Turkey (EUR)">UAE: Middle East Turkey (€)</option>
+      </optgroup>
+      <optgroup label="── Latin America ──">
+        <option value="Latin America">Latin America ($)</option>
+        <option value="MX: Latin America">MX: Latin America ($)</option>
+        <option value="US: Latin America">US: Latin America ($)</option>
+        <option value="Africa Low Euro">Africa Low Euro ($)</option>
+        <option value="MX: Mexico MXN">MX: Mexico MXN (Mex$)</option>
+        <option value="BR: Brasil BRL">BR: Brasil (R$)</option>
+      </optgroup>
+      <optgroup label="── Middle East ──">
+        <option value="UAE: Middle East Low">UAE: Middle East Low ($)</option>
+        <option value="UAE: Middle East Mid">UAE: Middle East Mid ($)</option>
+      </optgroup>
+      <optgroup label="── Asia / Africa ──">
+        <option value="Asia / Africa High">Asia / Africa High ($)</option>
+        <option value="Asia / Africa Middle">Asia / Africa Middle ($)</option>
+        <option value="Asia / Africa Low">Asia / Africa Low ($)</option>
+        <option value="HK: Asia High">HK: Asia High ($)</option>
+        <option value="HK: Asia Middle">HK: Asia Middle ($)</option>
+        <option value="HK: Asia Low">HK: Asia Low ($)</option>
+      </optgroup>
+      <optgroup label="── Australia ──">
+        <option value="AU: Australia AUD">AU: Australia (AUD)</option>
+        <option value="AU: Australia High (USD)">AU: Australia High (USD)</option>
+        <option value="AU: Australia low (USD)">AU: Australia Low (USD)</option>
+      </optgroup>
+      <optgroup label="── India / SE Asia ──">
+        <option value="IN: India INR">IN: India (Rs)</option>
+        <option value="ID: Indonesia IDR">ID: Indonesia (Rp)</option>
+      </optgroup>
+    </select>
+  </div>
+  <div class="cf"><label id="lbl-users">Usuarios</label>
+    <input type="number" id="unum" min="1" max="9999" value="10" oninput="checkDed();upd()" style="width:75px">
+  </div>
+  <div class="cf"><label id="lbl-plan">Plan</label>
+    <div class="cseg">
+      <button class="csb on" id="tab-std" onclick="setPlan('Standard',this)"><span data-t="plan_std">Estándar</span></button>
+      <button class="csb" id="tab-cus" onclick="setPlan('Custom',this)"><span data-t="plan_custom">Personalizado</span></button>
+    </div>
+  </div>
+  <div class="cf"><label id="lbl-hosting">Alojamiento</label>
+    <div class="hm-wrap">
+      <div class="hm on" id="htab-online" onclick="setHost('online',this)">☁️ Online</div>
+      <div class="hm dis" id="htab-onprem" onclick="setHost('onprem',this)">🖥️ On-Premise</div>
+      <div class="hm dis" id="htab-sh" onclick="setHost('sh',this)">⚙️ Odoo.sh</div>
+    </div>
+  </div>
+  <div class="cf"><label id="lbl-company">Empresa</label>
+    <input type="text" id="client-name" placeholder="Nombre del cliente" id="client-placeholder" oninput="upd()" style="min-width:130px">
+  </div>
+  <div class="cf"><label id="lbl-erp-compare">Comparativa ERP</label>
+    <div style="display:flex;flex-direction:column;gap:5px;margin-top:2px">
+      <label style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--g700);cursor:pointer">
+        <input type="checkbox" id="show-erp" checked onchange="document.getElementById('erp-section').style.display=this.checked?'block':'none'" style="accent-color:var(--p);width:13px;height:13px"><span id="lbl-show-erp"> Visible en propuesta</span>
+      </label>
+      <div style="display:flex;align-items:center;gap:5px">
+        <span style="font-size:11px;color:var(--g500)">Plan:</span>
+        <select id="erp-plan-sel" onchange="erpPlanOverride=parseInt(this.value);renderErp();upd()" style="font-size:11px;padding:3px 6px;border:1px solid var(--g200);border-radius:5px;background:white;color:var(--g900);font-family:inherit">
+          <option value="-1"><span id="lbl-plan-auto">Auto (mejor valor)</span></option>
+          <option value="0">Mensual</option>
+          <option value="1">12 meses</option>
+          <option value="2">24 meses</option>
+          <option value="3">36 meses</option>
+          <option value="4">48 meses</option>
+          <option value="5">60 meses</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="cf"><label id="lbl-validity">Vigencia (días)</label>
+    <div class="vig-wrap">
+      <input type="number" class="vig-in" id="vig-days" min="1" max="365" placeholder="—" oninput="this.style.width=Math.max(3,(this.value+'').length+1)+'ch';updateExpiry()" style="width:3ch">
+      <div class="ep ep-none" id="exp-pill"><span id="lbl-no-date">Sin fecha</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SH BAR ══ -->
+<div class="sh-bar hidden np" id="sh-bar" style="display:none">
+  <span style="font-size:10px;font-weight:600;color:var(--g500)">⚙️ Odoo.sh</span>
+  <div class="cf"><label><span id="lbl-workers"><span id="lbl-workers">Workers</span> (<span id="lbl-max">max</span> 256)</label><input type="number" id="wk" min="1" max="256" value="2" oninput="clampSh();checkDed();upd()" style="width:65px"></div>
+  <div class="cf"><label>Storage GB (<span id="lbl-max2">max</span> 4096)</label><input type="number" id="gb" min="1" max="4096" value="20" oninput="clampSh();checkDed();upd()" style="width:70px"></div>
+  <div class="cf"><label>Staging (<span id="lbl-max3">max</span> 20)</label><input type="number" id="stg" min="0" max="20" value="1" oninput="clampSh();checkDed();upd()" style="width:60px"></div>
+  <div id="ded-badge" class="db db-ok"><span id='lbl-no-ded'>Sin dedicado</span></div>
+  <span id="sh-cost-val" style="display:none">—</span>
+</div>
+
+<!-- ══ OPTIONS BAR ══ -->
+<div class="opts-bar np" style="display:none">
+  <span class="oblbl" id="lbl-planes">Planes</span>
+  <div class="chips" id="plan-chips"></div>
+  <div class="div"></div>
+  <span class="oblbl" id="lbl-add-disc">Desc. adicional</span>
+  <div class="disc-fs" id="disc-fields"><span style="font-size:10px;color:var(--g400)">Selecciona planes &gt;12m</span></div>
+  <div class="div"></div>
+  <div class="pt-wrap">
+    <span class="oblbl" id="lbl-pt">Términos de pago en</span>
+    <div class="chips" id="pt-plan-chips"></div>
+  </div>
+
+</div>
+
+<!-- ══ PAGE ══ -->
+<div class="page">
+  <div class="content">
+
+    <!-- Proposal header with inline editing -->
+    <div class="proposal-hdr" id="proposal-hdr">
+      <div class="ph-product" style="margin-bottom:.6rem"><span class="ph-dot"></span><span id="lbl-prop-header">Propuesta de licenciamiento · Odoo Enterprise</span><span class="ph-dot"></span></div>
+      <!-- Inline client name edit -->
+      <div class="ph-client-wrap">
+        <input type="text" id="client-name-inline" class="ph-client-input" placeholder="Nombre del cliente..."
+          oninput="document.getElementById('client-name').value=this.value;upd()"
+          onfocus="this.parentNode.classList.add('editing')"
+          onblur="this.parentNode.classList.remove('editing')">
+      </div>
+      <div class="ph-hr"></div>
+      <!-- Inline config pills -->
+      <div class="ph-inline-pills" id="ph-inline-pills">
+
+        <!-- ROW 1: Always visible — Billing + Plan + Users + Region -->
+        <div class="pip-row" id="pip-row-1">
+
+          <!-- Step 1: Billing comparison — micro-label inline -->
+          <div class="pip-group pip-billing-group">
+            <span class="pip-micro-label" id="lbl-billing-ctx">Comparativa</span>
+            <div class="pip pip-billing pip-active" id="pip-monthly" onclick="setBilling('monthly');updateBillingPips()">
+              <span id="pip-lbl-monthly">Mensual</span>
+            </div>
+            <div class="pip pip-billing" id="pip-annual" onclick="setBilling('annual');updateBillingPips()">
+              <span id="pip-lbl-annual">Anual</span>
+            </div>
+          </div>
+
+                    <!-- Step 2: Plan type -->
+          <div class="pip-group">
+            <div class="pip pip-plan pip-active" id="pip-std" onclick="setPlanInline('Standard')">
+              <span id="pip-lbl-std">Estándar</span>
+            </div>
+            <div class="pip pip-plan" id="pip-cus" onclick="setPlanInline('Custom')">
+              <span id="pip-lbl-cus">Personalizado</span>
+            </div>
+          </div>
+
+          <!-- Step 3: Users -->
+          <div class="pip pip-users" id="pip-users" onclick="focusPipInput('pip-users-input')">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            <input type="number" id="pip-users-input" min="1" max="9999" value="10"
+              oninput="this.style.width=(this.value.length+1)+'ch';document.getElementById('unum').value=this.value;checkDed();upd()"
+              onclick="event.stopPropagation()"
+              style="width:2ch;min-width:20px;border:none;background:transparent;font-size:12px;font-weight:600;color:inherit;font-family:inherit;outline:none;text-align:center">
+            <span id="pip-lbl-users">usuarios</span>
+          </div>
+
+          <!-- Step 4: Region -->
+          <div class="pip pip-select" id="pip-region" onclick="togglePipDropdown('pip-region-dd');event.stopPropagation()">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            <span id="pip-region-val">North America ($)</span>
+            <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            <div class="pip-dd" id="pip-region-dd" onclick="event.stopPropagation()"></div>
+          </div>
+
+          <!-- Advanced settings -->
+          <div class="pip pip-adv" id="pip-adv-btn" onclick="toggleAdvPanel()">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            <span id="pip-adv-lbl">⚙ Avanzado</span>
+          </div>
+        </div>
+
+        <!-- ROW 2: Hosting — only shows if Custom -->
+        <div class="pip-row pip-row-hosting hidden" id="pip-row-hosting">
+          <div style="font-size:10px;color:var(--g400);font-weight:600;letter-spacing:.05em;align-self:center" id="pip-lbl-hosting-row">ALOJAMIENTO</div>
+          <div class="pip-group">
+            <!-- Online: always available for Custom -->
+            <div class="pip pip-host pip-host-active" id="pip-host-online" style="background:var(--s);color:white;font-weight:600" onclick="setHostInline('online')">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9z"/></svg>
+              Online
+            </div>
+            <!-- On-Premise: Custom + Annual only -->
+            <div class="pip pip-host" id="pip-host-onprem" onclick="setHostInline('onprem')" style="position:relative">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+              <span id="pip-lbl-onprem-txt">On-Premise</span>
+              <span class="pip-host-badge" id="pip-onprem-badge">Anual</span>
+            </div>
+            <!-- Odoo.sh: Custom only -->
+            <div class="pip pip-host" id="pip-host-sh" onclick="setHostInline('sh')">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+              Odoo.sh
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- Advanced panel (hidden by default) -->
+      <div class="adv-panel hidden" id="adv-panel">
+        <div class="adv-panel-inner">
+          <div class="adv-row">
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+              <span class="adv-lbl" id="lbl-validity">Vigencia</span>
+              <div class="vig-wrap">
+                <input type="number" class="vig-in" id="vig-days" min="1" max="365" placeholder="—" oninput="this.style.width=Math.max(3,(this.value+'').length+1)+'ch';updateExpiry()" style="width:3ch">
+                <div class="ep ep-none" id="exp-pill"><span id="lbl-no-date">Sin fecha</span></div>
+              </div>
+              <div style="display:flex;gap:3px;flex-wrap:wrap" id="vig-chips"></div>
+            </div>
+          </div>
+          <!-- Plans selector -->
+          <div class="adv-row" style="flex-wrap:wrap;gap:8px;align-items:center">
+            <span class="adv-lbl" id="lbl-planes">Planes + descuento</span>
+            <div id="adv-plans-unified"></div>
+          </div>
+
+          <!-- Views: Plans + Impact + 7% + ERP -->
+          <div class="adv-row" style="gap:14px;align-items:center;flex-wrap:wrap">
+            <span class="adv-lbl">Vista</span>
+            <label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer">
+              <input type="checkbox" id="adv-show-plans" checked onchange="toggleSection('plans',this.checked);document.getElementById('show-plans').checked=this.checked" style="accent-color:var(--p)">
+              <span id="lbl-vplanes2">Planes</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer">
+              <input type="checkbox" id="adv-show-impact" onchange="toggleSection('impact',this.checked);document.getElementById('show-impact').checked=this.checked" style="accent-color:var(--p)">
+              <span id="lbl-vimpact2">Impacto</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer">
+              <input type="checkbox" id="adv-inf" onchange="infOn=this.checked;document.getElementById('inf-chk').checked=this.checked;upd()" style="accent-color:#714B67">
+              <span>+</span>
+              <input type="number" id="adv-inf-rate" min="1" max="20" step="0.5" value="7"
+                oninput="this.style.width=Math.max(2,this.value.length+0.5)+'ch';infRate=parseFloat(this.value)||7;if(infOn)upd()"
+                style="width:2ch;padding:1px 4px;border:1px solid var(--g200);border-radius:4px;font-size:11px;font-family:inherit;text-align:center">
+              <span id="lbl-7pct2">% anual</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer">
+              <input type="checkbox" id="adv-show-erp" checked onchange="document.getElementById('show-erp').checked=this.checked;document.getElementById('erp-section').style.display=this.checked?'block':'none'" style="accent-color:var(--s)">
+              <span id="lbl-verp">ERP</span>
+            </label>
+          </div>
+
+          <!-- Payment terms -->
+          <div class="adv-row" style="flex-wrap:wrap;gap:8px;align-items:center">
+            <span class="adv-lbl" id="lbl-pt">Términos de pago</span>
+            <div class="chips" id="adv-pt-chips"></div>
+          </div>
+          <!-- ERP plan selector (hidden, kept for JS compat) -->
+          <select id="erp-plan-sel" onchange="erpPlanOverride=parseInt(this.value);renderErp();upd()" style="display:none">
+            <option value="-1" id="erp-opt-auto">Auto (mejor valor)</option>
+            <option value="0">Mensual</option><option value="1">12m</option>
+            <option value="2">24m</option><option value="3">36m</option>
+            <option value="4">48m</option><option value="5">60m</option>
+          </select>
+          <input type="checkbox" id="show-erp" checked style="display:none">
+          <!-- Odoo.sh bar (shown when sh selected) -->
+          <div id="sh-bar-inline" class="hidden">
+            <div id="sh-inline-cost" style="font-size:11px;color:var(--s);font-weight:600;margin-bottom:6px"></div>
+            <div class="adv-row" style="flex-wrap:wrap;gap:12px">
+              <span style="font-size:10px;font-weight:700;color:var(--g500);letter-spacing:.05em">⚙️ Odoo.sh</span>
+              <div class="adv-field"><label><span id="lbl-workers">Workers</span> (<span id="lbl-max">max</span> 256)</label><input type="number" id="wk" min="1" max="256" value="2" oninput="clampSh();checkDed();upd()" style="width:65px"></div>
+              <div class="adv-field"><label>Storage GB (<span id="lbl-max2">max</span> 4096)</label><input type="number" id="gb" min="1" max="4096" value="20" oninput="clampSh();checkDed();upd()" style="width:70px"></div>
+              <div class="adv-field"><label>Staging (<span id="lbl-max3">max</span> 20)</label><input type="number" id="stg" min="0" max="20" value="1" oninput="clampSh();checkDed();upd()" style="width:60px"></div>
+              <div id="ded-badge" class="db db-ok"><span id='lbl-no-ded'>Sin dedicado</span></div>
+              <div class="sh-cp" id="sh-cost-val">—</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="exp-top" style="flex-shrink:0;margin-bottom:.5rem"></div>
+
+    <!-- EXPIRY BANNER -->
+    <div id="expiry-banner" style="display:none"></div>
+
+    <!-- USERS WARNING -->
+    <div class="users-warn np" style="margin-bottom:.75rem">
+      <span class="uw-icon">⚡</span>
+      <div class="uw-text"><strong id="lbl-smart-warn">Planifica con inteligencia:</strong> <span id="smart-warn-text">agregar usuarios después del contrato inicial se cotiza al precio de lista vigente. Si ya sabes cuántos usuarios necesitarás en los próximos meses, incluirlos hoy te garantiza el mismo precio preferencial durante toda la vigencia.</span></div>
+    </div>
+
+    <!-- PRINT HEADER — only visible in PDF -->
+    <div class="print-only-hdr" style="display:none;margin-bottom:1rem">
+      <div style="font-size:9px;font-weight:600;color:var(--g400);text-transform:uppercase;letter-spacing:.12em;margin-bottom:5px"><span id="lbl-print-header">Propuesta de licenciamiento · Odoo Enterprise</span></div>
+      <div id="print-client-name" style="font-size:22px;font-weight:700;color:var(--g900);letter-spacing:-.01em;margin-bottom:5px"></div>
+      <div id="print-client-sub" style="font-size:10px;color:var(--g500)"></div>
+    </div>
+
+    <!-- PLANS VIEW -->
+    <div id="view-plans">
+
+      <div class="plans-grid" id="cards-grid"></div>
+
+    </div>
+
+    <!-- IMPACT VIEW -->
+    <div id="view-impact" class="hidden" style="margin-top:.85rem">
+      <div style="margin-bottom:.75rem">
+        <div style="font-size:15px;font-weight:700;color:var(--g900)" id="lbl-impact-title">📊 Inversión acumulada: contrato vs renovar año a año</div>
+        <div style="font-size:11px;color:var(--g400);margin-top:2px" id="lbl-impact-sub">Compara el costo total de cada plan multianual vs renovar anualmente durante 5 años</div>
+      </div>
+      <div class="impact-grid" id="impact-grid"></div>
+    </div>
+
+    <!-- 2. ERP COMPARISON -->
+    <div class="erp-section" id="erp-section">
+      <div class="erp-hdr">
+        <div>
+          <div class="erp-title" id="lbl-erp-title">Odoo vs. ERPs enterprise</div>
+          <div class="erp-sub" id="erp-sub">El ERP más completo al precio más competitivo del mercado</div>
+        </div>
+        <div class="erp-rtabs">
+          <div class="erp-rtab on" id="ert-northam" onclick="setErpRegion('northam',this)">North America</div>
+          <div class="erp-rtab" id="ert-latam" onclick="setErpRegion('latam',this)">Latin America</div>
+          <div class="erp-rtab" id="ert-europe" onclick="setErpRegion('europe',this)">Europe</div>
+        </div>
+      </div>
+      <div class="erp-bars" id="erp-bars"></div>
+      <p class="erp-note" id="erp-note"></p>
+    </div>
+
+    <!-- FEATURES -->
+    <div class="fs" id="features-sec">
+      <div class="fs-hdr">
+        <div style="flex:1">
+          <div class="fs-title" id="lbl-features-title">Todo lo que tu empresa necesita. Un solo precio.</div>
+          <div class="fs-sub" id="fs-sub" style="margin-top:3px"><span id="lbl-fs-sub">Sin módulos adicionales de pago</span> · <span style="color:var(--g400);font-size:11px" id="lbl-fs-nosurprises">Sin extras. Sin sorpresas.</span></div>
+        </div>
+        <div class="fs-badge" id="fs-badge" style="font-size:12px;padding:6px 14px"><span id="lbl-fs-badge">✓ Todo incluido</span></div>
+      </div>
+      <div id="fs-banner-wrap"></div>
+      <div id="fs-body"></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ══ DATA ══════════════════════════════════════════════
+
+// ══ TRANSLATIONS ══════════════════════════════════════════════════════════════
+let lang='es';
+function t(key){return LANG[lang]?.[key]||LANG['es'][key]||key;}
+
+var LANG={
+  es:{
+    billing:'FACTURACIÓN',
+    billing_ctx:'Comparativa',
+    star_hint:'Clic en estrella para marcar como recomendado', billing_monthly:'Mensual', billing_annual:'Anual',
+    view:'VISTA', view_plans:'Planes', view_impact:'Impacto',
+    toggle_7:'+7% anual · cláusula 5.2',
+    btn_copy:'Copiar', btn_pdf:'PDF',
+    region:'REGIÓN', users:'USUARIOS', plan:'PLAN',
+    hosting:'ALOJAMIENTO', company:'EMPRESA', erp_compare:'COMPARATIVA ERP',
+    validity:'VIGENCIA (DÍAS)', plan_auto:'Auto (mejor valor)',
+    host_online:'Online', host_onprem:'On-Premise', host_sh:'Odoo.sh',
+    plan_std:'Estándar', plan_custom:'Personalizado',
+    no_date:'Sin fecha', no_dedicated:'Sin dedicado',
+    show_erp:'Visible en propuesta', erp_plan:'Plan:',
+    workers:'WORKERS (MÁX 256)', storage:'STORAGE GB (MÁX 4096)',
+    staging:'STAGING (MÁX 20)', dedicated:'Con dedicado',
+    plans_lbl:'PLANES', add_disc:'DESC. ADICIONAL',
+    pt_label:'Términos de pago en', inv_table:'Tabla de inversión',
+    max:'máx',
+    plan_monthly:'Plan Mensual', plan_basic:'Plan Básico', plan_plus:'Plan Plus',
+    plan_pro:'Plan Pro', plan_expert:'Plan Experto', plan_smart:'Plan Inteligente',
+    plan_monthly_sub:'Sin compromiso',
+    plan_12:'12 meses', plan_24:'24 meses', plan_36:'36 meses',
+    plan_48:'48 meses', plan_60:'60 meses · Máximo ahorro',
+    prop_label:'Propuesta de licenciamiento',
+    prop_product:'Odoo Enterprise',
+    prop_client_placeholder:'Configure el nombre del cliente',
+    hosting_online:'Hospedaje Online', hosting_onprem:'Hospedaje On-Premise',
+    hosting_sh:'Hospedaje Odoo.sh',
+    normally:'Precio de lista', total_monthly:'Mensual',
+    saves:'Ahorras', months_free:'meses ahorrados',
+    per_user_month:'/ usuario / mes',
+    per_month:'/mes',
+    desc_initial:'Descuento de lanzamiento', price_frozen:'Precio fijo',
+    frozen_through:'Precio fijo hasta',
+    no_7pct:'Sin incremento anual de precio', tag_7pct:'+7% anual aplicado',
+    best_value:'Recomendado',
+    includes:'INCLUYE',
+    all_apps:'Todas las apps Odoo', auto_updates:'Actualizaciones automáticas',
+    initial_disc:'Descuento inicial del primer año', frozen_price:'Precio fijo',
+    no_7_inc:'Sin incremento anual de precio', studio:'Odoo Studio',
+    multicompany:'Multiempresa', api_access:'API completa + acceso al código',
+    pt_title:'Término de pago', pt_select:'-- Selecciona un término --',
+    pt_approval:'Requiere aprobación de gerencia — solo visible para el comercial',
+    expiry_valid:'Propuesta válida hasta el', expiry_expires:'Esta propuesta expira el',
+    expiry_days_left:'días restantes', expiry_act_soon:'— Actúa pronto',
+    expiry_days:'días de vigencia',
+    plan_smart_warning:'Planifica con inteligencia:',
+    plan_smart_text:'agregar usuarios después del contrato inicial se cotiza al precio de lista vigente. Si ya sabes cuántos usuarios necesitarás en los próximos meses, incluirlos hoy te garantiza el mismo precio preferencial durante toda la vigencia.',
+    erp_title:'Odoo vs. ERPs enterprise',
+    erp_sub:'El ERP más completo al precio más competitivo del mercado',
+    erp_your_price:'✓ Tu precio actual',
+    erp_more_exp:'x más',
+    erp_note_src:'Fuentes:',
+    erp_note_northam:'Essentials $80 / Premium $110 (nov 2025)',
+    erp_src_europe:'Fuentes: SAP SE (abr 2026), Microsoft (nov 2025), Oracle partners EU (2026). Precios referenciales.',
+    erp_src_latam:'Fuentes: Microsoft (nov 2025), SAP partners LATAM, Oracle (2026). Precios referenciales USD.',
+    erp_src_northam:'Fuentes: Microsoft (nov 2025), SAP SE (abr 2026), Oracle/BrokenRubik (2026). Precios referenciales USD.',
+    erp_note_suffix:'Los precios de competidores incluyen hospedaje SaaS. Odoo Enterprise incluye actualizaciones automáticas, corrección de bugs, security advisories y soporte de las 3 últimas versiones sin costo adicional.',
+    features_title:'Todo lo que tu empresa necesita. Un solo precio.',
+    features_all:'✓ Todo incluido',
+    feat_platform:'Operar y Crecer',
+    feat_security:'Proteger y Soportar',
+    feat_multiyear:'Con planes multianuales además obtienes',
+    feat_multiyear_sub:'Al contratar 24 meses o más obtienes protecciones que no están disponibles en planes mensuales o anuales simples.',
+    feat_frozen_pill:'🔒 Precio fijo',
+    feat_rate_pill:'💱 Tasa de cambio fija',
+    feat_7_pill:'🛡️ Sin incremento anual de precio',
+    impact_title:'Inversión acumulada: contrato vs renovar año a año',
+    impact_sub:'Compara el costo total de cada plan multianual vs renovar anualmente durante 5 años',
+    impact_contract:'Precio total del contrato (precio garantizado)',
+    impact_renewing:'Costo renovando ese año sin contrato',
+    impact_rec:'Plan recomendado',
+    impact_col_total:'Total 5 años',
+    impact_col_total_sub:'contrato + renovaciones',
+    impact_saves:'Ahorras vs',
+    impact_months:'Meses gratis',
+    impact_ref:'Renovando año a año',
+    impact_ref_sub:'sin contrato · referencia',
+    impact_renovating:'renovando',
+    impact_reference:'referencia',
+    impact_footer_ann:'El total de 5 años incluye el contrato más renovaciones para completar el período. El ahorro compara contra renovar año a año los 5 años',
+    impact_footer_7:'con +7% desde año 3',
+    renewing_annual:'renovar anualmente', paying_monthly:'pagar mensualmente',
+    comparing_vs:'comparando vs',
+    yr:'Año',
+    onprem_title:'Incluido con On-Premise',
+    sh_title:'Incluido con Odoo.sh',
+    feat_no_modules:'Sin módulos adicionales de pago',
+    feat_all_included:'✓ Todo incluido',
+    feat_studio_api:'✓ Studio + API incluidos',
+    feat_benefits_title:'Beneficios exclusivos · Contratos multianuales',
+    feat_rate_pill_txt:'💱 Tasa de cambio fija',
+    feat_op1_t:'Cumplimiento normativo estricto',
+    feat_op1_d:'GDPR, ISO 27001, regulaciones bancarias o gubernamentales que exigen datos en servidores propios.',
+    feat_op2_t:'Integración con sistemas legacy',
+    feat_op2_d:'ERP heredados, bases de datos industriales o internas sin exponerlos a internet.',
+    feat_op3_t:'Código fuente abierto',
+    feat_op3_d:'Personalización profunda sin dependencia de vendor. Adapta Odoo a procesos únicos de tu industria.',
+    feat_op4_t:'Módulos personalizados cubiertos',
+    feat_op4_d:'Soporte, upgrade y corrección de bugs en módulos a medida con mantenimiento contratado.',
+    feat_op5_t:'Mantente en versión soportada',
+    feat_op5_d:'Usar una versión fuera de las 3 últimas activas genera un cargo del 25% sobre la tarifa anual. Las actualizaciones en On-Premise son responsabilidad del cliente.',
+    feat_sh1_t:'CI/CD y branches de desarrollo',
+    feat_sh1_d:'Cada commit puede desplegarse automáticamente; prueba en staging antes de afectar producción.',
+    feat_sh2_t:'Entorno de QA dedicado',
+    feat_sh2_d:'Prueba actualizaciones de versión en tu propio código antes de aplicarlas en producción real.',
+    feat_sh3_t:'Monitoreo y logs en tiempo real',
+    feat_sh3_d:'Visibilidad completa del servidor sin necesidad de un equipo de DevOps dedicado.',
+    feat_sh4_t:'Recursos escalables',
+    feat_sh4_d:'Workers, storage y staging configurables; servidor dedicado automático al crecer.',
+    feat_sh5_t:'Código fuente accesible',
+    feat_sh5_d:'Personalización vía módulos open source sin dependencia de vendor.',
+    feat_op_label:'On-Premise — Control total de tu infraestructura',
+    feat_op_sub:'Cuando necesitas que tus datos no salgan de tus servidores.',
+    feat_sh_label:'Odoo.sh — La potencia de la nube con control de desarrollador',
+    feat_sh_sub:'Para equipos técnicos que necesitan agilidad sin renunciar a personalización.',
+    feat_p1_t:'+80 apps incluidas',
+    feat_p1_d:'CRM, Ventas, Contabilidad, RRHH, Inventario, Fabricación, Proyectos, Compras y más — todo sin costo extra.',
+    feat_p2_t:'IA integrada',
+    feat_p2_d:'Asistente de redacción, predicción de ventas y detección de anomalías contables sin configuración adicional.',
+    feat_p3_t:'Multi-idioma y multi-moneda',
+    feat_p3_d:'+50 idiomas y cualquier moneda con tipo de cambio automático. Listo para operaciones globales.',
+    feat_p4_t:'Facturación electrónica local',
+    feat_p4_d:'CFDI México, NF-e Brasil, SAT, SRI, DIAN y más — cumplimiento fiscal localizado incluido en tu plan.',
+    feat_p5_t:'App móvil nativa',
+    feat_p5_d:'iOS y Android incluidos. Acceso offline a inventario, aprobaciones y CRM desde cualquier dispositivo.',
+    feat_p6_t:'Reportes y dashboards',
+    feat_p6_d:'Paneles ejecutivos, reportes personalizables y análisis de negocio integrados sin herramientas externas.',
+    feat_s1_t:'SSO / SAML 2.0',
+    feat_s1_d:'Integración nativa con Active Directory, Google Workspace y Okta. Un solo login para toda la empresa.',
+    feat_s2_t:'Seguridad empresarial',
+    feat_s2_d:'SSL, cifrado de extremo a extremo, autenticación en dos pasos y protección de datos incluidos.',
+    feat_s3_t:'Soporte ilimitado',
+    feat_s3_d:'Tickets, correo electrónico y documentación completa sin límite de consultas ni costo adicional.',
+    feat_s4_t:'Backups automáticos diarios',
+    feat_s4_d:'Respaldos automáticos con posibilidad de restauración a cualquier punto del tiempo.',
+    feat_s5_t:'Soporte 3 últimas versiones',
+    feat_s5_d:'Odoo mantiene soporte activo en las 3 versiones más recientes. Siempre cubierto sin esfuerzo adicional.',
+    feat_s6_t:'Corrección de bugs garantizada',
+    feat_s6_d:'Al corregir un bug en cualquier versión cubierta, Odoo lo corrige en todas las versiones más recientes activas.',
+    feat_s7_t:'Security Advisory anticipado',
+    feat_s7_d:'Odoo notifica vulnerabilidades de seguridad al menos 2 semanas antes de hacerlas públicas.',
+    feat_s8_t:'Migraciones asistidas',
+    feat_s8_d:'Soporte oficial para migrar desde versiones anteriores de Odoo, SAP, QuickBooks u otros ERPs.',
+    feat_plan_custom_label:'Plan personalizado',
+    feat_studio_t:'Odoo Studio',
+    feat_studio_d:'Personaliza formularios, vistas, reportes y flujos de trabajo sin escribir código. Disponible en todos los hospedajes.',
+    feat_multicompany_t:'Multiempresa',
+    feat_multicompany_d:'Gestiona múltiples empresas y subsidiarias desde una única cuenta con datos y permisos separados por empresa.',
+    feat_api_t:'API completa + acceso al código',
+    feat_api_d:'Integra sistemas externos via REST API y webhooks. Acceso al código fuente para personalizaciones profundas. Requiere On-Premise u Odoo.sh.',
+    inf_label:'+7% anual en renovaciones',
+    cta_select:'Seleccionar plan',
+    edit_region:'Región',
+    edit_users:'usuarios',
+    edit_plan_label:'Plan',
+    edit_hosting_label:'Alojamiento',
+    edit_advanced:'⚙ Configuración avanzada',
+    edit_advanced_close:'Cerrar',
+    edit_client_ph:'Nombre del cliente...',
+    feat_no_modules_sub:'Sin módulos. Sin extras. Sin sorpresas.',
+    footer_note:'Descuento inicial del primer año: tarifa especial para nuevas licencias · Los precios no incluyen IVA',
+  },
+  en:{
+    billing:'BILLING',
+    billing_ctx:'Comparison',
+    star_hint:'Click star to mark as recommended', billing_monthly:'Monthly', billing_annual:'Annual',
+    view:'VIEW', view_plans:'Plans', view_impact:'Impact',
+    toggle_7:'+7% annual · clause 5.2',
+    btn_copy:'Copy', btn_pdf:'PDF',
+    region:'REGION', users:'USERS', plan:'PLAN',
+    hosting:'HOSTING', company:'COMPANY', erp_compare:'ERP COMPARISON',
+    validity:'VALID FOR (DAYS)', plan_auto:'Auto (best value)',
+    host_online:'Online', host_onprem:'On-Premise', host_sh:'Odoo.sh',
+    plan_std:'Standard', plan_custom:'Custom',
+    no_date:'No date', no_dedicated:'No dedicated',
+    show_erp:'Visible in proposal', erp_plan:'Plan:',
+    workers:'WORKERS (MAX 256)', storage:'STORAGE GB (MAX 4096)',
+    staging:'STAGING (MAX 20)', dedicated:'With dedicated',
+    plans_lbl:'PLANS', add_disc:'ADD. DISCOUNT',
+    pt_label:'Payment terms:', inv_table:'Investment table',
+    max:'max',
+    plan_monthly:'Monthly Plan', plan_basic:'Basic Plan', plan_plus:'Plus Plan',
+    plan_pro:'Pro Plan', plan_expert:'Expert Plan', plan_smart:'Smart Plan',
+    plan_monthly_sub:'No commitment',
+    plan_12:'12 months', plan_24:'24 months', plan_36:'36 months',
+    plan_48:'48 months', plan_60:'60 months · Max savings',
+    prop_label:'Licensing proposal',
+    prop_product:'Odoo Enterprise',
+    prop_client_placeholder:'Set client name',
+    hosting_online:'Online Hosting', hosting_onprem:'On-Premise Hosting',
+    hosting_sh:'Odoo.sh Hosting',
+    normally:'List price', total_monthly:'Monthly',
+    saves:'You save', months_free:'months saved',
+    per_user_month:'/ user / month',
+    per_month:'/month',
+    desc_initial:'Launch discount', price_frozen:'Rate locked',
+    frozen_through:'Rate locked through',
+    no_7pct:'No annual rate increases', tag_7pct:'+7% annual applied',
+    best_value:'Recommended',
+    includes:'INCLUDES',
+    all_apps:'All Odoo apps', auto_updates:'Automatic updates',
+    initial_disc:'First year initial discount', frozen_price:'Price frozen',
+    no_7_inc:'No annual rate increases',
+    inf_label:'+7% annual on renewals', studio:'Odoo Studio',
+    multicompany:'Multi-company', api_access:'Full API + source code access',
+    pt_title:'Payment term', pt_select:'-- Select a term --',
+    pt_approval:'Requires management approval — visible to sales rep only',
+    expiry_valid:'Proposal valid until', expiry_expires:'This proposal expires on',
+    expiry_days_left:'days remaining', expiry_act_soon:'— Act soon',
+    expiry_days:'days remaining',
+    plan_smart_warning:'Plan smarter:',
+    plan_smart_text:'Adding users after the contract starts is billed at current list price. Lock in today\'s pricing for all users you\'ll need from day one.',
+    erp_title:'Odoo vs. Enterprise ERPs',
+    erp_sub:'The most complete ERP at the most competitive price on the market',
+    erp_your_price:'✓ Your current price',
+    erp_more_exp:'x more',
+    erp_note_src:'Sources:',
+    erp_note_northam:'Essentials $80 / Premium $110 (Nov 2025)',
+    erp_src_europe:'Sources: SAP SE (Apr 2026), Microsoft (nov 2025), Oracle partners EU (2026). Reference prices.',
+    erp_src_latam:'Sources: Microsoft (nov 2025), SAP partners LATAM, Oracle (2026). Reference prices USD.',
+    erp_src_northam:'Sources: Microsoft (nov 2025), SAP SE (Apr 2026), Oracle/BrokenRubik (2026). Reference prices USD.',
+    erp_note_suffix:'Competitor prices include SaaS hosting. Odoo Enterprise includes automatic updates, bug fixes, security advisories and support for the last 3 versions at no additional cost.',
+    features_title:'Everything your business needs. One price.',
+    features_all:'✓ All included',
+    feat_platform:'Operate & Grow',
+    feat_security:'Security and support',
+    feat_multiyear:'Multi-year contracts also include',
+    feat_multiyear_sub:'Contracting 24 months or more gives you protections not available in monthly or simple annual plans.',
+    feat_frozen_pill:'🔒 Rate locked',
+    feat_rate_pill:'💱 Fixed exchange rate',
+    feat_7_pill:'🛡️ No annual rate increases',
+    impact_title:'Total cost: multi-year contract vs annual renewals',
+    impact_sub:'Compare the total cost of each multi-year plan vs renewing annually for 5 years',
+    impact_contract:'Total contract price (guaranteed price)',
+    impact_renewing:'Cost renewing that year without contract',
+    impact_rec:'Recommended plan',
+    impact_col_total:'5-year total',
+    impact_col_total_sub:'contract + renewals',
+    impact_saves:'Savings vs',
+    impact_months:'Free months',
+    impact_ref:'Annual renewals (no contract)',
+    impact_ref_sub:'no contract · benchmark',
+    impact_renovating:'renewing',
+    impact_reference:'reference',
+    impact_footer_ann:'The 5-year total includes the contract plus renewals to complete the period. Savings compared to renewing year to year for 5 years',
+    impact_footer_7:'with +7% from year 3',
+    renewing_annual:'renewing annually', paying_monthly:'paying monthly',
+    comparing_vs:'vs',
+    yr:'Year',
+    onprem_title:'Included with On-Premise',
+    sh_title:'Included with Odoo.sh',
+    feat_no_modules:'No additional paid modules',
+    feat_no_modules_sub:'No modules. No add-ons. No surprises.',
+    feat_all_included:'✓ All included',
+    feat_studio_api:'✓ Studio + API included',
+    feat_benefits_title:'Exclusive benefits · Multi-year contracts',
+    feat_rate_pill_txt:'💱 Fixed exchange rate',
+    feat_op1_t:'Strict regulatory compliance',
+    feat_op1_d:'GDPR, ISO 27001, banking or government regulations requiring data on your own servers.',
+    feat_op2_t:'Legacy system integration',
+    feat_op2_d:'Legacy ERPs, industrial or internal databases without exposing them to the internet.',
+    feat_op3_t:'Open source code',
+    feat_op3_d:'Deep customization without vendor dependency. Adapt Odoo to unique industry processes.',
+    feat_op4_t:'Custom modules covered',
+    feat_op4_d:'Support, upgrades and bug fixes for custom modules with contracted maintenance.',
+    feat_op5_t:'Stay on supported version',
+    feat_op5_d:"Using a version outside the 3 latest active ones incurs a 25% surcharge on the annual rate. Updates on On-Premise are the client's responsibility.",
+    feat_sh1_t:'CI/CD and development branches',
+    feat_sh1_d:'Each commit can be deployed automatically; test in staging before affecting production.',
+    feat_sh2_t:'Dedicated QA environment',
+    feat_sh2_d:'Test version updates on your own code before applying them to real production.',
+    feat_sh3_t:'Real-time monitoring and logs',
+    feat_sh3_d:'Complete server visibility without needing a dedicated DevOps team.',
+    feat_sh4_t:'Scalable resources',
+    feat_sh4_d:'Configurable workers, storage and staging; automatic dedicated server as you grow.',
+    feat_sh5_t:'Accessible source code',
+    feat_sh5_d:'Customization via open source modules without vendor dependency.',
+    feat_op_label:'On-Premise — Full infrastructure control',
+    feat_op_sub:'When you need your data to stay on your own servers.',
+    feat_sh_label:'Odoo.sh — Cloud power with developer control',
+    feat_sh_sub:'For technical teams that need agility without sacrificing customization.',
+    feat_p1_t:'+80 included apps',
+    feat_p1_d:'CRM, Sales, Accounting, HR, Inventory, Manufacturing, Projects, Purchases and more — all at no extra cost.',
+    feat_p2_t:'Integrated AI',
+    feat_p2_d:'Writing assistant, sales prediction and accounting anomaly detection without additional setup.',
+    feat_p3_t:'Multi-language and multi-currency',
+    feat_p3_d:'+50 languages and any currency with automatic exchange rates. Ready for global operations.',
+    feat_p4_t:'Local e-invoicing',
+    feat_p4_d:'CFDI Mexico, NF-e Brazil, SAT, SRI, DIAN and more — localized tax compliance included in your plan.',
+    feat_p5_t:'Native mobile app',
+    feat_p5_d:'iOS and Android included. Offline access to inventory, approvals and CRM from any device.',
+    feat_p6_t:'Reports and dashboards',
+    feat_p6_d:'Executive dashboards, customizable reports and integrated business analytics without external tools.',
+    feat_s1_t:'SSO / SAML 2.0',
+    feat_s1_d:'Native integration with Active Directory, Google Workspace and Okta. Single login for the entire company.',
+    feat_s2_t:'Enterprise security',
+    feat_s2_d:'SSL, end-to-end encryption, two-factor authentication and data protection included.',
+    feat_s3_t:'Unlimited support',
+    feat_s3_d:'Tickets, email and complete documentation with no query limits or additional cost.',
+    feat_s4_t:'Automatic daily backups',
+    feat_s4_d:'Automatic backups with the ability to restore to any point in time.',
+    feat_s5_t:'Support for last 3 versions',
+    feat_s5_d:'Odoo maintains active support for the 3 most recent versions. Always covered without additional effort.',
+    feat_s6_t:'Guaranteed bug fixing',
+    feat_s6_d:'When fixing a bug in any covered version, Odoo fixes it in all currently active recent versions.',
+    feat_s7_t:'Early security advisory',
+    feat_s7_d:'Odoo notifies security vulnerabilities at least 2 weeks before making them public.',
+    feat_s8_t:'Assisted migrations',
+    feat_s8_d:'Official support for migrating from previous versions of Odoo, SAP, QuickBooks or other ERPs.',
+    feat_plan_custom_label:'Custom plan',
+    feat_studio_t:'Odoo Studio',
+    feat_studio_d:'Customize forms, views, reports and workflows without writing code. Available on all hosting options.',
+    feat_multicompany_t:'Multi-company',
+    feat_multicompany_d:'Manage multiple companies and subsidiaries from a single account with separate data and permissions per company.',
+    feat_api_t:'Full API + source code access',
+    feat_api_d:'Integrate external systems via REST API and webhooks. Source code access for deep customizations. Requires On-Premise or Odoo.sh.',
+    cta_select:'Select plan',
+    edit_region:'Region',
+    edit_users:'users',
+    edit_plan_label:'Plan',
+    edit_hosting_label:'Hosting',
+    edit_advanced:'⚙ Advanced settings',
+    edit_advanced_close:'Close',
+    edit_client_ph:'Client name...',
+    footer_note:'First year initial discount: special rate for new licenses · Prices do not include VAT',
+  },
+
+  fr:{
+    billing:'FACTURATION',
+    billing_ctx:'Comparatif',
+    star_hint:'Cliquez sur l\'étoile pour marquer comme recommandé', billing_monthly:'Mensuel', billing_annual:'Annuel',
+    view:'VUE', view_plans:'Plans', view_impact:'Impact',
+    toggle_7:'+7% annuel · clause 5.2',
+    btn_copy:'Copier', btn_pdf:'PDF',
+    region:'RÉGION', users:'UTILISATEURS', plan:'PLAN',
+    hosting:'HÉBERGEMENT', company:'ENTREPRISE', erp_compare:'COMPARATIF ERP',
+    validity:'VALABLE (JOURS)', plan_auto:'Auto (meilleure valeur)',
+    host_online:'En ligne', host_onprem:'On-Premise', host_sh:'Odoo.sh',
+    plan_std:'Standard', plan_custom:'Personnalisé',
+    no_date:'Sans date', no_dedicated:'Sans dédié',
+    show_erp:'Visible dans la proposition', erp_plan:'Plan :',
+    workers:'WORKERS (MAX 256)', storage:'STOCKAGE GB (MAX 4096)',
+    staging:'STAGING (MAX 20)', dedicated:'Avec dédié',
+    plans_lbl:'PLANS', add_disc:'REMISE SUPP.',
+    pt_label:'Échéancier :', inv_table:"Tableau d'investissement",
+    max:'max',
+    plan_monthly:'Plan Mensuel', plan_basic:'Plan Basique', plan_plus:'Plan Plus',
+    plan_pro:'Plan Pro', plan_expert:'Plan Expert', plan_smart:'Plan Intelligent',
+    plan_monthly_sub:'Sans engagement',
+    plan_12:'12 mois', plan_24:'24 mois', plan_36:'36 mois',
+    plan_48:'48 mois', plan_60:'60 mois · Économies max',
+    prop_label:'Proposition de licence',
+    prop_product:'Odoo Enterprise',
+    prop_client_placeholder:'Configurer le nom du client',
+    hosting_online:'Hébergement en ligne', hosting_onprem:'Hébergement On-Premise',
+    hosting_sh:'Hébergement Odoo.sh',
+    normally:'Prix catalogue', total_monthly:'Mensuel',
+    saves:'Vous économisez', months_free:'mois économisés',
+    per_user_month:'/ utilisateur / mois',
+    per_month:'/mois',
+    desc_initial:'Remise de lancement', price_frozen:'Tarif garanti',
+    frozen_through:"Tarif garanti jusqu'en",
+    no_7pct:'Sans augmentation annuelle', tag_7pct:'+7% annuel appliqué',
+    best_value:'Recommandé',
+    includes:'INCLUT',
+    all_apps:'Toutes les apps Odoo', auto_updates:'Mises à jour automatiques',
+    initial_disc:'Remise initiale première année', frozen_price:'Tarif garanti',
+    no_7_inc:'Sans augmentation annuelle',
+    inf_label:'+7% annuel sur renouvellements', studio:'Odoo Studio',
+    multicompany:'Multi-société', api_access:'API complète + accès au code source',
+    pt_title:'Condition de paiement', pt_select:'-- Sélectionner une condition --',
+    pt_approval:"Nécessite l'approbation de la direction — visible uniquement pour le commercial",
+    expiry_valid:"Proposition valable jusqu'au", expiry_expires:'Cette proposition expire le',
+    expiry_days_left:'jours restants', expiry_act_soon:'— Agissez rapidement',
+    expiry_days:'jours de validité',
+    plan_smart_warning:'Planifiez intelligemment :',
+    plan_smart_text:"les utilisateurs supplémentaires contractés après l'achat initial sont facturés au prix catalogue en vigueur sans remise initiale. Maximisez les avantages en acquérant le maximum d'utilisateurs dès le début.",
+    erp_title:'Odoo vs. ERPs entreprise',
+    erp_sub:"L'ERP le plus complet au prix le plus compétitif du marché",
+    erp_your_price:'✓ Votre prix actuel',
+    erp_more_exp:'x plus cher',
+    erp_note_src:'Sources :',
+    erp_note_northam:'Essentials $80 / Premium $110 (nov 2025)',
+    erp_src_europe:'Sources : SAP SE (avr 2026), Microsoft (nov 2025), Oracle partenaires EU (2026). Prix de référence.',
+    erp_src_latam:'Sources : Microsoft (nov 2025), SAP partenaires LATAM, Oracle (2026). Prix de référence USD.',
+    erp_src_northam:'Sources : Microsoft (nov 2025), SAP SE (avr 2026), Oracle/BrokenRubik (2026). Prix de référence USD.',
+    erp_note_suffix:"Les prix des concurrents incluent l'hébergement SaaS. Odoo Enterprise inclut les mises à jour automatiques, la correction de bugs, les avis de sécurité et le support des 3 dernières versions sans frais supplémentaires.",
+    features_title:'Tout ce dont votre entreprise a besoin. Un seul prix.',
+    features_all:'✓ Tout inclus',
+    feat_platform:'Opérer & Croître',
+    feat_security:'Sécurité et support',
+    feat_multiyear:'Les contrats pluriannuels incluent aussi',
+    feat_multiyear_sub:"Contracter 24 mois ou plus vous offre des protections non disponibles dans les plans mensuels ou annuels simples.",
+    feat_frozen_pill:'🔒 Tarif garanti',
+    feat_rate_pill:'💱 Taux de change fixe',
+    feat_7_pill:'🛡️ Sans augmentation annuelle',
+    impact_title:'Coût total : contrat pluriannuel vs renouvellements annuels',
+    impact_sub:'Comparez le coût total de chaque plan pluriannuel vs renouveler annuellement sur 5 ans',
+    impact_contract:'Prix total du contrat (prix garanti)',
+    impact_renewing:'Coût de renouvellement cette année sans contrat',
+    impact_rec:'Plan recommandé',
+    impact_col_total:'Total 5 ans',
+    impact_col_total_sub:'contrat + renouvellements',
+    impact_saves:'Économies vs',
+    impact_months:'Mois offerts',
+    impact_ref:'Renouvellements annuels (sans contrat)',
+    impact_ref_sub:'sans contrat · référence',
+    impact_renovating:'renouvellement',
+    impact_reference:'référence',
+    impact_footer_ann:'Le total sur 5 ans inclut le contrat plus les renouvellements pour compléter la période.',
+    impact_footer_7:"avec +7% à partir de l'an 3",
+    renewing_annual:'renouvellement annuel', paying_monthly:'paiement mensuel',
+    comparing_vs:'vs',
+    yr:'An',
+    onprem_title:'Inclus avec On-Premise',
+    sh_title:'Inclus avec Odoo.sh',
+    feat_no_modules:'Sans modules payants supplémentaires',
+    feat_no_modules_sub:'Sans modules. Sans extras. Sans surprises.',
+    feat_all_included:'✓ Tout inclus',
+    feat_studio_api:'✓ Studio + API inclus',
+    feat_benefits_title:'Avantages exclusifs · Contrats pluriannuels',
+    feat_rate_pill_txt:'💱 Taux de change fixe',
+    feat_op1_t:'Conformité réglementaire stricte',
+    feat_op1_d:'RGPD, ISO 27001, réglementations bancaires ou gouvernementales exigeant des données sur vos propres serveurs.',
+    feat_op2_t:'Intégration avec les systèmes legacy',
+    feat_op2_d:'ERP hérités, bases de données industrielles ou internes sans les exposer à internet.',
+    feat_op3_t:'Code source ouvert',
+    feat_op3_d:'Personnalisation approfondie sans dépendance fournisseur. Adaptez Odoo aux processus uniques de votre secteur.',
+    feat_op4_t:'Modules personnalisés couverts',
+    feat_op4_d:'Support, mises à niveau et corrections de bugs pour les modules personnalisés avec maintenance contractée.',
+    feat_op5_t:'Restez sur une version supportée',
+    feat_op5_d:'Utiliser une version en dehors des 3 dernières actives entraîne une majoration de 25% sur le tarif annuel. Les mises à jour On-Premise sont de la responsabilité du client.',
+    feat_sh1_t:'CI/CD et branches de développement',
+    feat_sh1_d:"Chaque commit peut être déployé automatiquement ; testez en staging avant d'affecter la production.",
+    feat_sh2_t:'Environnement QA dédié',
+    feat_sh2_d:'Testez les mises à jour de version sur votre propre code avant de les appliquer en production réelle.',
+    feat_sh3_t:'Surveillance et logs en temps réel',
+    feat_sh3_d:"Visibilité complète du serveur sans avoir besoin d'une équipe DevOps dédiée.",
+    feat_sh4_t:'Ressources évolutives',
+    feat_sh4_d:'Workers, stockage et staging configurables ; serveur dédié automatique à mesure que vous grandissez.',
+    feat_sh5_t:'Code source accessible',
+    feat_sh5_d:'Personnalisation via des modules open source sans dépendance fournisseur.',
+    feat_op_label:'On-Premise — Contrôle total de votre infrastructure',
+    feat_op_sub:'Quand vous avez besoin que vos données restent sur vos propres serveurs.',
+    feat_sh_label:'Odoo.sh — La puissance du cloud avec le contrôle développeur',
+    feat_sh_sub:"Pour les équipes techniques qui ont besoin d'agilité sans renoncer à la personnalisation.",
+    feat_p1_t:'+80 apps incluses',
+    feat_p1_d:'CRM, Ventes, Comptabilité, RH, Inventaire, Fabrication, Projets, Achats et plus — tout sans frais supplémentaires.',
+    feat_p2_t:'IA intégrée',
+    feat_p2_d:"Assistant de rédaction, prédiction des ventes et détection d'anomalies comptables sans configuration supplémentaire.",
+    feat_p3_t:'Multi-langue et multi-devise',
+    feat_p3_d:'+50 langues et toute devise avec taux de change automatique. Prêt pour les opérations mondiales.',
+    feat_p4_t:'Facturation électronique locale',
+    feat_p4_d:'CFDI Mexique, NF-e Brésil, SAT, SRI, DIAN et plus — conformité fiscale localisée incluse dans votre plan.',
+    feat_p5_t:'Application mobile native',
+    feat_p5_d:"iOS et Android inclus. Accès hors ligne à l'inventaire, aux approbations et au CRM depuis n'importe quel appareil.",
+    feat_p6_t:'Rapports et tableaux de bord',
+    feat_p6_d:'Tableaux de bord exécutifs, rapports personnalisables et analyses commerciales intégrées sans outils externes.',
+    feat_s1_t:'SSO / SAML 2.0',
+    feat_s1_d:"Intégration native avec Active Directory, Google Workspace et Okta. Un seul login pour toute l'entreprise.",
+    feat_s2_t:"Sécurité d'entreprise",
+    feat_s2_d:'SSL, chiffrement de bout en bout, authentification à deux facteurs et protection des données inclus.',
+    feat_s3_t:'Support illimité',
+    feat_s3_d:'Tickets, e-mail et documentation complète sans limite de requêtes ni coût supplémentaire.',
+    feat_s4_t:'Sauvegardes automatiques quotidiennes',
+    feat_s4_d:"Sauvegardes automatiques avec possibilité de restauration à n'importe quel moment.",
+    feat_s5_t:'Support des 3 dernières versions',
+    feat_s5_d:'Odoo maintient un support actif pour les 3 versions les plus récentes. Toujours couvert sans effort supplémentaire.',
+    feat_s6_t:'Correction de bugs garantie',
+    feat_s6_d:"Lors de la correction d'un bug dans toute version couverte, Odoo le corrige dans toutes les versions récentes actives.",
+    feat_s7_t:'Avis de sécurité anticipé',
+    feat_s7_d:'Odoo notifie les vulnérabilités de sécurité au moins 2 semaines avant de les rendre publiques.',
+    feat_s8_t:'Migrations assistées',
+    feat_s8_d:"Support officiel pour migrer depuis les versions précédentes d'Odoo, SAP, QuickBooks ou d'autres ERP.",
+    feat_plan_custom_label:'Plan personnalisé',
+    feat_studio_t:'Odoo Studio',
+    feat_studio_d:"Personnalisez les formulaires, vues, rapports et flux de travail sans écrire de code. Disponible sur tous les hébergements.",
+    feat_multicompany_t:'Multi-société',
+    feat_multicompany_d:"Gérez plusieurs entreprises et filiales depuis un seul compte avec des données et autorisations séparées par entreprise.",
+    feat_api_t:"API complète + accès au code source",
+    feat_api_d:"Intégrez des systèmes externes via REST API et webhooks. Accès au code source pour des personnalisations approfondies. Nécessite On-Premise ou Odoo.sh.",
+    cta_select:'Choisir ce plan',
+    edit_region:'Région',
+    edit_users:'utilisateurs',
+    edit_plan_label:'Plan',
+    edit_hosting_label:'Hébergement',
+    edit_advanced:'⚙ Paramètres avancés',
+    edit_advanced_close:'Fermer',
+    edit_client_ph:'Nom du client...',
+    footer_note:"Remise initiale première année : tarif spécial pour les nouvelles licences · Les prix n'incluent pas la TVA",
+  }
+};
+
+function setLang(l){
+  lang=l;
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('on',b.dataset.lang===l));
+  document.documentElement.lang=l;
+  const ids={
+    'lbl-billing':t('billing'),
+    'lbl-billing-ctx':t('billing_ctx'),'lbl-monthly':t('billing_monthly'),
+    'lbl-annual':t('billing_annual'),'lbl-view':t('view'),
+    'lbl-vplanes':'📊 '+t('view_plans'),'lbl-vimpact':'💡 '+t('view_impact'),
+    'lbl-7pct':t('toggle_7'),'lbl-region':t('region'),
+    'lbl-users':t('users'),'lbl-plan':t('plan'),
+    'lbl-hosting':t('hosting'),'lbl-company':t('company'),
+    'lbl-validity':t('validity'),'lbl-pt':t('pt_label'),
+    'copy-lbl':t('btn_copy'),'pdf-lbl':t('btn_pdf'),
+    'lbl-smart-warn':t('plan_smart_warning'),
+    'lbl-erp-compare':t('erp_compare'),
+    'lbl-erp-title':t('erp_title'),
+    'lbl-feat-benefits-title':t('feat_benefits_title'),
+    'lbl-impact-title':'📊 '+t('impact_title'),
+    'lbl-legend-contract':t('impact_contract'),
+    'lbl-legend-rec':t('impact_rec'),
+    'lbl-legend-renewing':t('impact_renewing'),
+    'lbl-impact-sub':t('impact_sub'),
+    'erp-opt-auto':t('plan_auto'),
+    'erp-opt-0':t('billing_monthly'),
+    'erp-opt-1':t('plan_12'),
+    'erp-opt-2':t('plan_24'),
+    'erp-opt-3':t('plan_36'),
+    'erp-opt-4':t('plan_48'),
+    'erp-opt-5':PI[5].months,
+    'lbl-feat-multiyear-sub':t('feat_multiyear_sub'),
+    'erp-sub':t('erp_sub'),
+    'lbl-features-title':t('features_title'),
+    'lbl-fs-sub':t('feat_no_modules'),
+    'lbl-fs-badge':t('features_all'),
+    'lbl-show-erp':' '+t('show_erp'),
+    'lbl-no-date':t('no_date'),
+    'lbl-no-ded':t('no_dedicated'),
+    'client-placeholder':t('prop_client_placeholder'),
+    'lbl-planes':t('plans_lbl'),
+    'lbl-add-disc':t('add_disc'),
+    'chip-mensual':t('billing_monthly'),
+    'lbl-plan-auto':t('plan_auto'),
+    'lbl-prop-header':t('prop_label')+' · '+t('prop_product'),
+    'lbl-workers':t('workers').split(' ')[0],
+    'lbl-max':t('max'),'lbl-max2':t('max'),'lbl-max3':t('max'),
+    'lbl-print-header':t('prop_label')+' · '+t('prop_product'),
+    'page-title':lang==='en'?'Odoo Enterprise '+t('view_plans'):t('view_plans')+' de Odoo Enterprise',
+  };
+  setLang_apply(ids);
+}
+
+function setLang_apply(ids){
+  Object.entries(ids).forEach(([id,txt])=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    if(el.placeholder!==undefined&&el.tagName==='INPUT')el.placeholder=txt;
+    else el.textContent=txt;
+  });
+  // Update plan std/custom buttons
+  document.querySelectorAll('[data-t="plan_std"]').forEach(el=>el.textContent=t('plan_std'));
+  document.querySelectorAll('[data-t="plan_custom"]').forEach(el=>el.textContent=t('plan_custom'));
+  // Update smart warning text
+  const sw=document.getElementById('smart-warn-text');
+  if(sw)sw.textContent=t('plan_smart_text');
+  // Re-render everything
+  buildChips();buildPtChips();buildDiscFields();buildUnifiedPlanChips&&buildUnifiedPlanChips();renderErp();upd();
+  updateExpiry();
+  if(document.getElementById('show-impact')?.checked)buildImpact();
+  // Update inline pill labels
+  const pipLabels={
+    'pip-lbl-monthly':t('billing_monthly'),
+    'pip-lbl-annual':t('billing_annual'),
+    'pip-lbl-users':t('edit_users'),
+    'pip-adv-lbl':t('edit_advanced'),
+    'lbl-billing-ctx':t('billing_ctx'),
+    'pip-lbl-std':t('plan_std'),
+    'pip-lbl-cus':t('plan_custom'),
+    'pip-lbl-hosting-row':t('hosting').toUpperCase(),
+    'pip-onprem-badge':t('billing_annual'),
+  };
+  Object.entries(pipLabels).forEach(([id,val])=>{
+    const el=document.getElementById(id);
+    if(el) el.textContent=val;
+  });
+  if(typeof updateAllPips==='function') updateAllPips();
+  const inlineInput=document.getElementById('client-name-inline');
+  if(inlineInput) inlineInput.placeholder=t('edit_client_ph');
+  if(typeof buildRegionDropdown==='function') buildRegionDropdown();
+  if(typeof buildUnifiedPlanChips==='function') buildUnifiedPlanChips();
+}
+
+const PD={
+  // ann={y1,y2} = annual price per user per MONTH (annual_total/12)
+  // mon={y1,y2} = monthly price per user per month
+  // sh.ann/mon = Odoo.sh per-month rates at annual/monthly billing
+
+  // ── NORTH AMERICA ──
+  "North America":            {S:{ann:{y1:298.8/12,  y2:373.2/12},  mon:{y1:31.10, y2:38.90}}, C:{ann:{y1:588/12,    y2:732/12},    mon:{y1:61.10, y2:76.20}}, sh:{ann:{gb:2.4,   st:172.8, wk:691.2,  ded:5760},  mon:{gb:.25,  st:18,   wk:72,    ded:600}},   cur:'$',    usd:1,    rgn:'northam'},
+  "US: North America (USD)":  {S:{ann:{y1:298.8/12,  y2:373.2/12},  mon:{y1:31.10, y2:38.90}}, C:{ann:{y1:588/12,    y2:732/12},    mon:{y1:61.10, y2:76.20}}, sh:{ann:{gb:2.4,   st:172.8, wk:691.2,  ded:5760},  mon:{gb:.25,  st:18,   wk:72,    ded:600}},   cur:'$',    usd:1,    rgn:'northam'},
+  "US: North America (CAD)":  {S:{ann:{y1:422.4/12,  y2:528/12},    mon:{y1:44.00, y2:55.00}}, C:{ann:{y1:660/12,    y2:828/12},    mon:{y1:68.50, y2:86.00}}, sh:{ann:{gb:3.8,   st:260,   wk:1037,   ded:8448},  mon:{gb:.40,  st:27,   wk:108,   ded:880}},   cur:'CAD$', usd:0.74, rgn:'northam'},
+
+  // ── EUROPE ──
+  "Europe High":              {S:{ann:{y1:238.8/12,  y2:298.8/12},  mon:{y1:24.90, y2:31.10}}, C:{ann:{y1:358.8/12,  y2:448.8/12},  mon:{y1:37.40, y2:46.80}}, sh:{ann:{gb:1.92,  st:144,   wk:576,    ded:4800},  mon:{gb:.20,  st:15,   wk:60,    ded:500}},   cur:'€',    usd:1.08, rgn:'northam'},
+  "Europe Low":               {S:{ann:{y1:142.8/12,  y2:178.8/12},  mon:{y1:14.80, y2:18.60}}, C:{ann:{y1:214.8/12,  y2:268.8/12},  mon:{y1:22.40, y2:28.00}}, sh:{ann:{gb:1.92,  st:144,   wk:576,    ded:4800},  mon:{gb:.20,  st:15,   wk:60,    ded:500}},   cur:'€',    usd:1.08, rgn:'latam'},
+  "DE: Germany - Austria":    {S:{ann:{y1:238.8/12,  y2:298.8/12},  mon:{y1:24.90, y2:31.10}}, C:{ann:{y1:358.8/12,  y2:448.8/12},  mon:{y1:37.40, y2:46.80}}, sh:{ann:{gb:1.92,  st:144,   wk:576,    ded:4800},  mon:{gb:.20,  st:15,   wk:60,    ded:500}},   cur:'€',    usd:1.08, rgn:'northam'},
+  "ES: Spain":                {S:{ann:{y1:142.8/12,  y2:178.8/12},  mon:{y1:14.80, y2:18.60}}, C:{ann:{y1:214.8/12,  y2:268.8/12},  mon:{y1:22.40, y2:28.00}}, sh:{ann:{gb:1.92,  st:144,   wk:576,    ded:4800},  mon:{gb:.20,  st:15,   wk:60,    ded:500}},   cur:'€',    usd:1.08, rgn:'latam'},
+  "IT: Italy":                {S:{ann:{y1:142.8/12,  y2:178.8/12},  mon:{y1:14.80, y2:18.60}}, C:{ann:{y1:214.8/12,  y2:268.8/12},  mon:{y1:22.40, y2:28.00}}, sh:{ann:{gb:1.92,  st:144,   wk:576,    ded:4800},  mon:{gb:.20,  st:15,   wk:60,    ded:500}},   cur:'€',    usd:1.08, rgn:'latam'},
+  "BE: United Kingdom (GBP)": {S:{ann:{y1:216/12,    y2:264/12},    mon:{y1:23.00, y2:28.00}}, C:{ann:{y1:321.6/12,  y2:403.2/12},  mon:{y1:33.50, y2:42.00}}, sh:{ann:{gb:1.70,  st:132,   wk:510,    ded:4224},  mon:{gb:.20,  st:14,   wk:54,    ded:440}},   cur:'£',    usd:1.27, rgn:'northam'},
+  "UAE: Middle East Turkey (EUR)":{S:{ann:{y1:142.8/12,y2:178.8/12},mon:{y1:14.80,y2:18.60}},  C:{ann:{y1:214.8/12,  y2:268.8/12},  mon:{y1:22.40, y2:28.00}}, sh:{ann:{gb:1.92,  st:144,   wk:576,    ded:4800},  mon:{gb:.20,  st:15,   wk:60,    ded:500}},   cur:'€',    usd:1.08, rgn:'latam'},
+
+  // ── LATIN AMERICA ──
+  "Latin America":            {S:{ann:{y1:87/12,     y2:107.4/12},  mon:{y1:9.10,  y2:11.20}}, C:{ann:{y1:130.8/12,  y2:163.2/12},  mon:{y1:13.60, y2:17.00}}, sh:{ann:{gb:2.4,   st:172.8, wk:691.2,  ded:5760},  mon:{gb:.25,  st:18,   wk:72,    ded:600}},   cur:'$',    usd:1,    rgn:'latam'},
+  "MX: Latin America":        {S:{ann:{y1:87/12,     y2:107.4/12},  mon:{y1:9.10,  y2:11.20}}, C:{ann:{y1:130.8/12,  y2:163.2/12},  mon:{y1:13.60, y2:17.00}}, sh:{ann:{gb:2.4,   st:172.8, wk:691.2,  ded:5760},  mon:{gb:.25,  st:18,   wk:72,    ded:600}},   cur:'$',    usd:1,    rgn:'latam'},
+  "US: Latin America":        {S:{ann:{y1:87/12,     y2:107.4/12},  mon:{y1:9.10,  y2:11.20}}, C:{ann:{y1:130.8/12,  y2:163.2/12},  mon:{y1:13.60, y2:17.00}}, sh:{ann:{gb:2.4,   st:172.8, wk:691.2,  ded:5760},  mon:{gb:.25,  st:18,   wk:72,    ded:600}},   cur:'$',    usd:1,    rgn:'latam'},
+  "Africa Low Euro":          {S:{ann:{y1:87/12,     y2:107.4/12},  mon:{y1:9.10,  y2:11.20}}, C:{ann:{y1:130.8/12,  y2:163.2/12},  mon:{y1:13.60, y2:17.00}}, sh:{ann:{gb:2.4,   st:172.8, wk:691.2,  ded:5760},  mon:{gb:.25,  st:18,   wk:72,    ded:600}},   cur:'$',    usd:1,    rgn:'latam'},
+  "MX: Mexico MXN":           {S:{ann:{y1:2160/12,   y2:2736/12},   mon:{y1:225,   y2:285}},   C:{ann:{y1:3288/12,   y2:4080/12},   mon:{y1:342,   y2:425}},   sh:{ann:{gb:48,    st:3456,  wk:13824,  ded:115200}, mon:{gb:5,    st:360,  wk:1440,  ded:12000}}, cur:'Mex$', usd:17,   rgn:'latam'},
+  "BR: Brasil BRL":           {S:{ann:{y1:460.8/12,  y2:576/12},    mon:{y1:48.00, y2:60.00}}, C:{ann:{y1:691.2/12,  y2:864/12},    mon:{y1:72.00, y2:90.00}}, sh:{ann:{gb:12.48, st:912,   wk:3648,   ded:30720},  mon:{gb:1.30, st:95,   wk:380,   ded:3200}},  cur:'R$',   usd:5,    rgn:'latam'},
+
+  // ── MIDDLE EAST ──
+  "UAE: Middle East Low":     {S:{ann:{y1:87/12,     y2:107.4/12},  mon:{y1:9.10,  y2:11.20}}, C:{ann:{y1:130.8/12,  y2:163.2/12},  mon:{y1:13.60, y2:17.00}}, sh:{ann:{gb:2.4,   st:172.8, wk:691.2,  ded:5760},  mon:{gb:.25,  st:18,   wk:72,    ded:600}},   cur:'$',    usd:1,    rgn:'latam'},
+  "UAE: Middle East Mid":     {S:{ann:{y1:162/12,    y2:202.8/12},  mon:{y1:16.90, y2:21.10}}, C:{ann:{y1:244.8/12,  y2:306/12},    mon:{y1:25.50, y2:31.90}}, sh:{ann:{gb:2.4,   st:172.8, wk:691.2,  ded:5760},  mon:{gb:.25,  st:18,   wk:72,    ded:600}},   cur:'$',    usd:1,    rgn:'latam'},
+
+  // ── ASIA / AFRICA ──
+  "Asia / Africa High":       {S:{ann:{y1:271.2/12,  y2:339.6/12},  mon:{y1:28.30, y2:35.40}}, C:{ann:{y1:406.8/12,  y2:510/12},    mon:{y1:42.30, y2:53.10}}, sh:{ann:{gb:2.4,   st:172.8, wk:691.2,  ded:5760},  mon:{gb:.25,  st:18,   wk:72,    ded:600}},   cur:'$',    usd:1,    rgn:'northam'},
+  "Asia / Africa Middle":     {S:{ann:{y1:162/12,    y2:202.8/12},  mon:{y1:16.90, y2:21.10}}, C:{ann:{y1:244.8/12,  y2:306/12},    mon:{y1:25.50, y2:31.90}}, sh:{ann:{gb:2.4,   st:172.8, wk:691.2,  ded:5760},  mon:{gb:.25,  st:18,   wk:72,    ded:600}},   cur:'$',    usd:1,    rgn:'latam'},
+  "Asia / Africa Low":        {S:{ann:{y1:87/12,     y2:107.4/12},  mon:{y1:9.10,  y2:11.20}}, C:{ann:{y1:130.8/12,  y2:163.2/12},  mon:{y1:13.60, y2:17.00}}, sh:{ann:{gb:2.4,   st:172.8, wk:691.2,  ded:5760},  mon:{gb:.25,  st:18,   wk:72,    ded:600}},   cur:'$',    usd:1,    rgn:'latam'},
+  "HK: Asia High":            {S:{ann:{y1:271.2/12,  y2:339.6/12},  mon:{y1:28.30, y2:35.40}}, C:{ann:{y1:406.8/12,  y2:510/12},    mon:{y1:42.30, y2:53.10}}, sh:{ann:{gb:2.4,   st:172.8, wk:691.2,  ded:5760},  mon:{gb:.25,  st:18,   wk:72,    ded:600}},   cur:'$',    usd:1,    rgn:'northam'},
+  "HK: Asia Middle":          {S:{ann:{y1:162/12,    y2:202.8/12},  mon:{y1:16.90, y2:21.10}}, C:{ann:{y1:244.8/12,  y2:306/12},    mon:{y1:25.50, y2:31.90}}, sh:{ann:{gb:2.4,   st:172.8, wk:691.2,  ded:5760},  mon:{gb:.25,  st:18,   wk:72,    ded:600}},   cur:'$',    usd:1,    rgn:'latam'},
+  "HK: Asia Low":             {S:{ann:{y1:87/12,     y2:107.4/12},  mon:{y1:9.10,  y2:11.20}}, C:{ann:{y1:130.8/12,  y2:163.2/12},  mon:{y1:13.60, y2:17.00}}, sh:{ann:{gb:2.4,   st:172.8, wk:691.2,  ded:5760},  mon:{gb:.25,  st:18,   wk:72,    ded:600}},   cur:'$',    usd:1,    rgn:'latam'},
+
+  // ── AUSTRALIA ──
+  "AU: Australia AUD":        {S:{ann:{y1:412.8/12,  y2:516/12},    mon:{y1:43.20, y2:54.00}}, C:{ann:{y1:624/12,    y2:780/12},    mon:{y1:64.80, y2:81.00}}, sh:{ann:{gb:3.60,  st:259.2, wk:1056,   ded:8600},  mon:{gb:.37,  st:27,   wk:110,   ded:900}},   cur:'AUD',  usd:1.5,  rgn:'northam'},
+  "AU: Australia High (USD)": {S:{ann:{y1:273.6/12,  y2:342/12},    mon:{y1:28.80, y2:36.00}}, C:{ann:{y1:422.4/12,  y2:528/12},    mon:{y1:44.00, y2:55.00}}, sh:{ann:{gb:2.4,   st:172.8, wk:708,    ded:5760},  mon:{gb:.25,  st:18,   wk:73.7,  ded:600}},   cur:'$',    usd:1,    rgn:'northam'},
+  "AU: Australia low (USD)":  {S:{ann:{y1:87/12,     y2:107.4/12},  mon:{y1:9.10,  y2:11.20}}, C:{ann:{y1:130.8/12,  y2:163.2/12},  mon:{y1:13.60, y2:17.00}}, sh:{ann:{gb:2.4,   st:172.8, wk:691.2,  ded:5760},  mon:{gb:.25,  st:18,   wk:72,    ded:600}},   cur:'$',    usd:1,    rgn:'latam'},
+
+  // ── INDIA / INDONESIA ──
+  "IN: India INR":            {S:{ann:{y1:6960/12,   y2:8700/12},   mon:{y1:760,   y2:950}},   C:{ann:{y1:10680/12,  y2:13800/12},  mon:{y1:1140,  y2:1420}},  sh:{ann:{gb:192,   st:14850, wk:58500,  ded:480000}, mon:{gb:20,   st:1550, wk:6200,  ded:50000}}, cur:'Rs',   usd:83,   rgn:'latam'},
+  "ID: Indonesia IDR":        {S:{ann:{y1:1320000/12,y2:1650000/12},mon:{y1:136000,y2:170000}}, C:{ann:{y1:2040000/12,y2:2550000/12},mon:{y1:211875,y2:265000}}, sh:{ann:{gb:37000, st:2650000,wk:10500000,ded:88000000},mon:{gb:3800,st:275000,wk:1100000,ded:9200000}}, cur:'Rp',usd:15500,rgn:'latam'}
+};
+const DMAX={2:5,3:10,4:12.5,5:15};
+const PM={0:t('billing_monthly'),1:12,2:24,3:36,4:48,5:60};
+// PI uses t() for names — called as function to get current language
+function PI_get(y){
+  const data={
+    0:{name_key:'plan_monthly', months_key:'plan_monthly_sub', col:'#8F8F8F'},
+    1:{name_key:'plan_basic',   months_key:'plan_12',          col:'#8F8F8F'},
+    2:{name_key:'plan_plus',    months_key:'plan_24',          col:'#8F8F8F'},
+    3:{name_key:'plan_pro',     months_key:'plan_36',          col:'#8F8F8F'},
+    4:{name_key:'plan_expert',  months_key:'plan_48',          col:'#8F8F8F'},
+    5:{name_key:'plan_smart',   months_key:'plan_60',          col:'#8F8F8F'}
+  };
+  const d=data[y];
+  return{name:t(d.name_key),months:t(d.months_key),col:d.col};
+}
+// Keep PI as a getter proxy for compatibility
+const PI=new Proxy({},{get:(obj,y)=>{const n=parseInt(y);return isNaN(n)?undefined:PI_get(n);}});
+const COL_REC='#017E84';   // teal Odoo — recommended card
+const COL_GRAY='#8F8F8F';  // gray Odoo — non-recommended cards
+const PT_RULES={
+  latam:[
+    {maxUSD:15000,t:[{l:'Al recibir',def:true},{l:'50% ahora, 50% NET30'}]},
+    {maxUSD:25000,t:[{l:'Al recibir',def:true},{l:'50% ahora, 50% NET30'},{l:'50% ahora, 50% NET45'},{l:'50% ahora, 50% NET60'},{l:'40% ahora, 30% NET30, 30% NET60'},{l:'50% ahora, 25% NET30, 25% NET60'}]},
+    {maxUSD:Infinity,t:[{l:'Al recibir',def:true},{l:'50% ahora, 50% NET30'},{l:'50% ahora, 50% NET45'},{l:'50% ahora, 50% NET60'},{l:'40% ahora, 30% NET30, 30% NET60'},{l:'50% ahora, 25% NET30, 25% NET60'},{l:'Más de NET60 (requiere aprobación gerencia)',sp:true}]}
+  ],
+  northam:[
+    {maxUSD:50000,t:[{l:'Al recibir',def:true},{l:'50% ahora, 50% NET30'}]},
+    {maxUSD:70000,t:[{l:'Al recibir',def:true},{l:'50% ahora, 50% NET30'},{l:'50% ahora, 50% NET45'},{l:'50% ahora, 50% NET60'},{l:'40% ahora, 30% NET30, 30% NET60'},{l:'50% ahora, 25% NET30, 25% NET60'}]},
+    {maxUSD:Infinity,t:[{l:'Al recibir',def:true},{l:'50% ahora, 50% NET30'},{l:'50% ahora, 50% NET45'},{l:'50% ahora, 50% NET60'},{l:'40% ahora, 30% NET30, 30% NET60'},{l:'50% ahora, 25% NET30, 25% NET60'},{l:'Más de NET60 (requiere aprobación gerencia)',sp:true}]}
+  ]
+};
+
+// ══ STATE ══════════════════════════════════════════════
+let curPlan='Standard',curHost='online',curDed=false,billing='monthly';
+let discs={2:0,3:7,4:0,5:12.5}; // 36m=7%, 60m=12.5% default
+let visPlans=new Set([1,3,5]); // default: 12, 36, 60 meses Plan mensual (0) NOT default
+let infOn=false,infRate=7,view='plans',ptTargetPlans=new Set(),ptSelectedTerm={},erpPlanOverride=-1; // ptSelectedTerm[yrs] = chosen term label
+
+// ══ INIT ═══════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded',()=>{
+  try{
+    buildChips();buildPtChips();buildDiscFields();renderErp();upd();
+  }catch(e){console.error('Init error:',e);}
+});
+
+// ══ CONTROLS ═══════════════════════════════════════════
+function setBilling(m){
+  billing=m;
+  document.getElementById('bill-m').classList.toggle('on',m==='monthly');
+  document.getElementById('bill-a').classList.toggle('on',m==='annual');
+  upd();
+  updateBillingPips&&updateBillingPips();
+}
+function setPlan(p,el){
+  curPlan=p;
+  document.querySelectorAll('.csb').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  const isStd=p==='Standard';
+  ['htab-onprem','htab-sh'].forEach(id=>document.getElementById(id).classList.toggle('dis',isStd));
+  if(isStd)setHost('online',document.getElementById('htab-online'));
+  upd();
+}
+function setHost(h,el){
+  if(curPlan==='Standard'&&h!=='online')return;
+  curHost=h;
+  document.querySelectorAll('.hm').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('sh-bar').classList.toggle('hidden',h!=='sh');
+  const shInline=document.getElementById('sh-bar-inline');
+  if(shInline) shInline.classList.toggle('hidden',h!=='sh');
+  // Sync inline pills
+  ['online','onprem','sh'].forEach(host=>{
+    const pip=document.getElementById('pip-host-'+host);
+    if(pip) pip.classList.toggle('pip-active',host===h);
+  });
+  upd();
+}
+function onRegionChange(){checkDed();upd();}
+function clampSh(){
+  const c=(id,mx)=>{const el=document.getElementById(id);let v=parseInt(el.value)||0;if(v>mx)el.value=mx;};
+  c('wk',256);c('gb',4096);c('stg',20);
+}
+function checkDed(){
+  if(curHost!=='sh'){curDed=false;return;}
+  const wk=parseInt(document.getElementById('wk').value)||1;
+  const gb=parseInt(document.getElementById('gb').value)||1;
+  const stg=parseInt(document.getElementById('stg').value)||0;
+  const u=parseInt(document.getElementById('unum').value)||1;
+  curDed=(wk>8||gb>512||stg>20||u>200);
+  const b=document.getElementById('ded-badge');
+  b.textContent=curDed?'⚡ Dedicado':t('no_dedicated');
+  b.className='db '+(curDed?'db-hot':'db-ok');
+}
+function toggleInf(){
+  infOn=!infOn;
+  document.getElementById('inf-chk').checked=infOn;
+  document.getElementById('inf-wrap').classList.toggle('on',infOn);
+  upd();
+}
+function toggleSection(section,show){
+  if(section==='plans'){
+    document.getElementById('view-plans').classList.toggle('hidden',!show);
+  } else {
+    const el=document.getElementById('view-impact');
+    el.classList.toggle('hidden',!show);
+    if(show) buildImpact();
+  }
+}
+// ══ CHIPS ══════════════════════════════════════════════
+function buildPtChips(){
+  const sorted=[...visPlans].sort((a,b)=>a-b);
+  const months={0:t('billing_monthly'),1:'12 m.',2:'24 m.',3:'36 m.',4:'48 m.',5:'60 m.'};
+  const ptHtml=sorted.map(y=>`<div class="chip ${ptTargetPlans.has(y)?'on':''}" onclick="togglePtPlan(${y})">${months[y]}</div>`).join('');
+  ['pt-plan-chips','adv-pt-chips'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=ptHtml;});
+}
+function togglePtPlan(y){
+  if(ptTargetPlans.has(y)){
+    ptTargetPlans.delete(y);
+    delete ptSelectedTerm[y];
+  } else {
+    ptTargetPlans.add(y);
+  }
+  buildPtChips();
+  upd();
+}
+function buildChips(){
+  const html=[0,1,2,3,4,5].map(y=>`
+    <div class="chip ${visPlans.has(y)?'on':''}" onclick="togglePlan(${y})">${y===0?t('billing_monthly'):PM[y]+' m.'}</div>`).join('');
+  ['plan-chips','adv-plan-chips'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=html;});
+  buildUnifiedPlanChips();
+}
+
+let bestValuePlan=null; // null = auto
+
+function buildUnifiedPlanChips(){
+  const el=document.getElementById('adv-plans-unified');
+  if(!el) return;
+  const html=`<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start">
+    ${[0,1,2,3,4,5].map(y=>{
+      const isOn=visPlans.has(y);
+      const label=y===0?t('billing_monthly'):PM[y]+' m.';
+      const hasDmax=DMAX[y]&&y>1;
+      const discVal=discs[y]||0;
+      const isBest=bestValuePlan===y;
+      return `<div class="upc-wrap">
+        <div class="upc-chip-row">
+          <div class="chip upc-chip ${isOn?'on':''}" onclick="togglePlan(${y});buildUnifiedPlanChips()">${label}</div>
+          ${isOn?`<div class="upc-star ${isBest?'upc-star-on':''}" onclick="setBestValue(${y})" title="${lang==='en'?'Mark as recommended':lang==='fr'?'Marquer comme recommandé':'Marcar como recomendado'}">★</div>`:''}
+        </div>
+        ${isOn&&hasDmax?`<div class="upc-disc">
+          <input type="number" class="upc-input" min="0" max="${DMAX[y]}" step="0.5" value="${discVal}"
+            oninput="this.style.width=Math.max(2,(this.value+'').length+0.5)+'ch';setDisc(${y},this.value)" onclick="event.stopPropagation()"
+            style="width:${Math.max(2,(discVal+'').length+0.5)}ch"
+            placeholder="0" title="${t('max')} ${DMAX[y]}%">
+          <span class="upc-pct">%</span>
+        </div>`:''}
+      </div>`;
+    }).join('')}
+  </div>
+  <div style="font-size:10px;color:var(--g400);margin-top:4px">★ ${t('star_hint')}</div>`;
+  el.innerHTML=html;
+}
+
+function setBestValue(y){
+  bestValuePlan=bestValuePlan===y?null:y; // toggle
+  buildUnifiedPlanChips();
+  upd();
+}
+function togglePlan(y){
+  if(visPlans.has(y)){
+    if(visPlans.size<=1)return;
+    visPlans.delete(y);
+    ptTargetPlans.delete(y);
+    delete ptSelectedTerm[y];
+  } else visPlans.add(y);
+  buildChips();buildPtChips();buildDiscFields();renderErp();upd();
+}
+
+// ══ DISC FIELDS ════════════════════════════════════════
+function buildDiscFields(){
+  const yrs=[2,3,4,5].filter(y=>visPlans.has(y));
+  const discHtml=yrs.length
+    ?yrs.map(y=>`<div class="df">
+        <label>${PM[y]}m:</label>
+        <input type="number" id="disc-${y}" min="0" max="${DMAX[y]}" step="0.5" value="${discs[y]}" oninput="setDisc(${y},this.value)">
+        <span class="mx">${t('max')} ${DMAX[y]}%</span>
+      </div>`).join('')
+    :'<span style="font-size:10px;color:var(--g400)">Selecciona planes &gt;12m</span>';
+  ['disc-fields','adv-disc-fields'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=discHtml;});
+}
+function setDisc(y,v){
+  discs[y]=Math.max(0,Math.min(DMAX[y],parseFloat(v)||0));
+  upd();
+}
+
+// ══ EXPIRY ══════════════════════════════════════════════
+function updateExpiry(){
+  const days=parseInt(document.getElementById('vig-days').value)||0;
+  const pill=document.getElementById('exp-pill');
+  const banner=document.getElementById('expiry-banner');
+  if(!days){
+    pill.textContent=t('no_date');pill.className='ep ep-none';
+    if(banner)banner.style.display='none';
+    return;
+  }
+  const exp=new Date();exp.setDate(exp.getDate()+days);
+  const locale=lang==='fr'?'fr-FR':lang==='en'?'en-US':'es-MX';
+  const ds=exp.toLocaleDateString(locale,{day:'numeric',month:'long',year:'numeric'});
+  // Config bar pill
+  let pillCls;
+  if(days<=7)pillCls='ep-danger';
+  else if(days<=30)pillCls='ep-warn';
+  else pillCls='ep-ok';
+  pill.textContent=t('expiry_expires')+' '+ds;
+  pill.className='ep '+pillCls;
+  // Main banner
+  let bg,color,label,sub;
+  if(days<=7){
+    bg='#FFEBEE';color='#C62828';
+    label=t('expiry_expires')+' '+ds;
+    sub=days+' '+t('expiry_days_left')+' '+t('expiry_act_soon');
+  } else if(days<=30){
+    bg='#FFF8E1';color='#F57F17';
+    label=t('expiry_expires')+' '+ds;
+    sub=days+' '+t('expiry_days_left');
+  } else {
+    bg='#E8F5E9';color='#2E7D32';
+    label=t('expiry_valid')+' '+ds;
+    sub=days+' '+t('expiry_days');
+  }
+  if(banner){
+    banner.style.display='flex';
+    banner.className='exp-banner';
+    banner.style.cssText=`display:flex;background:${bg};color:${color};border:1px solid ${color}30;padding:10px 16px;border-radius:var(--rs);font-size:13px;font-weight:500;margin-bottom:1rem;align-items:center;justify-content:space-between;gap:1rem`;
+    banner.innerHTML=`<span>${label}</span><span style="font-size:11px;font-weight:600;opacity:.85">${sub}</span>`;
+  }
+}
+
+// ══ FORMAT ══════════════════════════════════════════════
+function fN(n,cur,sh=false){
+  if(!n&&n!==0)return cur+'—';
+  if(sh&&Math.abs(n)>=1000000)return cur+(n/1000000).toFixed(1)+'M';
+  if(sh&&Math.abs(n)>=1000)return cur+(n/1000).toFixed(0)+'k';
+  if(Math.abs(n)>=1000000)return cur+(n/1000000).toFixed(2)+'M';
+  if(Math.abs(n)>=10000)return cur+Math.round(n).toLocaleString('es-MX');
+  return cur+n.toLocaleString('en-US',{minimumFractionDigits:n<100?2:0,maximumFractionDigits:n<100?2:0});
+}
+
+// ══ SH MONTHLY COST ═════════════════════════════════════
+function frozenUntil(yrs){
+  const exp=new Date();
+  exp.setMonth(exp.getMonth()+yrs*12);
+  const locale=lang==='fr'?'fr-FR':lang==='en'?'en-US':'es-MX';
+  const opts=lang==='en'
+    ?{month:'long',year:'numeric'}
+    :{month:'short',year:'numeric'};
+  return exp.toLocaleDateString(locale,opts);
+}
+function getCur(){const reg=document.getElementById('region')?.value||'North America';return (PD[reg]||PD['North America']).cur||'$';}
+
+function shCost(useAnnual){
+  // useAnnual=true → sh.ann rates (annual/multiyear plans)
+  // useAnnual=false → sh.mon rates (monthly plan)
+  if(curHost!=='sh')return 0;
+  const d=PD[document.getElementById('region').value];if(!d)return 0;
+  const r=useAnnual?d.sh.ann:d.sh.mon;
+  const wk=parseInt(document.getElementById('wk').value)||1;
+  const gb=parseInt(document.getElementById('gb').value)||1;
+  const stg=parseInt(document.getElementById('stg').value)||0;
+  const raw=wk*r.wk+gb*r.gb+stg*r.st+(curDed?r.ded:0);
+  // sh.ann values in new PD are annual totals → divide by 12 for monthly rate
+  return useAnnual?raw/12:raw;
+}
+// Convenience: shMon() for display in bar (use billing toggle for reference)
+function shMon(){return shCost(billing==='annual');}
+
+// ══ CALC PLAN ═══════════════════════════════════════════
+function calcP(yrs,plan,u,_shm,isAnn){
+  // _shm ignored — shCost() called internally with correct billing
+  if(yrs===0){
+    const licMo=plan.mon.y1*u;
+    const shtMo=curHost==='sh'?shCost(false):0;
+    const totalMo=licMo+shtMo;
+    const refMo=plan.mon.y2*u+(curHost==='sh'?shCost(false):0);
+    const sv=refMo-totalMo;
+    return{yrs:0,disc:0,licY1:licMo,licY2:0,licTotal:licMo,shTotal:shtMo,
+           total:totalMo,saving:sv,avgRate:plan.mon.y1,refRate:plan.mon.y2,
+           mesesAhorrados:sv/(plan.mon.y2*u||1),baseRef:refMo,isMonthlyPlan:true};
+  }
+  const disc=yrs>1?Math.min(discs[yrs]||0,DMAX[yrs])/100:0;
+  // Contract price is ALWAYS based on annual pricing (ann.y1, ann.y2)
+  // The billing toggle only changes the "Normalmente" reference for savings display
+  const rY1=plan.ann.y1;
+  const rY2=plan.ann.y2;
+  // Reference price for "Normalmente" depends on billing toggle
+  const refY2=isAnn?plan.ann.y2:plan.mon.y2;
+  // ── CONTRACT price (frozen) ──────────────────────────
+  // Year 1: Y1 (initial discount)
+  // Year 2+: Y2 frozen, NO inflation ever
+  const licY1=rY1*u*12*(1-disc);
+  const licY2=yrs>1 ? rY2*u*12*(yrs-1)*(1-disc) : 0;
+  const licTotal=licY1+licY2;
+  // Odoo.sh: annual and multiyear plans ALWAYS use annual rates
+  const shMonthlyCost=shCost(true);
+  const shTotal=curHost==='sh'?shMonthlyCost*12*yrs:0;
+  const total=licTotal+shTotal;
+
+  // ── SAVING: "Normalmente" = what client pays WITHOUT contract
+  // Always uses refY2 (base price, no Y1 discount) for ALL years
+  // The Y1 discount is exclusive to contract holders — without contract you pay Y2 from day 1
+  let baseRef=0;
+  for(let y=1;y<=yrs;y++){
+    const factor=infOn&&y>=3 ? Math.pow(1+infRate/100,y-2) : 1;
+    baseRef+=refY2*u*12*factor;
+  }
+  // baseRef uses same sh rate as billing toggle for consistency
+  // Annual toggle → ann sh rate, Monthly toggle → mon sh rate
+  const shRefTotal=curHost==='sh'?shCost(isAnn)*12*yrs:0;
+  const baseRefWithSh=baseRef+shRefTotal;
+  const base=baseRefWithSh;
+  const saving=base-total;
+  const avgRate=licTotal/(u*12*yrs);
+  // "Meses ahorrados" = saving / monthly cost per month
+  const monthlyCostPerMonth=plan.mon.y2*u;
+  const mesesAhorrados=monthlyCostPerMonth>0?saving/monthlyCostPerMonth:0;
+  return{yrs,disc,licY1,licY2,licTotal,shTotal,total,saving,avgRate,rY1,rY2,baseRef:baseRefWithSh,mesesAhorrados};
+}
+
+// ══ PT ══════════════════════════════════════════════════
+function getPT(totalUSD,rgn){
+  const rules=PT_RULES[rgn]||PT_RULES.northam;
+  for(const r of rules)if(totalUSD<=r.maxUSD)return r.t;
+  return rules[rules.length-1].t;
+}
+
+// ══ FEATURES ════════════════════════════════════════════
+function buildFeatures(){
+  const hasMulti=[...visPlans].some(y=>y>1);
+  const isCustom=curPlan==='Custom';
+  const hostLabel=curHost==='online'?t('host_online'):curHost==='onprem'?t('host_onprem'):t('host_sh');
+  const planLabel=isCustom?t('plan_custom'):t('plan_std');
+
+  document.getElementById('fs-sub').textContent=
+    `${planLabel} · ${hostLabel} · ${t('feat_no_modules')}`;
+  document.getElementById('fs-badge').textContent=
+    isCustom?t('feat_studio_api'):t('features_all');
+
+  // ── SVG icons (clean, professional) ──────────────────
+  const ICONS={
+    apps:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>`,
+    ai:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4v1h1a3 3 0 0 1 0 6h-1v1a4 4 0 0 1-8 0v-1H7a3 3 0 0 1 0-6h1V6a4 4 0 0 1 4-4z"/></svg>`,
+    globe:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>`,
+    receipt:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1V2l-2 1-2-1-2 1-2-1-2 1-2-1z"/><path d="M9 7h6M9 11h6M9 15h4"/></svg>`,
+    mobile:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2"/><circle cx="12" cy="17" r="1" fill="currentColor"/></svg>`,
+    chart:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
+    lock:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="11" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>`,
+    shield:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.5C16.5 22.15 20 17.25 20 12V6l-8-4z"/></svg>`,
+    headset:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11V9a9 9 0 0 1 18 0v2"/><path d="M3 11a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M16 11a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2z"/></svg>`,
+    cloud:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9z"/></svg>`,
+    refresh:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.5 15a9 9 0 1 1-2.1-9.4L23 10"/></svg>`,
+    bug:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2l1.5 1.5M16 2l-1.5 1.5M9 7a3 3 0 0 0-3 3v5a5 5 0 0 0 10 0v-5a3 3 0 0 0-3-3H9z"/><path d="M6 10H3M18 10h3M6 15H3M18 15h3"/></svg>`,
+    alert:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>`,
+    migrate:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h11l5 5v3"/><polyline points="18 15 22 19 18 23"/><line x1="10" y1="19" x2="22" y2="19"/></svg>`,
+  };
+
+  const colMap={
+    apps:{bg:'#F0F9FF',stroke:'#0369A1'},
+    ai:{bg:'#F5F3FF',stroke:'#6D28D9'},
+    globe:{bg:'#ECFDF5',stroke:'#065F46'},
+    receipt:{bg:'#FFFBEB',stroke:'#92400E'},
+    mobile:{bg:'#F0FDF4',stroke:'#166534'},
+    chart:{bg:'#FFF1F2',stroke:'#9F1239'},
+    lock:{bg:'#F5F3FF',stroke:'#6D28D9'},
+    shield:{bg:'#ECFDF5',stroke:'#065F46'},
+    headset:{bg:'#EFF6FF',stroke:'#1D4ED8'},
+    cloud:{bg:'#F0F9FF',stroke:'#0369A1'},
+    refresh:{bg:'#F0FDF4',stroke:'#166534'},
+    bug:{bg:'#FFF1F2',stroke:'#9F1239'},
+    alert:{bg:'#FFFBEB',stroke:'#92400E'},
+    migrate:{bg:'#F5F3FF',stroke:'#6D28D9'},
+  };
+
+  // ── Feature card renderer ─────────────────────────────
+  // hero = large card spanning 2 cols
+  function featCard(iconKey,title,desc,hero=false){
+    const {bg,stroke}=colMap[iconKey]||{bg:'#F3F4F6',stroke:'#6B7280'};
+    return`<div class="feat-card${hero?' feat-hero':''}">
+      <div class="feat-icon-wrap" style="background:${bg};color:${stroke}">${ICONS[iconKey]||''}</div>
+      <div class="feat-content">
+        <div class="feat-title">${title}</div>
+        <div class="feat-desc">${desc}</div>
+      </div>
+    </div>`;
+  }
+
+  // ── OPERATE & GROW grid (2 hero + 4 compact) ──────────
+  const operateHtml=`
+    <div class="feat-group-label">
+      <span>${t('feat_platform')}</span>
+      <div class="feat-group-line"></div>
+    </div>
+    <div class="feat-grid">
+      ${featCard('apps', t('feat_p1_t'), t('feat_p1_d'), true)}
+      ${featCard('ai',   t('feat_p2_t'), t('feat_p2_d'), true)}
+      ${featCard('globe',   t('feat_p3_t'), t('feat_p3_d'))}
+      ${featCard('receipt', t('feat_p4_t'), t('feat_p4_d'))}
+      ${featCard('mobile',  t('feat_p5_t'), t('feat_p5_d'))}
+      ${featCard('chart',   t('feat_p6_t'), t('feat_p6_d'))}
+    </div>`;
+
+  // ── PROTECT & SUPPORT grid (2 hero + 6 compact) ───────
+  const protectHtml=`
+    <div class="feat-group-label">
+      <span>${t('feat_security')}</span>
+      <div class="feat-group-line"></div>
+    </div>
+    <div class="feat-grid">
+      ${featCard('shield',  t('feat_s1_t'), t('feat_s1_d'), true)}
+      ${featCard('headset', t('feat_s3_t'), t('feat_s3_d'), true)}
+      ${featCard('lock',    t('feat_s2_t'), t('feat_s2_d'))}
+      ${featCard('cloud',   t('feat_s4_t'), t('feat_s4_d'))}
+      ${featCard('refresh', t('feat_s5_t'), t('feat_s5_d'))}
+      ${featCard('bug',     t('feat_s6_t'), t('feat_s6_d'))}
+      ${featCard('alert',   t('feat_s7_t'), t('feat_s7_d'))}
+      ${featCard('migrate', t('feat_s8_t'), t('feat_s8_d'))}
+    </div>`;
+
+  // ── Multi-year banner — section climax ───────────────
+  const bannerHtml=hasMulti?`
+    <div class="feat-multiyear-banner" id="fs-banner-wrap">
+      <div class="fmt-header">
+        <div class="fmt-lock">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="11" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+        </div>
+        <div>
+          <div class="fmt-title" id="lbl-feat-benefits-title">${t('feat_benefits_title')}</div>
+          <div class="fmt-sub" id="lbl-feat-multiyear-sub">${t('feat_multiyear_sub')}</div>
+        </div>
+      </div>
+      <div class="fmt-pillars">
+        <div class="fmt-pillar">
+          <div class="fmt-pillar-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="11" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+          </div>
+          <div class="fmt-pillar-title">${t('feat_frozen_pill').replace('🔒 ','')}</div>
+          <div class="fmt-pillar-sub">${lang==='fr'?'Votre tarif ne changera pas pendant toute la durée du contrat':lang==='en'?'Your rate stays fixed for the entire contract duration':'Tu tarifa no cambia durante toda la vigencia del contrato'}</div>
+        </div>
+        <div class="fmt-pillar">
+          <div class="fmt-pillar-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <div class="fmt-pillar-title">${t('feat_rate_pill').replace('💱 ','')}</div>
+          <div class="fmt-pillar-sub">${lang==='fr'?'Taux de change fixé à la signature, quelle que soit la devise':lang==='en'?'Exchange rate locked at signing, regardless of currency fluctuations':'Tipo de cambio fijo al momento de la firma del contrato'}</div>
+        </div>
+        <div class="fmt-pillar" style="${infOn?'':'opacity:.4'}">
+          <div class="fmt-pillar-icon" style="${infOn?'':'background:rgba(255,255,255,.1)'}">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 6v6c0 5.25 3.5 10.15 8 11.5C16.5 22.15 20 17.25 20 12V6l-8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <div class="fmt-pillar-title">${t('feat_7_pill').replace('🛡️ ','')}</div>
+          <div class="fmt-pillar-sub">${lang==='fr'?'Aucune hausse tarifaire annuelle de 7% sur toute la durée':lang==='en'?'No annual rate increases for the entire contract period':'Sin incremento anual del 7% durante toda la vigencia'}</div>
+        </div>
+      </div>
+    </div>`:'';
+
+  // ── Hosting-specific section ──────────────────────────
+  function hostBand(){
+    if(curHost==='online') return'';
+    const isOnprem=curHost==='onprem';
+    const items=isOnprem?[
+      {t:'feat_op1_t',tkey:true, d:t('feat_op1_d')},
+      {t:'feat_op2_t',tkey:true, d:t('feat_op2_d')},
+      {t:'feat_op3_t',tkey:true, d:t('feat_op3_d')},
+      {t:'feat_op4_t',tkey:true, d:t('feat_op4_d')},
+      {t:'feat_op5_t',tkey:true, d:t('feat_op5_d')},
+    ]:[
+      {t:'feat_sh1_t',tkey:true, d:t('feat_sh1_d')},
+      {t:'feat_sh2_t',tkey:true, d:t('feat_sh2_d')},
+      {t:'feat_sh3_t',tkey:true, d:t('feat_sh3_d')},
+      {t:'feat_sh4_t',tkey:true, d:t('feat_sh4_d')},
+      {t:'feat_sh5_t',tkey:true, d:t('feat_sh5_d')},
+    ];
+    const label=isOnprem?t('feat_op_label'):t('feat_sh_label');
+    const sublabel=isOnprem?t('feat_op_sub'):t('feat_sh_sub');
+    const iconSvg=isOnprem
+      ?`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>`
+      :`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#065F46" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9z"/></svg>`;
+    return`
+      <div class="feat-group-label">
+        <span>${isOnprem?t('onprem_title'):t('sh_title')}</span>
+        <div class="feat-group-line"></div>
+      </div>
+      <div class="host-band">
+        <div class="host-band-icon" style="background:${isOnprem?'#EFF6FF':'#ECFDF5'}">${iconSvg}</div>
+        <div style="flex:1">
+          <div class="host-band-title">${label}</div>
+          <div class="host-band-sub">${sublabel}</div>
+          <div class="host-band-items">
+            ${items.map(i=>`<div class="host-item">
+              <svg width="8" height="8" viewBox="0 0 12 12" fill="none" style="flex-shrink:0;margin-top:3px"><circle cx="6" cy="6" r="3" fill="#017E84"/></svg>
+              <div><strong class="host-item-t">${i.tkey?t(i.t):i.t}</strong><span class="host-item-d"> — ${i.d}</span></div>
+            </div>`).join('')}
+          </div>
+        </div>
+      </div>`;
+  }
+
+  // ── Custom plan section ────────────────────────────────
+  function customSection(){
+    if(!isCustom) return'';
+    const showAdvanced=curHost==='onprem'||curHost==='sh';
+    return`
+      <div class="feat-group-label">
+        <span>${t('feat_plan_custom_label')}</span>
+        <div class="feat-group-line"></div>
+      </div>
+      <div class="feat-grid" style="margin-bottom:1.25rem">
+        ${featCard('lock',   t('feat_studio_t'),      t('feat_studio_d'),      true)}
+        ${featCard('apps',   t('feat_multicompany_t'),t('feat_multicompany_d'),true)}
+        ${showAdvanced?featCard('migrate',t('feat_api_t'),t('feat_api_d')):''}
+      </div>`;
+  }
+
+  // ── Assemble: banner first (climax), then features ─────
+  let html='';
+  html+=bannerHtml;
+  html+=operateHtml;
+  html+=protectHtml;
+  html+=customSection();
+  html+=hostBand();
+
+  document.getElementById('fs-body').innerHTML=html;
+  document.getElementById('fs-banner-wrap') && (document.getElementById('fs-banner-wrap').innerHTML=''); // banner now inline
+}
+
+// ══ IMPACT ══════════════════════════════════════════════
+function buildImpact(){
+  const d=PD[document.getElementById('region').value];
+  const u=parseInt(document.getElementById('unum').value)||1;
+  if(!d)return;
+  const cur=d.cur,plan=curPlan==='Standard'?d.S:d.C;
+  const isAnn=billing==='annual';
+  const shm=shCost(true);
+  const maxYrs=5;
+
+  function renewalCost(yr){
+    const sh=curHost==='sh'?shm*12:0;
+    const y2=isAnn?plan.ann.y2:plan.mon.y2;
+    const factor=infOn&&yr>=3?Math.pow(1+infRate/100,yr-2):1;
+    return y2*u*12*factor+sh;
+  }
+
+  const renCosts=Array.from({length:maxYrs},(_,i)=>renewalCost(i+1));
+  const renAcc=renCosts.reduce((acc,v,i)=>{acc.push((i>0?acc[i-1]:0)+v);return acc;},[]);
+  const totalRenewing=renAcc[maxYrs-1];
+  const activePlans=[1,2,3,4,5].filter(y=>visPlans.has(y));
+  const recY=erpPlanOverride>0&&visPlans.has(erpPlanOverride)
+    ?erpPlanOverride
+    :activePlans.reduce((best,y)=>{
+        const cc=calcP(y,plan,u,0,isAnn);
+        const cb=calcP(best,plan,u,0,isAnn);
+        return cc.saving>cb.saving?y:best;
+      },activePlans[0]||1);
+
+  const baseRate=isAnn?plan.ann.y2:plan.mon.y2;
+  const modeLabel=isAnn?t('renewing_annual'):t('paying_monthly');
+
+  const grid=document.getElementById('impact-grid');
+  grid.style.gridTemplateColumns='1fr';
+
+  // Build column widths
+  const colsHtml=`<colgroup>
+    <col style="width:160px">
+    ${Array.from({length:maxYrs},()=>'<col style="width:100px">').join('')}
+    <col style="width:100px"><col style="width:105px"><col style="width:80px">
+  </colgroup>`;
+
+  // Build rows
+  const rowsHtml=activePlans.map(yrs=>{
+    const isRec=yrs===(bestValuePlan!==null&&typeof bestValuePlan!=='undefined'?bestValuePlan:recY);
+    const cc=calcP(yrs,plan,u,0,isAnn);
+    const cCost=cc.total;
+    // Total = contract + renewals for remaining years up to maxYrs
+    const invTotal=cCost+(yrs<maxYrs?renAcc[maxYrs-1]-renAcc[yrs-1]:0);
+    // Saving = vs renewing all 5 years without contract
+    const saving=totalRenewing-invTotal;
+    const meses=saving>0?(saving/(baseRate*u)).toFixed(1):'—';
+    const discPct=cc.disc>0?` · -${(cc.disc*100).toFixed(0)}%`:'';
+    const contractCol=isRec?'#714B67':'#017E84';
+    const contractBorder=isRec?'2px solid #5a3a52':'1px solid #015F63';
+
+    // Cells
+    let cells='';
+    for(let yr=1;yr<=maxYrs;yr++){
+      if(yr<=yrs){
+        if(yr===1){
+          // Merged contract block
+          cells+=`<td colspan="${yrs}" style="background:${contractCol};border:${contractBorder};padding:12px 14px;text-align:center;vertical-align:middle">
+            <div style="font-size:${yrs===1?'18px':yrs===2?'20px':'22px'};font-weight:500;color:white;line-height:1">${fN(cCost,cur)}</div>
+            <div style="font-size:10px;color:rgba(255,255,255,.75);margin-top:4px">${fN(cc.avgRate,cur)} ${t('per_user_month')} · ${PI[yrs].months}${discPct}</div>
+          </td>`;
+        }
+      } else {
+        cells+=`<td style="padding:10px;text-align:center;border:0.5px solid var(--g200);background:white;vertical-align:middle">
+          <div style="font-size:12px;color:var(--g500)">${fN(renCosts[yr-1],cur)}</div>
+          <div style="font-size:10px;color:var(--g400);margin-top:2px">${t('impact_renovating')}</div>
+        </td>`;
+      }
+    }
+
+    return `<tr style="background:${isRec?'rgba(113,75,103,.04)':'white'};${isRec?'border-left:3px solid #714B67':''}">
+      <td style="padding:12px 14px;border:0.5px solid var(--g200);${isRec?'border-left:none':''}">
+        <div style="display:flex;align-items:center;gap:6px">
+          <div style="width:6px;height:6px;border-radius:50%;background:${isRec?'#714B67':'var(--g300)'};flex-shrink:0"></div>
+          <div>
+            <div style="font-size:13px;font-weight:500;color:${isRec?'#714B67':'var(--g800)'};display:flex;align-items:center;gap:6px">
+              ${PI[yrs].months}
+              ${isRec?`<span style="font-size:10px;padding:1px 7px;border-radius:20px;background:#714B67;color:white;font-weight:400">${t("best_value")}</span>`:''}
+            </div>
+            <div style="font-size:11px;color:var(--g400);margin-top:2px">${PI[yrs].name}${discPct}</div>
+          </div>
+        </div>
+      </td>
+      ${cells}
+      <td style="padding:8px 12px;text-align:right;border:0.5px solid var(--g200);background:var(--g50)">
+        <div style="font-size:13px;font-weight:500;color:${isRec?'#714B67':'var(--g700)'}">${fN(invTotal,cur)}</div>
+        ${yrs<maxYrs?`<div style="font-size:9px;color:var(--g400);margin-top:1px">${fN(cCost,cur)} cto + ${fN(renAcc[maxYrs-1]-renAcc[yrs-1],cur)} ren.</div>`:''}
+      </td>
+      <td style="padding:8px 12px;text-align:right;border:0.5px solid var(--g200)">
+        <div style="font-size:13px;font-weight:500;color:${saving>0?'#059669':'var(--g400)'}">${saving>0?'+'+fN(saving,cur):fN(saving,cur)}</div>
+      </td>
+      <td style="padding:8px 12px;text-align:right;border:0.5px solid var(--g200)">
+        <div style="font-size:12px;font-weight:500;color:${saving>0?'#059669':'var(--g400)'}">${meses!=='—'?meses+'m':'—'}</div>
+      </td>
+    </tr>`;
+  }).join('');
+
+  // Reference row
+  const refRow=`<tr style="background:var(--g50)">
+    <td style="padding:12px 14px;border:0.5px solid var(--g200)">
+      <div style="font-size:12px;font-weight:500;color:var(--g500)">Renovando año a año</div>
+      <div style="font-size:11px;color:var(--g400);margin-top:2px">${t('impact_ref_sub')}</div>
+    </td>
+    ${renCosts.map(v=>`<td style="padding:10px;text-align:center;border:0.5px solid var(--g200);background:var(--g50)">
+      <div style="font-size:12px;color:var(--g500)">${fN(v,cur)}</div>
+    </td>`).join('')}
+    <td style="padding:8px 12px;text-align:right;border:0.5px solid var(--g200);background:var(--g50)">
+      <div style="font-size:13px;font-weight:500;color:#C62828">${fN(totalRenewing,cur)}</div>
+    </td>
+    <td colspan="2" style="padding:8px 12px;text-align:center;border:0.5px solid var(--g200);background:var(--g50)">
+      <div style="font-size:11px;color:var(--g400)">referencia</div>
+    </td>
+  </tr>`;
+
+  grid.innerHTML=`
+  <div style="background:white;border:0.5px solid var(--g200);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh)">
+    <div style="padding:.85rem 1.25rem;border-bottom:0.5px solid var(--g200);background:var(--g50)">
+      <div style="font-size:13px;font-weight:500;color:var(--g900)">${t('impact_title')}</div>
+      <div style="font-size:11px;color:var(--g500);margin-top:2px">${u} ${t('users').toLowerCase().replace(/es$/,'').replace(/s$/,'')}${u>1?'s':''} · ${curPlan==='Standard'?t('plan_std'):t('plan_custom')}${infOn?' · '+t('inf_label'):''} · ${t('comparing_vs')} ${modeLabel}</div>
+    </div>
+    <div style="display:flex;gap:16px;padding:.45rem 1.25rem;border-bottom:0.5px solid var(--g200);background:var(--g50);flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--g500)"><div style="width:10px;height:10px;border-radius:2px;background:#017E84"></div><span id="lbl-legend-contract">Precio total del contrato</span></div>
+      <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--g500)"><div style="width:10px;height:10px;border-radius:2px;background:#714B67"></div><span id="lbl-legend-rec">Plan recomendado</span></div>
+      <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--g500)"><div style="width:10px;height:10px;border-radius:2px;background:var(--g100);border:0.5px solid var(--g200)"></div><span id="lbl-legend-renewing">Renovando sin contrato</span></div>
+    </div>
+    <div style="overflow-x:auto">
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        ${colsHtml}
+        <thead>
+          <tr style="background:var(--g50);border-bottom:0.5px solid var(--g200)">
+            <th style="padding:8px 12px;text-align:left;font-weight:500;font-size:11px;color:var(--g600)">Plan</th>
+            ${Array.from({length:maxYrs},(_,i)=>`<th style="padding:8px 10px;text-align:center;font-weight:500;font-size:11px;color:var(--g600)">${t("yr")} ${i+1}</th>`).join('')}
+            <th style="padding:8px 10px;text-align:right;font-weight:500;font-size:11px;color:var(--g600)">Total 5 años<br><span style="font-weight:400;color:var(--g400)">contrato + renovaciones</span></th>
+            <th style="padding:8px 10px;text-align:right;font-weight:500;font-size:11px;color:#059669">Ahorras vs<br><span style="font-weight:400">${isAnn?t('renewing_annual'):t('paying_monthly')}</span></th>
+            <th style="padding:8px 10px;text-align:right;font-weight:500;font-size:11px;color:#059669">Meses<br>gratis</th>
+          </tr>
+        </thead>
+        <tbody>${rowsHtml}${refRow}</tbody>
+      </table>
+    </div>
+    <div style="padding:.6rem 1.25rem;font-size:11px;color:var(--g400);border-top:0.5px solid var(--g200)">El total de 5 años incluye el contrato más renovaciones para completar el período. El ahorro compara contra renovar año a año los 5 años${infOn?' '+t('impact_footer_7'):''}.</div>
+  </div>`;
+}
+
+
+// ══ MAIN UPDATE ═════════════════════════════════════════
+function upd(){
+  const reg=document.getElementById('region').value;
+  const u=parseInt(document.getElementById('unum').value)||1;
+  const d=PD[reg];if(!d)return;
+  const cur=d.cur,plan=curPlan==='Standard'?d.S:d.C;
+  // plan.ann = {y1,y2}, plan.mon = {y1,y2}
+  const isAnn=billing==='annual';
+  const shm=shMon();
+
+  if(curHost==='sh'){
+    // Display bar shows both rates for reference
+    const shAnnRate=shCost(true);
+    const shMonRate=shCost(false);
+    document.getElementById('sh-cost-val').textContent=
+      `${t('billing_annual')}: ${fN(shAnnRate,cur)} ${t('per_user_month')} · ${t('billing_monthly')}: ${fN(shMonRate,cur)} ${t('per_user_month')}`;
+  }
+
+  // Header
+  const cl=document.getElementById('client-name').value;
+  const planLabel=curPlan==='Standard'?t('plan_std'):t('plan_custom');
+  const hostLabel=curHost==='online'?t('hosting_online'):curHost==='onprem'?t('hosting_onprem'):t('hosting_sh');
+  const subText=`${u} ${t('users').toLowerCase().replace(/es$/,'').replace(/s$/,'')}${u>1?'s':''} · ${planLabel} · ${hostLabel}`;
+  // Proposal header
+  const clientEl=document.getElementById('content-sub');
+  if(clientEl)clientEl.textContent=cl||t('prop_client_placeholder');
+  const detEl=document.getElementById('content-detail');
+  if(detEl)detEl.innerHTML=
+    `<span class="ph-pill-hl">${u} ${t('users').toLowerCase().replace(/es$/,'').replace(/s$/,'')}${u>1?'s':''}</span>`+
+    `<span class="ph-pill">${planLabel}</span>`+
+    `<span class="ph-pill">${hostLabel}</span>`;
+  // Print header
+  const pn=document.getElementById('print-client-name');
+  const ps=document.getElementById('print-client-sub');
+  if(pn)pn.textContent=cl||'';
+  if(ps)ps.textContent=subText;
+
+  const sorted=[...visPlans].sort((a,b)=>a-b);
+  const calcs=sorted.map(y=>calcP(y,plan,u,0,isAnn));
+  let bestIdx=0,bestSav=-Infinity;
+  calcs.forEach((c,i)=>{if(c.yrs>0&&c.saving>bestSav){bestSav=c.saving;bestIdx=i;}});
+
+  // PT — per plan (multi-select)
+  const ptOn=ptTargetPlans.size>0;
+
+  // GRID — always N columns (one per plan)
+  const vigDays=parseInt(document.getElementById('vig-days').value)||0;
+  // Reorder: put recommended card in center
+  // Use override or automatic for centering
+  const recYear=erpPlanOverride>0&&visPlans.has(erpPlanOverride)
+    ?erpPlanOverride
+    :sorted[bestIdx];
+  if(sorted.length>1){
+    const rest=sorted.filter(y=>y!==recYear);
+    const mid=Math.floor(rest.length/2);
+    rest.splice(mid,0,recYear);
+    sorted.splice(0,sorted.length,...rest);
+  }
+  // Build calcs in final sorted order
+  const calcsOrdered=sorted.map(y=>calcP(y,plan,u,0,isAnn));
+  const n=sorted.length;
+  const grid=document.getElementById('cards-grid');
+  grid.style.gridTemplateColumns=`repeat(${n},minmax(0,1fr))`;
+
+  grid.innerHTML=sorted.map((y,i)=>{
+    const c=calcsOrdered[i];
+    const inf=PI[y];
+    // Recommended: manual override or automatic best saving
+    const _autoRec=erpPlanOverride>0&&visPlans.has(erpPlanOverride)?erpPlanOverride:recYear;
+    const _bestY=bestValuePlan!==null?bestValuePlan:_autoRec;
+    const isRec=y===_bestY&&(bestValuePlan!==null||bestSav>0);
+    const isMo=y===0;
+    const hasY1=isAnn&&y>1;
+    const hasDisc=c.disc>0;
+    const hasInf=infOn&&y>1;
+    const col=isRec?COL_REC:COL_GRAY;
+
+    // Tags
+    let tags='';
+    // Tag Y1: ALL plans
+    tags+=`<span class="tag ty1">★ ${t('desc_initial')}</span>`;
+    if(hasDisc)tags+=`<span class="tag tdisc">-${(c.disc*100).toFixed(1)}% adicional</span>`;
+    if(y>1)tags+=`<span class="tag tfrz">🔒 ${t('price_frozen')}</span>`;
+    // infOn tags: only show when toggle is active
+    if(infOn&&y>1)tags+=`<span class="tag tinf">${t('tag_7pct')}</span>`;
+
+    const isCustom=curPlan==='Custom';
+    const advHost=curHost==='onprem'||curHost==='sh';
+    // Sort: applicable items first, non-applicable at bottom
+    const allChecks=[
+      {y:true,              t:'all_apps',tkey:true},
+      {y:true,              t:'auto_updates',tkey:true},
+      {y:true,              t:'initial_disc',tkey:true},
+      {y:y>1,               t:t('price_frozen')},
+      ...(infOn&&y>1?[{y:true,t:t('no_7_inc')}]:[]),
+      {y:isCustom,          t:'studio',tkey:true},
+      {y:isCustom,          t:'multicompany',tkey:true},
+      {y:isCustom&&advHost, t:'api_access',tkey:true},
+    ];
+    const checks=[...allChecks.filter(f=>f.y), ...allChecks.filter(f=>!f.y)];
+
+    // PT — multi-select plans, vendor picks ONE term per plan
+    let ptHtml='';
+    if(ptTargetPlans.has(y)){
+      const planTotalUSD=c.total/d.usd;
+      const planTerms=getPT(planTotalUSD,d.rgn);
+      const chosen=ptSelectedTerm[y]||'';
+      const mLabel={0:t('billing_monthly'),1:'12 m.',2:'24 m.',3:'36 m.',4:'48 m.',5:'60 m.'}[y];
+      const spNote=chosen&&planTerms.find(pt=>pt.lk===chosen&&pt.sp)?
+        `<div class="np" style="font-size:10px;color:#F57F17;margin-top:4px">${t("pt_approval")}</div>`:'';
+      ptHtml=`<div class="pc-pt">
+        <div class="pc-pt-ttl">${t('pt_title')} · ${mLabel}</div>
+        <select class="np" style="width:100%;padding:5px 7px;border:1px solid var(--g200);border-radius:5px;font-size:11px;font-family:inherit;margin-top:4px;background:white;color:var(--g900)"
+          onchange="ptSelectedTerm[${y}]=this.value;upd()">
+          <option value="">${t('pt_select')}</option>
+          ${planTerms.map(pt=>`<option value="${pt.lk}" ${chosen===pt.lk?'selected':''}>${pt.def?'⭐ ':''}${window._tl?window._tl(pt.lk):pt.lk}</option>`).join('')}
+        </select>
+        ${chosen?`<div class="np" style="margin-top:5px;padding:5px 8px;background:var(--pp);border-radius:5px;font-size:11px;font-weight:600;color:var(--p)">✓ ${chosen}${spNote}</div>`:''}
+        ${chosen?`<div class="pc-pt-chosen" style="margin-top:5px;padding:5px 8px;background:var(--pp);border-radius:5px;font-size:11px;font-weight:600;color:var(--p)">✓ ${t(chosen)}</div>`:''}
+      </div>`;
+    }
+
+    const shLabel=`Odoo.sh: ${fN(c.shTotal/(isMo?12:y*12),cur)} ${t('per_month')}`;
+    const totalMonths=isMo?12:y*12;
+
+    const totalMonthsLabel=isMo?t('billing_monthly'):`${PI[y].months}`;
+    const frozenBadge=y>1&&vigDays>0?`🔒 ${lang==='en'?t('frozen_through'):t('price_frozen')+' · '+t('expiry_valid')} ${frozenUntil(y)}`:'';
+    const mesesGratis=c.mesesAhorrados>0?`${c.mesesAhorrados.toFixed(1)} ${t('months_free')}`:'';
+    const normTotal=isMo?fN(plan.mon.y2*u+(curHost==='sh'?shCost(false):0),cur):fN(c.baseRef,cur);
+
+    return `<div class="pc ${isRec?'rec':''}" style="--pcol:${col}">
+
+      <!-- HEADER with gradient for rec -->
+      <div class="pcb" style="background:${isRec?`linear-gradient(135deg,${col} 0%,${col}dd 100%)`:col}">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div>
+            <div class="pcb-months">${inf.months}</div>
+            <div class="pcb-name">${inf.name}</div>
+          </div>
+          ${isRec?`<div class="pcb-badge">${t('best_value')}</div>`:''}
+        </div>
+        ${frozenBadge?`<div class="frozen-date-badge" style="margin-top:8px;display:inline-flex">${frozenBadge}</div>`:''}
+      </div>
+
+      <!-- PRICE BLOCK -->
+      <div class="pc-ph" style="padding:16px 16px 12px">
+        <div class="pc-normally-row">
+          <span class="pc-normally-lbl">${t('normally')}</span>
+          <div class="pc-strike-wrap">
+            <span class="pc-strike">${normTotal}</span>
+            <div class="pc-strike-line"></div>
+          </div>
+        </div>
+        <div class="pc-total-big" style="color:${isRec?'var(--s)':'var(--g900)'}">${fN(c.total,cur)}</div>
+        <div class="pc-per-user-inline">${fN(c.avgRate,cur)} ${t('per_user_month')}${curHost==='sh'?' · '+shLabel:''}</div>
+
+        <!-- SAVINGS HERO -->
+        ${c.saving>0?`
+        <div class="pc-savings-block">
+          <div class="pc-savings-months">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:1px"><rect x="3" y="4" width="18" height="18" rx="2" stroke="#059669" stroke-width="2"/><path d="M3 9h18" stroke="#059669" stroke-width="2"/><path d="M8 2v3M16 2v3" stroke="#059669" stroke-width="2" stroke-linecap="round"/></svg>
+            ${mesesGratis}
+          </div>
+          <div class="pc-savings-amount">${t('saves')} ${fN(c.saving,cur)}</div>
+        </div>`:''}
+
+        <!-- TAGS -->
+        <div class="pc-tags" style="margin-top:10px">${tags}</div>
+      </div>
+
+      <!-- FEATURES — collapsed for non-rec, subtle list -->
+      <div class="pc-bd">
+        <div class="pc-feat-divider"></div>
+        <div class="fl-ttl">${t('includes')}</div>
+        <div class="pc-feats">
+          ${checks.filter(f=>f.y).map(f=>`<div class="fi">
+            <svg width="9" height="9" viewBox="0 0 12 12" fill="none" style="flex-shrink:0;margin-top:2px"><path d="M2 6l3 3 5-5" stroke="${isRec?'#017E84':'#6B7280'}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="ft">${f.tkey?t(f.t):f.t}</span>
+          </div>`).join('')}
+          ${checks.filter(f=>!f.y).length>0?`<div class="fi pc-feat-unavail">
+            <span class="ft dim" style="font-size:9.5px;color:var(--g300)">+ ${checks.filter(f=>!f.y).length} ${lang==='fr'?'avec plan personnalisé':lang==='en'?'with custom plan':'con plan personalizado'}</span>
+          </div>`:''}
+        </div>
+        ${ptHtml}
+
+      </div>
+    </div>`;
+  }).join('');
+
+
+  autoSetErpRegion(reg);
+  buildFeatures();
+  if(document.getElementById('show-impact')?.checked)buildImpact();
+  if(document.getElementById('show-inv-table')?.checked)buildInvTable();
+  // Update inline pills
+  if(typeof updateAllPips==='function') updateAllPips();
+}
+
+// ══ INVESTMENT TABLE ══════════════════════════════════════
+function toggleInvTable(){
+  const show=document.getElementById('show-inv-table').checked;
+  document.getElementById('inv-table-section').classList.toggle('hidden',!show);
+  if(show) buildInvTable();
+}
+
+function buildInvTable(){
+  const reg=document.getElementById('region').value;
+  const u=parseInt(document.getElementById('unum').value)||1;
+  const d=PD[reg]; if(!d) return;
+  const cur=d.cur;
+  const plan=curPlan==='Standard'?d.S:d.C;
+  const isAnn=billing==='annual';
+  const shm=shCost(true);
+
+  // Rows = contract durations (only selected plans + always show mensual ref)
+  const contractRows=[
+    {label:t('billing_monthly')+' ('+t('impact_ref_sub').split('·')[0].trim()+')',yrs:0,isMo:true},
+    ...[1,2,3,4,5].filter(y=>visPlans.has(y)).map(y=>({
+      label:PI[y].months,yrs:y,isMo:false
+    }))
+  ];
+
+  // Columns = Year 1 through Year 5 (annual renewal accumulations)
+  const maxYrs=5;
+  const yrCols=[1,2,3,4,5];
+
+  // Find recommended year
+  const recY=erpPlanOverride>0&&visPlans.has(erpPlanOverride)?erpPlanOverride:
+    ([...visPlans].filter(y=>y>0).map(y=>{
+      const cc=calcP(y,plan,u,0,true);
+      return{y,saving:cc.saving};
+    }).reduce((a,b)=>b.saving>a.saving?b:a,{y:0,saving:-Infinity})).y;
+
+  // Annual renewal cost per year (with +7% if infOn)
+  // Year 1 = Y1 price, Year 2 = Y2 base, Year 3+ = Y2 * 1.07^(yr-2) if infOn
+  function annualRenewalCost(yr){
+    const shAnn=curHost==='sh'?shm*12:0;
+    let lic;
+    if(yr===1) lic=plan.ann.y1*u*12;
+    else if(yr===2) lic=plan.ann.y2*u*12;
+    else lic=plan.ann.y2*u*12*(infOn?Math.pow(1+infRate/100,yr-2):1);
+    return lic+shAnn;
+  }
+  function monthlyRenewalCost(yr){
+    const shMo=curHost==='sh'?shm*12:0;
+    let lic;
+    if(yr===1) lic=plan.mon.y1*u*12;
+    else if(yr===2) lic=plan.mon.y2*u*12;
+    else lic=plan.mon.y2*u*12*(infOn?Math.pow(1+infRate/100,yr-2):1);
+    return lic+shMo;
+  }
+
+  // Max saving for color scale
+  let maxSaving=0;
+  contractRows.filter(r=>!r.isMo).forEach(row=>{
+    const cc=calcP(row.yrs,plan,u,0,isAnn);
+    // Compare vs annual renewals for same period
+    let annTotal=0;
+    for(let yr=1;yr<=row.yrs;yr++) annTotal+=annualRenewalCost(yr);
+    const sv=annTotal-cc.total;
+    if(sv>maxSaving)maxSaving=sv;
+  });
+
+  // Build header
+  let html=`<thead>
+    <tr>
+      <th rowspan="2" style="text-align:left;padding:8px 12px;background:var(--g50);border:1px solid var(--g200);font-weight:600;color:var(--g700);vertical-align:middle;white-space:nowrap">Plazo</th>
+      <th colspan="${maxYrs}" style="text-align:center;padding:6px 10px;background:var(--g50);border:1px solid var(--g200);font-weight:600;color:var(--g600);font-size:11px">Renovaciones anuales acumuladas</th>
+      <th rowspan="2" style="text-align:center;padding:8px 10px;background:var(--g50);border:1px solid var(--g200);font-weight:600;color:var(--g600);white-space:nowrap;vertical-align:middle;font-size:11px">${t('impact_col_total')}<br><span style='font-weight:400;color:var(--g400)'>${t('impact_col_total_sub')}</span></th>
+      <th rowspan="2" style="text-align:center;padding:8px 10px;background:var(--g50);border:1px solid var(--g200);font-weight:600;color:#059669;white-space:nowrap;vertical-align:middle;font-size:11px">Ahorro vs<br>mensual</th>
+    </tr>
+    <tr>
+      ${yrCols.map(yr=>`<th style="text-align:center;padding:5px 8px;background:var(--g50);border:1px solid var(--g200);font-weight:500;color:var(--g500);font-size:10px">${t("yr")} ${yr}</th>`).join('')}
+    </tr>
+  </thead>`;
+
+  html+='<tbody>';
+
+  contractRows.forEach(row=>{
+    const isRec=row.yrs===recY&&!row.isMo;
+    const contractCalc=row.isMo?null:calcP(row.yrs,plan,u,0,isAnn);
+    const contractTotal=contractCalc?contractCalc.total:0;
+
+    // Compute annual renewal totals up to each year
+    let runningAnnual=0;
+    let runningMonthly=0;
+
+    // Total for this contract period via monthly
+    let moTotalPeriod=0;
+    if(!row.isMo){
+      for(let yr=1;yr<=row.yrs;yr++) moTotalPeriod+=monthlyRenewalCost(yr);
+    }
+
+    // Saving vs monthly
+    const vsMo=row.isMo?0:moTotalPeriod-contractTotal;
+    const mesesGratis=vsMo>0?(vsMo/(plan.mon.y2*u)).toFixed(1):'';
+
+    // Saving vs annual renewals for color
+    let annTotalPeriod=0;
+    if(!row.isMo) for(let yr=1;yr<=row.yrs;yr++) annTotalPeriod+=annualRenewalCost(yr);
+    const savVsAnn=row.isMo?0:annTotalPeriod-contractTotal;
+    const intensity=maxSaving>0?savVsAnn/maxSaving:0;
+
+    html+=`<tr>
+      <td style="padding:8px 12px;border:1px solid ${isRec?'#017E84':'var(--g200)'};background:${isRec?'rgba(1,126,132,.04)':row.isMo?'var(--g50)':'white'};font-weight:${isRec?'700':'500'};color:${isRec?'#017E84':row.isMo?'var(--g500)':'var(--g800)'};white-space:nowrap;${isRec?'border-left-width:3px':''}">
+        ${isRec?'<span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:#017E84;margin-right:5px;vertical-align:middle"></span>':''}
+        ${row.label}${row.isMo?'':` <span style="font-size:9px;color:var(--g400);font-weight:400">${lang==='fr'?'contrat':'contrato'}</span>`}
+      </td>`;
+
+    // Year columns
+    yrCols.forEach(yr=>{
+      const isOnDiag=!row.isMo&&yr===row.yrs; // diagonal = contract covers exactly this many years
+      const isBeyond=!row.isMo&&yr>row.yrs;   // beyond contract duration
+      const isBeforeContract=!row.isMo&&yr<row.yrs; // renewal years within contract
+
+      let cellContent='', bg='white', textCol='var(--g900)', border='var(--g200)', bw='1px';
+
+      if(row.isMo){
+        // Monthly reference row
+        runningMonthly+=monthlyRenewalCost(yr);
+        bg='var(--g50)'; textCol='var(--g500)';
+        cellContent=`<div style="font-weight:500;color:${textCol}">${fN(runningMonthly,cur)}</div><div style="font-size:9px;color:var(--g400);margin-top:1px">acumulado</div>`;
+      } else if(isOnDiag){
+        // Contract total on diagonal
+        bg=intensity>0.5?'rgba(1,126,132,.15)':intensity>0.2?'rgba(1,126,132,.08)':'rgba(1,126,132,.04)';
+        textCol=intensity>0.5?'#085041':'#017E84';
+        border=isRec?'#017E84':'#01A8B0';
+        bw=isRec?'2px':'1px';
+        cellContent=`<div style="font-weight:700;color:${textCol}">${fN(contractTotal,cur)}</div>
+          ${mesesGratis?`<div style="font-size:9px;color:#059669;margin-top:2px">≈ ${mesesGratis}m gratis</div>`:''}`;
+      } else if(isBeforeContract){
+        // Annual renewal cost accumulating up to contract start
+        runningAnnual+=annualRenewalCost(yr);
+        bg='var(--g100)'; textCol='var(--g400)';
+        cellContent=`<div style="font-weight:500;color:${textCol};font-size:11px">${fN(runningAnnual,cur)}</div><div style="font-size:9px;color:var(--g400);margin-top:1px">${t('impact_renovating')}</div>`;
+      } else {
+        // Beyond contract
+        bg='var(--g50)'; textCol='var(--g300)';
+        cellContent=`<div style="color:${textCol};font-size:11px">—</div>`;
+      }
+
+      html+=`<td style="padding:7px 9px;border:${bw} solid ${border};background:${bg};text-align:center">${cellContent}</td>`;
+    });
+
+    // Investment total column
+    const invTotal=row.isMo?monthlyRenewalCost(5)*5:contractTotal; // approx for monthly
+    if(row.isMo){
+      html+=`<td style="padding:7px 9px;border:1px solid var(--g200);background:var(--g50);text-align:center">
+        <div style="font-size:10px;color:var(--g400)">variable</div></td>`;
+    } else {
+      html+=`<td style="padding:7px 9px;border:1px solid ${isRec?'#017E84':'var(--g200)'};background:${isRec?'rgba(1,126,132,.04)':'white'};text-align:center;${isRec?'border-width:2px':''}">
+        <div style="font-weight:700;color:${isRec?'#017E84':'var(--g800)'}">${fN(contractTotal,cur)}</div></td>`;
+    }
+
+    // Ahorro vs mensual column
+    if(row.isMo){
+      html+=`<td style="padding:7px 9px;border:1px solid var(--g200);background:var(--g50);text-align:center">
+        <div style="font-size:10px;color:var(--g400)">—</div></td>`;
+    } else {
+      html+=`<td style="padding:7px 9px;border:1px solid var(--g200);background:${vsMo>0?'rgba(5,150,105,.07)':'white'};text-align:center">
+        <div style="font-weight:700;color:${vsMo>0?'#059669':'var(--g400)'}">${vsMo>0?'+'+fN(vsMo,cur):fN(vsMo,cur)}</div>
+        ${mesesGratis&&vsMo>0?`<div style="font-size:9px;color:#059669;margin-top:1px">${mesesGratis} meses</div>`:''}
+      </td>`;
+    }
+
+    html+='</tr>';
+  });
+
+  html+='</tbody>';
+  document.getElementById('inv-table').innerHTML=html;
+  document.getElementById('inv-subtitle').textContent=
+    `${u} ${t('users').toLowerCase().replace(/es$/,'').replace(/s$/,'')}${u>1?'s':''} · Plan ${curPlan==='Standard'?t('plan_std'):t('plan_custom')} · ${reg}${infOn?' · '+t('inf_label'):''}`;
+}
+
+// ══ COPY ════════════════════════════════════════════════
+function copyProposal(){
+  const d=PD[document.getElementById('region').value];
+  const u=parseInt(document.getElementById('unum').value)||1;
+  const cur=d.cur,plan=curPlan==='Standard'?d.S:d.C,shm=shMon();
+  const isAnn=billing==='annual';
+  const cl=document.getElementById('client-name').value||'—';
+  const sorted=[...visPlans].sort((a,b)=>a-b);
+  const calcs=sorted.map(y=>calcP(y,plan,u,shm,isAnn));
+  const hl=curHost==='online'?'Online':curHost==='onprem'?'On-Premise':'Odoo.sh';
+  const copyLabels={
+    title:    {es:'PROPUESTA ODOO ENTERPRISE',      en:'ODOO ENTERPRISE PROPOSAL',          fr:'PROPOSITION ODOO ENTERPRISE'},
+    client:   {es:'Cliente',                         en:'Client',                             fr:'Client'},
+    region:   {es:'Región',                          en:'Region',                             fr:'Région'},
+    plan:     {es:'Plan',                            en:'Plan',                               fr:'Plan'},
+    users:    {es:'Usuarios',                        en:'Users',                              fr:'Utilisateurs'},
+    billing:  {es:'Facturación',                     en:'Billing',                            fr:'Facturation'},
+    ann:      {es:'Anual',                           en:'Annual',                             fr:'Annuel'},
+    mo:       {es:'Mensual',                         en:'Monthly',                            fr:'Mensuel'},
+    hosting:  {es:'Alojamiento',                     en:'Hosting',                            fr:'Hébergement'},
+    inf7:     {es:'⚠️ +7% compuesto anual aplicado', en:'⚠️ +7% annual compound applied',     fr:'⚠️ +7% annuel composé appliqué'},
+    saving:   {es:'Ahorro total',                    en:'Total savings',                      fr:'Économies totales'},
+    disc:     {es:'★ Descuento inicial primer año incluido en planes anuales.','en':'★ First-year discount included in annual plans.','fr':'★ Remise première année incluse dans les plans annuels.'},
+    frozen:   {es:'🔒 Precio fijo durante todo el contrato multianual.','en':'🔒 Price frozen throughout the multi-year contract.','fr':'🔒 Tarif garanti pendant toute la durée du contrat pluriannuel.'},
+    no7:      {es:'🛡️ Sin incremento anual del 7% (aplica solo en contratos multianuales).','en':'🛡️ No annual 7% price hike (applies to multi-year contracts only).','fr':'🛡️ Sans hausse de prix annuelle de 7% (contrats pluriannuels uniquement).'},
+    notax:    {es:'Precios no incluyen IVA.',         en:'Prices do not include VAT.',         fr:'Prix hors TVA.'},
+    clause:   {es:'Cláusula 5.2',                   en:'Clause 5.2',                         fr:'Clause 5.2'},
+  };
+  const lbl=k=>copyLabels[k][lang]||copyLabels[k]['es'];
+  let txt=[
+    `${lbl('title')}\n${'═'.repeat(36)}`,
+    `${lbl('client')}: ${cl}`,
+    `${lbl('region')}: ${document.getElementById('region').value}`,
+    `${lbl('plan')}: ${curPlan==='Standard'?t('plan_std'):t('plan_custom')}`,
+    `${lbl('users')}: ${u}`,
+    `${lbl('billing')}: ${isAnn?lbl('ann'):lbl('mo')}`,
+    `${lbl('hosting')}: ${hl}`,
+    infOn?lbl('inf7'):'','─'.repeat(36)
+  ];
+  calcs.forEach(c=>{
+    const inf=PI[c.yrs];
+    txt.push(`${inf.icon} ${inf.name} (${c.yrs===0?t('billing_monthly'):c.yrs*12+' '+t('plan_12').split(' ')[1]}): ${fN(c.total,cur)}${c.saving>0?' · '+lbl('saving')+': '+fN(c.saving,cur):''}`)
+  });
+  txt.push('─'.repeat(36),
+    lbl('disc'), lbl('frozen'), lbl('no7'), lbl('notax'),
+    `${lbl('clause')}: https://www.odoo.com/documentation/19.0/legal/terms/enterprise.html#renewal-charges`);
+  navigator.clipboard.writeText(txt.filter(Boolean).join('\n')).then(()=>{
+    const b=document.querySelector('.hbtn-g');const o=b.innerHTML;
+    b.textContent='¡Copiado!';setTimeout(()=>b.innerHTML=o,2000);
+  });
+}
+
+// ── ERP COMPARISON DATA ──────────────────────────────────────────────────────
+var ERP_DATA={
+  northam:{cur:'$',odooLabel:'Odoo Enterprise',
+    rows:[
+      {name:'Odoo Enterprise',low:24.9,high:31.1,col:'#017E84',odoo:true},
+      {name:'MS Dynamics 365',low:80,high:110,col:'#6B7280',note:'Essentials $80 / Premium $110 (nov 2025)'},
+      {name:'SAP Business One',low:108,high:188,col:'#374151',note:()=>lang==='fr'?'Cloud professionnel (avr 2026)':lang==='en'?'Professional cloud (Apr 2026)':'Professional cloud (abr 2026)'},
+      {name:'Oracle NetSuite',low:129,high:199,col:'#1E3A5F',note:()=>`Full user + base $999/${t('billing_monthly').toLowerCase()} (2026)`},
+    ],
+    src:()=>t('erp_src_northam')
+  },
+  latam:{cur:'$',odooLabel:'Odoo Enterprise',
+    rows:[
+      {name:'Odoo Enterprise',low:7.25,high:8.95,col:'#017E84',odoo:true},
+      {name:'MS Dynamics 365',low:80,high:110,col:'#6B7280',note:'Essentials $80 / Premium $110 (nov 2025)'},
+      {name:'SAP Business One',low:100,high:150,col:'#374151',note:()=>lang==='fr'?'Référence LATAM USD (2025)':lang==='en'?'Reference LATAM USD (2025)':'Referencial LATAM USD (2025)'},
+      {name:'Oracle NetSuite',low:129,high:199,col:'#1E3A5F',note:()=>`Full user + base $999/${t('billing_monthly').toLowerCase()} (2026)`},
+    ],
+    src:()=>t('erp_src_latam')
+  },
+  europe:{cur:'€',odooLabel:'Odoo Enterprise',
+    rows:[
+      {name:'Odoo Enterprise',low:19.9,high:24.9,col:'#017E84',odoo:true},
+      {name:'MS Dynamics 365',low:74,high:102,col:'#6B7280',note:()=>lang==='fr'?'Essentials / Premium (taux de change réf.)':lang==='en'?'Essentials / Premium (ref. exchange rate)':'Essentials / Premium (tipo cambio ref.)'},
+      {name:'SAP Business One',low:91,high:91,col:'#374151',note:()=>lang==='fr'?'Cloud professionnel €91 (avr 2026)':lang==='en'?'Professional cloud €91 (Apr 2026)':'Professional cloud €91 (abr 2026)'},
+      {name:'Oracle NetSuite',low:120,high:185,col:'#1E3A5F',note:()=>lang==='fr'?'Estimation Europe (2026)':lang==='en'?'Estimated Europe (2026)':'Estimado Europa (2026)'},
+    ],
+    src:()=>t('erp_src_europe')
+  }
+};
+
+let curErpRegion='northam';
+
+function autoSetErpRegion(regKey){
+  // Auto-sync ERP region tab with pricelist
+  const map={
+    'North America':'northam','Europe High':'europe','Europe Low':'europe',
+    'Latin America':'latam','Mexico USD':'latam','Mexico MXN':'latam',
+    'Brasil BRL':'latam','India':'latam','Indonesia IDR':'latam',
+    'Asia / Africa High':'northam','Asia / Africa Middle':'latam','Asia / Africa Low':'latam',
+    'Australia AUD':'northam','Australia USD':'northam'
+  };
+  const mapped=map[regKey]||'northam';
+  if(mapped!==curErpRegion){
+    curErpRegion=mapped;
+    document.querySelectorAll('.erp-rtab').forEach(t=>t.classList.remove('on'));
+    const el=document.getElementById('ert-'+mapped);
+    if(el)el.classList.add('on');
+  }
+  renderErp();
+}
+
+function setErpRegion(r,el){
+  curErpRegion=r;
+  document.querySelectorAll('.erp-rtab').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+  renderErp();
+}
+
+function renderErp(){
+  const d=ERP_DATA[curErpRegion];
+  if(!d)return;
+  const maxVal=Math.max(...d.rows.map(r=>r.high));
+  const odooRow=d.rows.find(r=>r.odoo);
+  const odooMid=(odooRow.low+odooRow.high)/2;
+
+  // Get real Odoo price from current recommended plan
+  const reg2=document.getElementById('region').value;
+  const u2=parseInt(document.getElementById('unum').value)||1;
+  const plan2=curPlan==='Standard'?PD[reg2]?.S:PD[reg2]?.C;
+  const shm2=shCost(true);
+  let realOdooLicPerUser=odooRow?odooRow.low:0;
+  let realOdooShPerUser=0;
+  let realOdooPerUser=odooRow?odooRow.low:0;
+  let erpPlanLabel='';
+  if(plan2&&u2>0){
+    const sorted2=[...visPlans].filter(y=>y>0).sort((a,b)=>a-b);
+    if(sorted2.length){
+      // Determine which plan to use: override or recommended (highest saving)
+      let useY;
+      if(erpPlanOverride>=0&&visPlans.has(erpPlanOverride)&&erpPlanOverride>0){
+        useY=erpPlanOverride;
+      } else {
+        // Find recommended plan = highest saving vs monthly
+        const tempCalcs=sorted2.map(y=>{
+          const disc=y>1?Math.min(discs[y]||0,DMAX[y])/100:0;
+          const licY1=plan2.ann.y1*u2*12*(1-disc);
+          const licY2=plan2.ann.y2*u2*12*(y-1)*(1-disc);
+          const shT=curHost==='sh'?shCost(true)*12*y:0;
+          const total=licY1+licY2+shT;
+          const baseRef=plan2.mon.y2*u2*12*y+shT;
+          return{y,saving:baseRef-total};
+        });
+        const best=tempCalcs.reduce((a,b)=>b.saving>a.saving?b:a);
+        useY=best.y;
+      }
+      const months={1:'12 m.',2:'24 m.',3:'36 m.',4:'48 m.',5:'60 m.'};
+      erpPlanLabel=` · ${months[useY]||''}`;
+      const disc=useY>1?Math.min(discs[useY]||0,DMAX[useY])/100:0;
+      const licTotal=plan2.ann.y1*u2*12*(1-disc)+(plan2.ann.y2*u2*12*(useY-1)*(1-disc));
+      realOdooLicPerUser=licTotal/(u2*12*useY);
+      realOdooShPerUser=curHost==='sh'?shCost(true)/u2:0;
+      realOdooPerUser=realOdooLicPerUser+realOdooShPerUser;
+    }
+  }
+  d.rows=d.rows.map(r=>r.odoo?{...r,low:realOdooPerUser,high:realOdooPerUser}:r);
+  const maxVal2=Math.max(...d.rows.map(r=>r.high));
+
+  document.getElementById('erp-bars').innerHTML=d.rows.map(r=>{
+    const mid=(r.low+r.high)/2;
+    const pct=Math.max(4,(mid/maxVal2)*100);
+    const mult=r.odoo?null:(mid/realOdooPerUser);
+    // For Odoo: show total + breakdown in parenthesis
+    let label;
+    if(r.odoo){
+      if(curHost==='sh'){
+        label=`${d.cur}${realOdooPerUser.toFixed(2)}/${t('per_user_month')} (${d.cur}${realOdooLicPerUser.toFixed(2)} ${t('license_lbl')} + ${d.cur}${realOdooShPerUser.toFixed(2)} Odoo.sh)`;
+      } else {
+        label=`${d.cur}${realOdooPerUser.toFixed(2)} ${t('per_user_month')}`;
+      }
+    } else {
+      label=r.low===r.high?`${d.cur}${mid.toFixed(2)} ${t('per_user_month')}`:`${d.cur}${r.low}–${d.cur}${r.high} ${t('per_user_month')}`;
+    }
+    const multStr=r.odoo?`<span style="font-size:10px;color:#017E84;font-weight:600">${t('erp_your_price')}${erpPlanLabel}</span>`
+      :`<span style="color:#C62828">${mult.toFixed(1)} ${t('erp_more_exp')}</span>`;
+    return `<div class="erp-row">
+      <div class="erp-name"><div>${r.name}</div>${r.note?`<div style="font-size:9px;color:var(--g400);font-weight:400;margin-top:1px;white-space:normal">${typeof r.note==='function'?r.note():r.note}</div>`:''}</div>
+      <div style="flex:1">
+        <div class="erp-bar-wrap">
+          <div class="erp-bar-fill" style="width:${pct.toFixed(1)}%;background:${r.col}"></div>
+        </div>
+        <div style="font-size:11px;font-weight:600;color:${r.col};margin-top:3px">${label}</div>
+      </div>
+      <div class="erp-mult">${multStr}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('erp-note').innerHTML='* '+d.src()+'<br>'+t('erp_note_suffix');
+}
+
+// ── FROZEN BAR ───────────────────────────────────────────────────────────────
+
+
+// ══ INLINE EDITING SYSTEM ═══════════════════════════════════════════════
+
+// Initialize inline pills after DOM ready — called from DOMContentLoaded
+function initInlinePills(){
+  // Build vigencia quick chips
+  const vigChips=document.getElementById('vig-chips');
+  if(vigChips){
+    vigChips.innerHTML=[3,5,7,10,14,15,21,30,45].map(d=>
+      `<div class="vig-chip" onclick="setVig(${d})">${d}d</div>`
+    ).join('');
+  }
+  // Sync client name
+  const inlineInput=document.getElementById('client-name-inline');
+  if(inlineInput){
+    inlineInput.placeholder=t('edit_client_ph');
+    inlineInput.addEventListener('input',()=>{
+      const hiddenInput=document.getElementById('client-name');
+      if(hiddenInput) hiddenInput.value=inlineInput.value;
+      upd();
+    });
+  }
+  buildRegionDropdown();
+  updateAllPips();
+  // Close dropdowns on outside click
+  document.addEventListener('click',()=>{
+    document.querySelectorAll('.pip-dd.open').forEach(d=>d.classList.remove('open'));
+  });
+}
+
+function buildRegionDropdown(){
+  const dd=document.getElementById('pip-region-dd');
+  if(!dd) return;
+  const select=document.getElementById('region');
+  if(!select||!select.options) return;
+  let html='';
+  let curGroup='';
+  Array.from(select.options).forEach(opt=>{
+    if(opt.parentNode.tagName==='OPTGROUP'){
+      const grp=opt.parentNode.label;
+      if(grp!==curGroup){
+        if(curGroup) html+='</div>';
+        html+=`<div class="pip-dd-group"><div class="pip-dd-group-label">${grp.replace('── ','').replace(' ──','')}</div>`;
+        curGroup=grp;
+      }
+      const isActive=opt.value===select.value;
+      html+=`<div class="pip-dd-item${isActive?' active':''}" onclick="selectRegion('${opt.value.replace(/'/g,"\'")}');">${opt.text}</div>`;
+    }
+  });
+  if(curGroup) html+='</div>';
+  dd.innerHTML=html;
+}
+
+function selectRegion(val){
+  const select=document.getElementById('region');
+  if(select){
+    select.value=val;
+    onRegionChange();
+  }
+  document.getElementById('pip-region-val').textContent=val;
+  // Rebuild dropdown to update active state
+  buildRegionDropdown();
+  document.querySelectorAll('.pip-dd.open').forEach(d=>d.classList.remove('open'));
+}
+
+function togglePipDropdown(ddId){
+  const dd=document.getElementById(ddId);
+  if(!dd) return;
+  const wasOpen=dd.classList.contains('open');
+  document.querySelectorAll('.pip-dd.open').forEach(d=>d.classList.remove('open'));
+  if(!wasOpen) dd.classList.add('open');
+  event.stopPropagation();
+}
+
+function focusPipInput(inputId){
+  const el=document.getElementById(inputId);
+  if(el){ el.focus(); el.select(); }
+}
+
+function togglePlan_inline(){
+  const newPlan=curPlan==='Standard'?'Custom':'Standard';
+  // Call original setPlan
+  const el=newPlan==='Standard'?document.getElementById('tab-std'):document.getElementById('tab-cus');
+  if(el) setPlan(newPlan,el);
+  else { curPlan=newPlan; upd(); }
+  updateAllPips();
+}
+
+function cycleHost_inline(){
+  const hosts=curPlan==='Standard'?['online']:['online','onprem','sh'];
+  const icons={online:'☁️',onprem:'🖥️',sh:'⚙️'};
+  const next=hosts[(hosts.indexOf(curHost)+1)%hosts.length];
+  const htab=document.getElementById('htab-'+next);
+  if(htab) setHost(next,htab);
+  updateAllPips();
+}
+
+function updateBillingPips(){
+  const isAnn=billing==='annual';
+  document.getElementById('pip-monthly')?.classList.toggle('pip-active',!isAnn);
+  document.getElementById('pip-annual')?.classList.toggle('pip-active',isAnn);
+}
+
+function updateUserPip(){
+  // User pip updates automatically via input binding
+}
+
+function updateAllPips(){
+  if(!document.getElementById('pip-monthly')) return; // pills not in DOM yet
+  updateBillingPips();
+  // Region
+  const regionSel=document.getElementById('region');
+  if(regionSel&&regionSel.options&&regionSel.selectedIndex>=0){
+    const opt=regionSel.options[regionSel.selectedIndex];
+    const pipReg=document.getElementById('pip-region-val');
+    if(opt&&pipReg) pipReg.textContent=opt.text;
+  }
+  // Users (sync from hidden input)
+  const unum=document.getElementById('unum');
+  const pipU=document.getElementById('pip-users-input');
+  if(unum&&pipU) pipU.value=unum.value;
+  // Plan — sync adv panel buttons
+  const _isStd=curPlan==='Standard';
+  ['adv-tab-std','adv-tab-cus'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    const isActive=(id==='adv-tab-std'&&_isStd)||(id==='adv-tab-cus'&&!_isStd);
+    el.style.background=isActive?'var(--p)':'white';
+    el.style.color=isActive?'white':'var(--g500)';
+    el.style.fontWeight=isActive?'600':'500';
+  });
+  // Progressive hosting row — show only for Custom
+  const hostRow=document.getElementById('pip-row-hosting');
+  if(hostRow) hostRow.classList.toggle('hidden',curPlan!=='Custom');
+
+  // Hosting pills — direct style for guaranteed visibility
+  ['online','onprem','sh'].forEach(h=>{
+    const pip=document.getElementById('pip-host-'+h);
+    if(!pip) return;
+    const isActive=h===curHost;
+    pip.style.background=isActive?'var(--s)':'transparent';
+    pip.style.color=isActive?'white':'var(--g600)';
+    pip.style.fontWeight=isActive?'600':'500';
+    pip.classList.toggle('pip-host-active',isActive);
+  });
+
+  // On-Premise: only available with Annual → show badge, disable if Monthly
+  const onpremPip=document.getElementById('pip-host-onprem');
+  if(onpremPip){
+    const annualOnly=billing!=='annual';
+    onpremPip.style.opacity=annualOnly?'.4':'1';
+    onpremPip.style.cursor=annualOnly?'not-allowed':'pointer';
+    onpremPip.title=annualOnly?(lang==='en'?'Requires Annual billing':lang==='fr'?'Nécessite facturation annuelle':'Requiere facturación anual'):'';
+  }
+
+  // If Custom+Monthly and currently on onprem → switch to online
+  if(curPlan==='Custom'&&billing==='monthly'&&curHost==='onprem'){
+    setHostInline('online');
+  }
+
+  // Plan pills
+  const isStd=curPlan==='Standard';
+  const pipStd=document.getElementById('pip-std');
+  const pipCus=document.getElementById('pip-cus');
+  if(pipStd){pipStd.classList.toggle('pip-active',isStd);pipStd.style.background=isStd?'var(--p)':'white';pipStd.style.color=isStd?'white':'var(--g600)';}
+  if(pipCus){pipCus.classList.toggle('pip-active',!isStd);pipCus.style.background=!isStd?'var(--p)':'white';pipCus.style.color=!isStd?'white':'var(--g600)';}
+
+  // Adv panel plan buttons sync
+  const advStd=document.getElementById('adv-tab-std');
+  const advCus=document.getElementById('adv-tab-cus');
+  if(advStd){advStd.style.background=isStd?'var(--p)':'white';advStd.style.color=isStd?'white':'var(--g500)';}
+  if(advCus){advCus.style.background=!isStd?'var(--p)':'white';advCus.style.color=!isStd?'white':'var(--g500)';}
+
+  // Adv hosting buttons sync
+  ['online','onprem','sh'].forEach(h=>{
+    const advBtn=document.getElementById('adv-htab-'+h);
+    if(advBtn){
+      advBtn.style.background=h===curHost?'var(--s)':'white';
+      advBtn.style.color=h===curHost?'white':'var(--g400)';
+      advBtn.style.fontWeight=h===curHost?'600':'500';
+    }
+  });
+  // Standard plan disables onprem/sh
+  ['onprem','sh'].forEach(h=>{
+    const pip=document.getElementById('pip-host-'+h);
+    if(pip){pip.style.opacity=curPlan==='Standard'?'.3':'1';pip.style.cursor=curPlan==='Standard'?'not-allowed':'pointer';}
+  });
+  // Show/hide Odoo.sh inline bar in adv panel  
+  const shInline=document.getElementById('sh-bar-inline');
+  if(shInline) shInline.classList.toggle('hidden',curHost!=='sh');
+  // Update sh inline cost display
+  const shInlineCost=document.getElementById('sh-inline-cost');
+  if(shInlineCost&&curHost==='sh'){
+    const reg=document.getElementById('region')?.value||'North America';
+    const cur=(PD[reg]||PD['North America']).cur||'$';
+    const ann=shCost(true),mon=shCost(false);
+    shInlineCost.textContent=`${t('billing_annual')}: ${fN(ann/12,cur)}${t('per_month')} · ${t('billing_monthly')}: ${fN(mon/12,cur)}${t('per_month')}`;
+  } else if(shInlineCost) shInlineCost.textContent='';
+  // Sync pip labels via t()
+  const pipMonthly=document.getElementById('pip-lbl-monthly');
+  const pipAnnual=document.getElementById('pip-lbl-annual');
+  const pipUsers=document.getElementById('pip-lbl-users');
+  const pipAdv=document.getElementById('pip-adv-lbl');
+  if(pipMonthly) pipMonthly.textContent=t('billing_monthly');
+  if(pipAnnual) pipAnnual.textContent=t('billing_annual');
+  if(pipUsers) pipUsers.textContent=t('edit_users');
+  if(pipAdv) pipAdv.textContent=t('edit_advanced');
+}
+
+function setPlanInline(p){
+  const el=document.getElementById(p==='Standard'?'tab-std':'tab-cus');
+  if(el) setPlan(p,el);
+  else { curPlan=p; upd(); }
+  updateAllPips();
+}
+
+function setHostInline(h){
+  if(curPlan==='Standard'&&h!=='online') return;
+  if(h==='onprem'&&billing!=='annual') return;
+  curHost=h;
+  if(h==='sh') initShDefaults();
+  upd();
+}
+
+function initShDefaults(){
+  const u=parseInt(document.getElementById('unum')?.value)||10;
+  const wkVal=Math.max(1,Math.ceil(u/25));
+  const gbVal=Math.max(20,u*2);
+  const wkEl=document.getElementById('wk');
+  const gbEl=document.getElementById('gb');
+  const stgEl=document.getElementById('stg');
+  if(wkEl) wkEl.value=wkVal;
+  if(gbEl) gbEl.value=gbVal;
+  if(stgEl) stgEl.value=1;
+  checkDed();
+}
+
+function setVig(d){
+  const el=document.getElementById('vig-days');
+  if(el){
+    el.value=d;
+    updateExpiry();
+  }
+  // Update active chip
+  document.querySelectorAll('.vig-chip').forEach(ch=>{
+    ch.classList.toggle('active',ch.textContent===d+'d');
+  });
+}
+
+function toggleAdvPanel(){
+  const panel=document.getElementById('adv-panel');
+  const btn=document.getElementById('pip-adv-btn');
+  if(panel){
+    panel.classList.toggle('hidden');
+    if(btn) btn.style.borderStyle=panel.classList.contains('hidden')?'dashed':'solid';
+  }
+}
+
+// Add inline pill updates to DOMContentLoaded
+document.addEventListener('DOMContentLoaded',()=>{
+  setTimeout(initInlinePills, 50);
+});
+
+</script>
+</body>
+</html>
