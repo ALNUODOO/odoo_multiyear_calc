@@ -14,6 +14,10 @@ DOCTYPE html>
   --g50:#FAFAFA;--g100:#F4F4F5;--g200:#E4E4E7;--g300:#D4D4D8;--g400:#A1A1AA;--g500:#71717A;--g600:#52525B;--g700:#3F3F46;--g800:#27272A;--g900:#18181B;
   --r:12px;--rs:8px;--sh:0 1px 3px rgba(0,0,0,.07),0 4px 16px rgba(0,0,0,.05);
 }
+/* Hide number input spinners globally */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+input[type=number]{-moz-appearance:textfield}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'DM Sans',sans-serif;background:var(--g50);color:var(--g900);min-height:100vh}
 
@@ -57,7 +61,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--g50);color:var(--g900);mi
 .hm.on{border-color:var(--g);background:var(--gl);color:var(--g)}
 .hm.dis{opacity:.35;cursor:not-allowed;pointer-events:none}
 .vig-wrap{display:flex;gap:5px;align-items:center}
-.vig-in{width:3ch;min-width:3ch;padding:2px 6px;border:1px solid var(--g300);border-radius:6px;font-family:monospace;font-size:13px;font-weight:600;text-align:center}
+.vig-in{width:52px;min-width:52px;padding:3px 6px;border:1px solid var(--g300);border-radius:6px;font-family:'DM Mono',monospace;font-size:13px;font-weight:600;text-align:center}
 .ep{padding:3px 8px;border-radius:20px;font-size:10px;font-weight:600;font-family:'DM Mono',monospace;white-space:nowrap}
 .ep-none{background:var(--g100);color:var(--g400)}
 .ep-ok{background:#E8F5E9;color:#2E7D32}
@@ -255,7 +259,41 @@ body{font-family:'DM Sans',sans-serif;background:var(--g50);color:var(--g900);mi
 .fn{font-size:10px;color:var(--g400)}
 .fn a{color:var(--p);text-decoration:none}
 
-/* ── PRINT ── */
+/* ── STAIRS ── */
+.stair-diagram{padding:14px 16px 10px;border-top:1px solid var(--g100);margin-top:4px}
+.stair-timeline{position:relative;display:flex;align-items:flex-start;gap:0;margin-bottom:12px;overflow:visible;padding-top:4px}
+.stair-node{display:flex;flex-direction:column;align-items:center;position:relative;flex:1;min-width:60px}
+.stair-dot{width:10px;height:10px;border-radius:50%;background:var(--p);flex-shrink:0;z-index:1;margin-bottom:5px;margin-top:2px}
+.stair-dot-t{background:var(--s)}
+.stair-line{position:absolute;top:22px;left:50%;right:-50%;height:2px;background:var(--g200);z-index:0}
+.stair-node:last-child .stair-line{display:none}
+.stair-month{font-size:9px;font-weight:600;color:var(--g400);text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px}
+.stair-users{font-size:13px;font-weight:700;color:var(--g800);font-family:'DM Mono',monospace}
+.stair-users-lbl{font-size:9px;color:var(--g400)}
+.stair-tier-lbl{font-size:8px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:1px 5px;border-radius:8px;margin-bottom:4px}
+.stair-t0{background:var(--pp);color:var(--p)}
+.stair-t1{background:var(--gl);color:var(--g)}
+.stair-t2{background:#FFF3E0;color:#E65100}
+.stair-summary{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:8px 10px;background:var(--g50);border-radius:8px;margin-top:6px}
+.stair-sum-item{font-size:10px;color:var(--g600)}
+.stair-sum-save{font-size:11px;font-weight:700;color:#059669}
+.stair-warn{display:flex;align-items:center;gap:5px;font-size:10px;color:#92400E;background:#FFF8E1;border:1px solid #FDE68A;border-radius:6px;padding:5px 8px;margin-top:6px}
+
+/* adv step stair panel */
+.stair-adv-plan{border:1px solid var(--g200);border-radius:8px;padding:10px 12px;background:white;display:flex;flex-direction:column;gap:8px}
+.stair-adv-plan-hdr{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.stair-adv-plan-lbl{font-size:11px;font-weight:700;color:var(--g700)}
+.stair-toggle{position:relative;width:32px;height:18px;flex-shrink:0}
+.stair-toggle input{opacity:0;width:0;height:0}
+.stair-slider{position:absolute;cursor:pointer;inset:0;background:var(--g200);border-radius:9px;transition:.2s}
+.stair-slider:before{content:'';position:absolute;width:14px;height:14px;left:2px;top:2px;background:white;border-radius:50%;transition:.2s}
+.stair-toggle input:checked+.stair-slider{background:var(--p)}
+.stair-toggle input:checked+.stair-slider:before{transform:translateX(14px)}
+.stair-tier-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.stair-tier-badge{font-size:9px;font-weight:700;letter-spacing:.06em;padding:2px 7px;border-radius:20px;white-space:nowrap}
+.stair-input{width:60px;padding:3px 6px;border:1px solid var(--g200);border-radius:5px;font-size:12px;font-family:'DM Mono',monospace;text-align:center}
+.stair-input:focus{outline:none;border-color:var(--p)}
+.stair-input-lbl{font-size:10px;color:var(--g500);white-space:nowrap}
 @page{margin:1cm;size:auto}
 @media print{
   *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
@@ -453,28 +491,30 @@ body{font-family:'DM Sans',sans-serif;background:var(--g50);color:var(--g900);mi
 
 /* Advanced panel */
 .adv-panel{
-  margin-top:10px;background:var(--g50);border:1px solid var(--g200);
+  margin-top:10px;background:white;border:1px solid var(--g200);
   border-radius:12px;overflow:hidden;
   transition:all .2s;
 }
 .adv-panel.hidden{display:none!important}
-.adv-panel-inner{padding:16px;display:flex;flex-direction:column;gap:12px}
+.adv-panel-inner{padding:12px 14px;display:flex;flex-direction:row;gap:10px;flex-wrap:wrap;align-items:flex-start}
+.adv-step{background:var(--g50);border:1px solid var(--g200);border-radius:10px;padding:12px 14px;flex:1;min-width:200px;display:flex;flex-direction:column;gap:10px}
+.adv-step-hdr{display:flex;align-items:center;gap:7px;margin-bottom:2px}
+.adv-step-num{font-size:9px;font-weight:700;letter-spacing:.1em;color:var(--g400);text-transform:uppercase;background:var(--g200);padding:2px 6px;border-radius:20px;white-space:nowrap}
+.adv-step-title{font-size:11px;font-weight:700;color:var(--g700);white-space:nowrap}
 .adv-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .adv-lbl{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--g400);white-space:nowrap;min-width:fit-content}
 .adv-field{display:flex;flex-direction:column;gap:3px}
 .adv-field label{font-size:10px;color:var(--g500)}
 
 /* Hosting 3-way toggle pills */
-.pip-host{border:none;border-radius:0;padding:4px 10px;font-size:11px}
+.pip-host{border:none;border-radius:0;padding:4px 10px;font-size:11px;color:var(--g300);font-weight:500}
 .pip-host-group,.pip-group{display:flex;border:1.5px solid var(--g200);border-radius:20px;overflow:hidden;background:white}
 .pip-host.pip-host-active,.pip-host.pip-active{
-  background:var(--s)!important;color:white!important;font-weight:600;
+  background:white!important;color:var(--p)!important;font-weight:700!important;
 }
-.pip-host:not(.pip-host-active):not(.pip-active){
-  background:white;color:var(--g500);
-}
-.pip-host.pip-active:hover{background:var(--s);color:white}
-.pip-host:not(.pip-active){color:var(--g500)}
+.pip-host.pip-host-active svg,.pip-host.pip-active svg{stroke:var(--p)!important;}
+.pip-host:not(.pip-host-active):not(.pip-active){background:white;color:var(--g300);}
+.pip-host:not(.pip-host-active):not(.pip-active):hover{color:var(--p);}
 
 /* Progressive pills rows */
 .pip-row{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:5px;width:100%;}
@@ -494,16 +534,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--g50);color:var(--g900);mi
 .upc-wrap{display:flex;flex-direction:column;align-items:center;gap:3px}
 .upc-chip{min-width:52px;text-align:center}
 .upc-disc{display:flex;align-items:center;gap:1px;background:var(--g100);border-radius:8px;padding:2px 6px}
-.upc-input{width:30px;border:none;background:transparent;font-size:10px;font-weight:600;color:var(--p);outline:none;text-align:center;font-family:inherit}
+.upc-input{width:44px;border:none;background:transparent;font-size:10px;font-weight:600;color:var(--p);outline:none;text-align:center;font-family:inherit}
 .upc-pct{font-size:10px;color:var(--g400);font-weight:500}
 
 /* Micro-label inside pill group */
 .pip-billing-group{padding-left:2px}
-.pip-micro-label{
-  font-size:7.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--g400);padding:0 6px 0 8px;white-space:nowrap;align-self:center;
-}
-/* Remove top margin on pills — keep everything on one line */
+.pip-micro-label{font-size:7.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g400);padding:0 6px 0 8px;white-space:nowrap;align-self:center;}
 .ph-inline-pills{margin-top:6px!important;gap:4px!important}
 .pip-row{gap:4px!important}
 
@@ -512,30 +548,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--g50);color:var(--g900);mi
 .upc-star:hover{color:#F59E0B}
 .upc-star-on{color:#F59E0B}
 
-.vig-chip{
-  padding:2px 7px;border-radius:10px;font-size:10px;font-weight:600;
-  cursor:pointer;border:1px solid var(--g200);background:white;color:var(--g500);
-  white-space:nowrap;transition:all .12s;
-}
+.vig-chip{padding:2px 7px;border-radius:10px;font-size:10px;font-weight:600;cursor:pointer;border:1px solid var(--g200);background:white;color:var(--g500);white-space:nowrap;transition:all .12s;}
 .vig-chip:hover{border-color:var(--p);color:var(--p);background:#F9F5F8}
 .vig-chip.active{background:var(--p);color:white;border-color:var(--p)}
-.upc-input{min-width:2ch;width:2ch;max-width:5ch}
-
-/* Hosting pills inside pip-group — match billing/plan style */
-.pip-group .pip-host.pip-host-active,
-.pip-group .pip-host.pip-active{
-  background:var(--s)!important;
-  color:white!important;
-  font-weight:600!important;
-}
-.pip-group .pip-host:not(.pip-host-active):not(.pip-active){
-  background:white;
-  color:var(--g600);
-  font-weight:500;
-}
-.pip-group .pip-host:not(.pip-host-active):not(.pip-active):hover{
-  color:var(--s);
-}
 </style>
 </head>
 <body>
@@ -637,11 +652,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--g50);color:var(--g900);mi
   <div class="cf"><label id="lbl-erp-compare">Comparativa ERP</label>
     <div style="display:flex;flex-direction:column;gap:5px;margin-top:2px">
       <label style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--g700);cursor:pointer">
-        <input type="checkbox" id="show-erp" checked onchange="document.getElementById('erp-section').style.display=this.checked?'block':'none'" style="accent-color:var(--p);width:13px;height:13px"><span id="lbl-show-erp"> Visible en propuesta</span>
+        <input type="checkbox" id="show-erp-legacy" checked onchange="document.getElementById('erp-section').style.display=this.checked?'block':'none'" style="accent-color:var(--p);width:13px;height:13px"><span id="lbl-show-erp"> Visible en propuesta</span>
       </label>
       <div style="display:flex;align-items:center;gap:5px">
         <span style="font-size:11px;color:var(--g500)">Plan:</span>
-        <select id="erp-plan-sel" onchange="erpPlanOverride=parseInt(this.value);renderErp();upd()" style="font-size:11px;padding:3px 6px;border:1px solid var(--g200);border-radius:5px;background:white;color:var(--g900);font-family:inherit">
+        <select id="erp-plan-sel-legacy" onchange="erpPlanOverride=parseInt(this.value);renderErp();upd()" style="font-size:11px;padding:3px 6px;border:1px solid var(--g200);border-radius:5px;background:white;color:var(--g900);font-family:inherit">
           <option value="-1"><span id="lbl-plan-auto">Auto (mejor valor)</span></option>
           <option value="0">Mensual</option>
           <option value="1">12 meses</option>
@@ -653,27 +668,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--g50);color:var(--g900);mi
       </div>
     </div>
   </div>
-  <div class="cf"><label id="lbl-validity">Vigencia (días)</label>
-    <div class="vig-wrap">
-      <input type="number" class="vig-in" id="vig-days" min="1" max="365" placeholder="—" oninput="this.style.width=Math.max(3,(this.value+'').length+1)+'ch';updateExpiry()" style="width:3ch">
-      <div class="ep ep-none" id="exp-pill"><span id="lbl-no-date">Sin fecha</span></div>
-    </div>
-  </div>
-</div>
-
-<!-- ══ SH BAR ══ -->
-<div class="sh-bar hidden np" id="sh-bar" style="display:none">
-  <span style="font-size:10px;font-weight:600;color:var(--g500)">⚙️ Odoo.sh</span>
-  <div class="cf"><label><span id="lbl-workers"><span id="lbl-workers">Workers</span> (<span id="lbl-max">max</span> 256)</label><input type="number" id="wk" min="1" max="256" value="2" oninput="clampSh();checkDed();upd()" style="width:65px"></div>
-  <div class="cf"><label>Storage GB (<span id="lbl-max2">max</span> 4096)</label><input type="number" id="gb" min="1" max="4096" value="20" oninput="clampSh();checkDed();upd()" style="width:70px"></div>
-  <div class="cf"><label>Staging (<span id="lbl-max3">max</span> 20)</label><input type="number" id="stg" min="0" max="20" value="1" oninput="clampSh();checkDed();upd()" style="width:60px"></div>
-  <div id="ded-badge" class="db db-ok"><span id='lbl-no-ded'>Sin dedicado</span></div>
-  <span id="sh-cost-val" style="display:none">—</span>
 </div>
 
 <!-- ══ OPTIONS BAR ══ -->
 <div class="opts-bar np" style="display:none">
-  <span class="oblbl" id="lbl-planes">Planes</span>
+  <span class="oblbl" id="lbl-planes-legacy">Planes</span>
   <div class="chips" id="plan-chips"></div>
   <div class="div"></div>
   <span class="oblbl" id="lbl-add-disc">Desc. adicional</span>
@@ -701,6 +700,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--g50);color:var(--g900);mi
           onblur="this.parentNode.classList.remove('editing')">
       </div>
       <div class="ph-hr"></div>
+      <div class="ph-pills" id="ph-pills-row" style="margin-bottom:.75rem"></div>
       <!-- Inline config pills -->
       <div class="ph-inline-pills" id="ph-inline-pills">
 
@@ -731,10 +731,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--g50);color:var(--g900);mi
           <!-- Step 3: Users -->
           <div class="pip pip-users" id="pip-users" onclick="focusPipInput('pip-users-input')">
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-            <input type="number" id="pip-users-input" min="1" max="9999" value="10"
-              oninput="this.style.width=(this.value.length+1)+'ch';document.getElementById('unum').value=this.value;checkDed();upd()"
+            <input type="text" inputmode="numeric" pattern="[0-9]*" id="pip-users-input" value="10"
+              oninput="this.value=this.value.replace(/[^0-9]/g,'');document.getElementById('unum').value=this.value;checkDed();if(curHost==='sh')updateShSuggestions();upd()"
               onclick="event.stopPropagation()"
-              style="width:2ch;min-width:20px;border:none;background:transparent;font-size:12px;font-weight:600;color:inherit;font-family:inherit;outline:none;text-align:center">
+              style="width:44px;border:none;background:transparent;font-size:12px;font-weight:600;color:inherit;font-family:inherit;outline:none;text-align:center">
             <span id="pip-lbl-users">usuarios</span>
           </div>
 
@@ -758,17 +758,15 @@ body{font-family:'DM Sans',sans-serif;background:var(--g50);color:var(--g900);mi
           <div style="font-size:10px;color:var(--g400);font-weight:600;letter-spacing:.05em;align-self:center" id="pip-lbl-hosting-row">ALOJAMIENTO</div>
           <div class="pip-group">
             <!-- Online: always available for Custom -->
-            <div class="pip pip-host pip-host-active" id="pip-host-online" style="background:var(--s);color:white;font-weight:600" onclick="setHostInline('online')">
+            <div class="pip pip-host pip-host-active" id="pip-host-online" onclick="setHostInline('online')">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9z"/></svg>
               Online
             </div>
-            <!-- On-Premise: Custom + Annual only -->
             <div class="pip pip-host" id="pip-host-onprem" onclick="setHostInline('onprem')" style="position:relative">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
               <span id="pip-lbl-onprem-txt">On-Premise</span>
               <span class="pip-host-badge" id="pip-onprem-badge">Anual</span>
             </div>
-            <!-- Odoo.sh: Custom only -->
             <div class="pip pip-host" id="pip-host-sh" onclick="setHostInline('sh')">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
               Odoo.sh
@@ -780,51 +778,80 @@ body{font-family:'DM Sans',sans-serif;background:var(--g50);color:var(--g900);mi
       <!-- Advanced panel (hidden by default) -->
       <div class="adv-panel hidden" id="adv-panel">
         <div class="adv-panel-inner">
-          <div class="adv-row">
-            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+
+          <!-- STEP 01: Vigencia + Planes + Descuentos -->
+          <div class="adv-step">
+            <div class="adv-step-hdr">
+              <span class="adv-step-num">PASO 01</span>
+              <span class="adv-step-title">Planes & Vigencia</span>
+            </div>
+            <div class="adv-row">
               <span class="adv-lbl" id="lbl-validity">Vigencia</span>
               <div class="vig-wrap">
-                <input type="number" class="vig-in" id="vig-days" min="1" max="365" placeholder="—" oninput="this.style.width=Math.max(3,(this.value+'').length+1)+'ch';updateExpiry()" style="width:3ch">
+                <input type="text" inputmode="numeric" pattern="[0-9]*" class="vig-in" id="vig-days" placeholder="—" oninput="this.value=this.value.replace(/[^0-9]/g,'');updateExpiry()" style="width:52px">
                 <div class="ep ep-none" id="exp-pill"><span id="lbl-no-date">Sin fecha</span></div>
               </div>
               <div style="display:flex;gap:3px;flex-wrap:wrap" id="vig-chips"></div>
             </div>
-          </div>
-          <!-- Plans selector -->
-          <div class="adv-row" style="flex-wrap:wrap;gap:8px;align-items:center">
-            <span class="adv-lbl" id="lbl-planes">Planes + descuento</span>
-            <div id="adv-plans-unified"></div>
-          </div>
-
-          <!-- Views: Plans + Impact + 7% + ERP -->
-          <div class="adv-row" style="gap:14px;align-items:center;flex-wrap:wrap">
-            <span class="adv-lbl">Vista</span>
-            <label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer">
-              <input type="checkbox" id="adv-show-plans" checked onchange="toggleSection('plans',this.checked);document.getElementById('show-plans').checked=this.checked" style="accent-color:var(--p)">
-              <span id="lbl-vplanes2">Planes</span>
-            </label>
-            <label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer">
-              <input type="checkbox" id="adv-show-impact" onchange="toggleSection('impact',this.checked);document.getElementById('show-impact').checked=this.checked" style="accent-color:var(--p)">
-              <span id="lbl-vimpact2">Impacto</span>
-            </label>
-            <label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer">
-              <input type="checkbox" id="adv-inf" onchange="infOn=this.checked;document.getElementById('inf-chk').checked=this.checked;upd()" style="accent-color:#714B67">
-              <span>+</span>
-              <input type="number" id="adv-inf-rate" min="1" max="20" step="0.5" value="7"
-                oninput="this.style.width=Math.max(2,this.value.length+0.5)+'ch';infRate=parseFloat(this.value)||7;if(infOn)upd()"
-                style="width:2ch;padding:1px 4px;border:1px solid var(--g200);border-radius:4px;font-size:11px;font-family:inherit;text-align:center">
-              <span id="lbl-7pct2">% anual</span>
-            </label>
-            <label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer">
-              <input type="checkbox" id="adv-show-erp" checked onchange="document.getElementById('show-erp').checked=this.checked;document.getElementById('erp-section').style.display=this.checked?'block':'none'" style="accent-color:var(--s)">
-              <span id="lbl-verp">ERP</span>
-            </label>
+            <div class="adv-row" style="flex-wrap:wrap;gap:8px;align-items:center">
+              <span class="adv-lbl" id="lbl-planes">Planes + descuento</span>
+              <div id="adv-plans-unified"></div>
+            </div>
           </div>
 
-          <!-- Payment terms -->
-          <div class="adv-row" style="flex-wrap:wrap;gap:8px;align-items:center">
-            <span class="adv-lbl" id="lbl-pt">Términos de pago</span>
+          <!-- STEP 02: Vista + Cláusula 5.2 -->
+          <div class="adv-step">
+            <div class="adv-step-hdr">
+              <span class="adv-step-num">PASO 02</span>
+              <span class="adv-step-title">Vista & Ajustes</span>
+            </div>
+            <div class="adv-row" style="gap:12px;align-items:center;flex-wrap:wrap">
+              <span class="adv-lbl">Vista</span>
+              <label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer">
+                <input type="checkbox" id="adv-show-plans" checked onchange="toggleSection('plans',this.checked);document.getElementById('show-plans').checked=this.checked" style="accent-color:var(--p)">
+                <span id="lbl-vplanes2">Planes</span>
+              </label>
+              <label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer">
+                <input type="checkbox" id="adv-show-impact" onchange="toggleSection('impact',this.checked);document.getElementById('show-impact').checked=this.checked" style="accent-color:var(--p)">
+                <span id="lbl-vimpact2">Impacto</span>
+              </label>
+              <label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer">
+                <input type="checkbox" id="adv-show-erp" checked onchange="document.getElementById('show-erp').checked=this.checked;document.getElementById('erp-section').style.display=this.checked?'block':'none'" style="accent-color:var(--s)">
+                <span id="lbl-verp">ERP</span>
+              </label>
+            </div>
+            <div class="adv-row" style="gap:8px;align-items:center;flex-wrap:wrap">
+              <span class="adv-lbl" style="color:#E65100">⚡ Cláusula 5.2</span>
+              <label style="display:flex;align-items:center;gap:5px;font-size:12px;cursor:pointer">
+                <input type="checkbox" id="adv-inf" onchange="infOn=this.checked;document.getElementById('inf-chk').checked=this.checked;upd()" style="accent-color:#E65100">
+                <span style="color:var(--g600)">Incremento anual</span>
+              </label>
+              <div style="display:flex;align-items:center;gap:4px;background:var(--g100);border-radius:6px;padding:3px 8px">
+                <input type="text" inputmode="decimal" id="adv-inf-rate" value="7"
+                  oninput="this.value=this.value.replace(/[^0-9.]/g,'');infRate=parseFloat(this.value)||7;if(infOn)upd()"
+                  style="width:52px;padding:2px 6px;border:1px solid var(--g200);border-radius:4px;font-size:12px;font-family:'DM Mono',monospace;text-align:center;background:white">
+                <span id="lbl-7pct2" style="font-size:11px;color:var(--g500)">% anual compuesto</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 03: Términos de pago -->
+          <div class="adv-step">
+            <div class="adv-step-hdr">
+              <span class="adv-step-num">PASO 03</span>
+              <span class="adv-step-title">Términos de pago</span>
+            </div>
+            <div style="font-size:10px;color:var(--g400);margin-bottom:2px">Selecciona los planes donde quieres mostrar términos de pago:</div>
             <div class="chips" id="adv-pt-chips"></div>
+          </div>
+
+          <!-- STEP 04: Escaleras / Stairs -->
+          <div class="adv-step" style="flex-basis:100%">
+            <div class="adv-step-hdr">
+              <span class="adv-step-num">PASO 04</span>
+              <span class="adv-step-title">Escaleras <span style="font-size:9px;font-weight:400;color:var(--g400)">(Stairs) · Solo planes multianuales ≥ 24m</span></span>
+            </div>
+            <div id="stair-plans-container" style="display:flex;flex-wrap:wrap;gap:10px"></div>
           </div>
           <!-- ERP plan selector (hidden, kept for JS compat) -->
           <select id="erp-plan-sel" onchange="erpPlanOverride=parseInt(this.value);renderErp();upd()" style="display:none">
@@ -835,16 +862,44 @@ body{font-family:'DM Sans',sans-serif;background:var(--g50);color:var(--g900);mi
           </select>
           <input type="checkbox" id="show-erp" checked style="display:none">
           <!-- Odoo.sh bar (shown when sh selected) -->
-          <div id="sh-bar-inline" class="hidden">
-            <div id="sh-inline-cost" style="font-size:11px;color:var(--s);font-weight:600;margin-bottom:6px"></div>
-            <div class="adv-row" style="flex-wrap:wrap;gap:12px">
-              <span style="font-size:10px;font-weight:700;color:var(--g500);letter-spacing:.05em">⚙️ Odoo.sh</span>
-              <div class="adv-field"><label><span id="lbl-workers">Workers</span> (<span id="lbl-max">max</span> 256)</label><input type="number" id="wk" min="1" max="256" value="2" oninput="clampSh();checkDed();upd()" style="width:65px"></div>
-              <div class="adv-field"><label>Storage GB (<span id="lbl-max2">max</span> 4096)</label><input type="number" id="gb" min="1" max="4096" value="20" oninput="clampSh();checkDed();upd()" style="width:70px"></div>
-              <div class="adv-field"><label>Staging (<span id="lbl-max3">max</span> 20)</label><input type="number" id="stg" min="0" max="20" value="1" oninput="clampSh();checkDed();upd()" style="width:60px"></div>
-              <div id="ded-badge" class="db db-ok"><span id='lbl-no-ded'>Sin dedicado</span></div>
-              <div class="sh-cp" id="sh-cost-val">—</div>
+          <div id="sh-bar-inline" class="hidden adv-step" style="min-width:300px;flex-basis:100%">
+            <div class="adv-step-hdr">
+              <span class="adv-step-num" style="background:#E8F5F5;color:var(--g)">ODOO.SH</span>
+              <span class="adv-step-title">Configuración de infraestructura</span>
             </div>
+            <div id="sh-inline-cost" style="font-size:11px;color:var(--g);font-weight:600;margin-bottom:8px"></div>
+            <!-- Suggested values hint -->
+            <div id="sh-suggest" style="font-size:10px;color:var(--g400);background:var(--gl);border-radius:6px;padding:5px 9px;margin-bottom:8px;display:none"></div>
+            <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end">
+              <div class="adv-field">
+                <label style="display:flex;align-items:center;gap:4px">
+                  Workers
+                  <span style="font-size:9px;color:var(--g400)">(máx 256)</span>
+                  <span id="wk-suggest" style="font-size:9px;color:var(--g);font-weight:600;background:var(--gl);padding:1px 5px;border-radius:8px;display:none"></span>
+                </label>
+                <input type="number" id="wk" min="1" max="256" value="1" oninput="clampSh();checkDed();upd()" style="width:70px;padding:4px 7px;border:1px solid var(--g200);border-radius:5px;font-size:13px;font-family:'DM Mono',monospace">
+              </div>
+              <div class="adv-field">
+                <label style="display:flex;align-items:center;gap:4px">
+                  Storage GB
+                  <span style="font-size:9px;color:var(--g400)">(máx 4096)</span>
+                  <span id="gb-suggest" style="font-size:9px;color:var(--g);font-weight:600;background:var(--gl);padding:1px 5px;border-radius:8px;display:none"></span>
+                </label>
+                <input type="number" id="gb" min="1" max="4096" value="20" oninput="clampSh();checkDed();upd()" style="width:80px;padding:4px 7px;border:1px solid var(--g200);border-radius:5px;font-size:13px;font-family:'DM Mono',monospace">
+              </div>
+              <div class="adv-field">
+                <label style="display:flex;align-items:center;gap:4px">
+                  Stagings
+                  <span style="font-size:9px;color:var(--g400)">(máx 20)</span>
+                </label>
+                <input type="number" id="stg" min="0" max="20" value="1" oninput="clampSh();checkDed();upd()" style="width:70px;padding:4px 7px;border:1px solid var(--g200);border-radius:5px;font-size:13px;font-family:'DM Mono',monospace">
+              </div>
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <div id="ded-badge" class="db db-ok" style="font-size:11px"><span id="lbl-no-ded">Sin dedicado</span></div>
+                <div id="ded-limits" style="font-size:9px;color:var(--g400);display:none">Dedicado: &gt;8 workers · &gt;512 GB · &gt;20 stagings</div>
+              </div>
+            </div>
+            <div id="sh-cost-val" style="margin-top:8px;font-size:12px;font-weight:600;color:var(--p)">—</div>
           </div>
         </div>
       </div>
@@ -909,7 +964,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--g50);color:var(--g900);mi
         </div>
         <div class="fs-badge" id="fs-badge" style="font-size:12px;padding:6px 14px"><span id="lbl-fs-badge">✓ Todo incluido</span></div>
       </div>
-      <div id="fs-banner-wrap"></div>
+      <div id="fs-banner-wrap-static"></div>
       <div id="fs-body"></div>
     </div>
 
@@ -927,155 +982,157 @@ var LANG={
   es:{
     billing:'FACTURACIÓN',
     billing_ctx:'Comparativa',
-    star_hint:'Clic en estrella para marcar como recomendado', billing_monthly:'Mensual', billing_annual:'Anual',
+    star_hint:'Marca con estrella el plan que quieres resaltar como recomendado',
+    billing_monthly:'Mensual', billing_annual:'Anual',
     view:'VISTA', view_plans:'Planes', view_impact:'Impacto',
     toggle_7:'+7% anual · cláusula 5.2',
     btn_copy:'Copiar', btn_pdf:'PDF',
     region:'REGIÓN', users:'USUARIOS', plan:'PLAN',
     hosting:'ALOJAMIENTO', company:'EMPRESA', erp_compare:'COMPARATIVA ERP',
-    validity:'VIGENCIA (DÍAS)', plan_auto:'Auto (mejor valor)',
+    validity:'VIGENCIA (DÍAS)', plan_auto:'Automático (mejor valor)',
     host_online:'Online', host_onprem:'On-Premise', host_sh:'Odoo.sh',
     plan_std:'Estándar', plan_custom:'Personalizado',
-    no_date:'Sin fecha', no_dedicated:'Sin dedicado',
-    show_erp:'Visible en propuesta', erp_plan:'Plan:',
+    no_date:'Sin fecha límite', no_dedicated:'Servidor compartido',
+    show_erp:'Mostrar en propuesta', erp_plan:'Plan:',
     workers:'WORKERS (MÁX 256)', storage:'STORAGE GB (MÁX 4096)',
-    staging:'STAGING (MÁX 20)', dedicated:'Con dedicado',
-    plans_lbl:'PLANES', add_disc:'DESC. ADICIONAL',
-    pt_label:'Términos de pago en', inv_table:'Tabla de inversión',
+    staging:'STAGING (MÁX 20)', dedicated:'Servidor dedicado',
+    plans_lbl:'PLANES', add_disc:'DESCUENTO ADICIONAL',
+    pt_label:'Términos de pago', inv_table:'Tabla de inversión',
     max:'máx',
     plan_monthly:'Plan Mensual', plan_basic:'Plan Básico', plan_plus:'Plan Plus',
     plan_pro:'Plan Pro', plan_expert:'Plan Experto', plan_smart:'Plan Inteligente',
-    plan_monthly_sub:'Sin compromiso',
+    plan_monthly_sub:'Sin compromiso de permanencia',
     plan_12:'12 meses', plan_24:'24 meses', plan_36:'36 meses',
     plan_48:'48 meses', plan_60:'60 meses · Máximo ahorro',
     prop_label:'Propuesta de licenciamiento',
     prop_product:'Odoo Enterprise',
-    prop_client_placeholder:'Configure el nombre del cliente',
-    hosting_online:'Hospedaje Online', hosting_onprem:'Hospedaje On-Premise',
-    hosting_sh:'Hospedaje Odoo.sh',
+    prop_client_placeholder:'Nombre del cliente...',
+    hosting_online:'Alojamiento Online', hosting_onprem:'On-Premise',
+    hosting_sh:'Odoo.sh',
     normally:'Precio de lista', total_monthly:'Mensual',
-    saves:'Ahorras', months_free:'meses ahorrados',
+    saves:'Ahorras', months_free:'meses sin costo',
     per_user_month:'/ usuario / mes',
     per_month:'/mes',
-    desc_initial:'Descuento de lanzamiento', price_frozen:'Precio fijo',
-    frozen_through:'Precio fijo hasta',
-    no_7pct:'Sin incremento anual de precio', tag_7pct:'+7% anual aplicado',
+    desc_initial:'Descuento año 1', price_frozen:'Precio congelado',
+    frozen_through:'Precio congelado hasta',
+    no_7pct:'Sin incremento anual', tag_7pct:'+7% anual incluido',
     best_value:'Recomendado',
-    includes:'INCLUYE',
-    all_apps:'Todas las apps Odoo', auto_updates:'Actualizaciones automáticas',
-    initial_disc:'Descuento inicial del primer año', frozen_price:'Precio fijo',
+    includes:'QUÉ INCLUYE',
+    all_apps:'Todas las apps de Odoo', auto_updates:'Actualizaciones automáticas',
+    initial_disc:'Descuento de lanzamiento año 1', frozen_price:'Precio congelado',
     no_7_inc:'Sin incremento anual de precio', studio:'Odoo Studio',
     multicompany:'Multiempresa', api_access:'API completa + acceso al código',
-    pt_title:'Término de pago', pt_select:'-- Selecciona un término --',
+    pt_title:'Término de pago', pt_select:'Selecciona un término de pago',
     pt_approval:'Requiere aprobación de gerencia — solo visible para el comercial',
-    expiry_valid:'Propuesta válida hasta el', expiry_expires:'Esta propuesta expira el',
-    expiry_days_left:'días restantes', expiry_act_soon:'— Actúa pronto',
+    expiry_valid:'Propuesta válida hasta el', expiry_expires:'Esta propuesta vence el',
+    expiry_days_left:'días restantes', expiry_act_soon:'— ¡Actúa pronto!',
     expiry_days:'días de vigencia',
-    plan_smart_warning:'Planifica con inteligencia:',
-    plan_smart_text:'agregar usuarios después del contrato inicial se cotiza al precio de lista vigente. Si ya sabes cuántos usuarios necesitarás en los próximos meses, incluirlos hoy te garantiza el mismo precio preferencial durante toda la vigencia.',
-    erp_title:'Odoo vs. ERPs enterprise',
-    erp_sub:'El ERP más completo al precio más competitivo del mercado',
-    erp_your_price:'✓ Tu precio actual',
-    erp_more_exp:'x más',
+    plan_smart_warning:'Un dato importante:',
+    plan_smart_text:'Los usuarios que se agreguen después de firmar el contrato se cotizan al precio de lista vigente. Si ya sabes cuántos usuarios necesitarás en los próximos meses, conviene incluirlos hoy y garantizarles el mismo precio preferencial.',
+    erp_title:'Odoo vs. otros ERPs enterprise',
+    erp_sub:'El ERP más completo del mercado al precio más competitivo',
+    erp_your_price:'✓ Tu precio con Odoo',
+    erp_more_exp:'veces más caro',
     erp_note_src:'Fuentes:',
     erp_note_northam:'Essentials $80 / Premium $110 (nov 2025)',
     erp_src_europe:'Fuentes: SAP SE (abr 2026), Microsoft (nov 2025), Oracle partners EU (2026). Precios referenciales.',
     erp_src_latam:'Fuentes: Microsoft (nov 2025), SAP partners LATAM, Oracle (2026). Precios referenciales USD.',
     erp_src_northam:'Fuentes: Microsoft (nov 2025), SAP SE (abr 2026), Oracle/BrokenRubik (2026). Precios referenciales USD.',
-    erp_note_suffix:'Los precios de competidores incluyen hospedaje SaaS. Odoo Enterprise incluye actualizaciones automáticas, corrección de bugs, security advisories y soporte de las 3 últimas versiones sin costo adicional.',
+    erp_note_suffix:'Los precios de competidores incluyen alojamiento SaaS. Odoo Enterprise incluye actualizaciones automáticas, corrección de bugs, security advisories y soporte de las 3 últimas versiones sin costo adicional.',
     features_title:'Todo lo que tu empresa necesita. Un solo precio.',
     features_all:'✓ Todo incluido',
-    feat_platform:'Operar y Crecer',
-    feat_security:'Proteger y Soportar',
-    feat_multiyear:'Con planes multianuales además obtienes',
-    feat_multiyear_sub:'Al contratar 24 meses o más obtienes protecciones que no están disponibles en planes mensuales o anuales simples.',
-    feat_frozen_pill:'🔒 Precio fijo',
-    feat_rate_pill:'💱 Tasa de cambio fija',
-    feat_7_pill:'🛡️ Sin incremento anual de precio',
-    impact_title:'Inversión acumulada: contrato vs renovar año a año',
-    impact_sub:'Compara el costo total de cada plan multianual vs renovar anualmente durante 5 años',
-    impact_contract:'Precio total del contrato (precio garantizado)',
-    impact_renewing:'Costo renovando ese año sin contrato',
+    feat_platform:'Operar y crecer',
+    feat_security:'Seguridad y soporte',
+    feat_multiyear:'Con contratos multianuales además tienes',
+    feat_multiyear_sub:'Al contratar 24 meses o más, tu precio queda blindado: sin incrementos, sin sorpresas cambiarias, sin renegociaciones.',
+    feat_frozen_pill:'🔒 Precio congelado',
+    feat_rate_pill:'💱 Tipo de cambio fijo',
+    feat_7_pill:'🛡️ Sin incremento anual',
+    impact_title:'¿Cuánto ahorras con un contrato multianual?',
+    impact_sub:'Comparamos el costo total de cada plan vs renovar año a año durante 5 años',
+    impact_contract:'Total del contrato (precio garantizado)',
+    impact_renewing:'Costo de renovar ese año sin contrato',
     impact_rec:'Plan recomendado',
-    impact_col_total:'Total 5 años',
+    impact_col_total:'Total a 5 años',
     impact_col_total_sub:'contrato + renovaciones',
     impact_saves:'Ahorras vs',
-    impact_months:'Meses gratis',
+    impact_months:'Meses sin costo',
     impact_ref:'Renovando año a año',
     impact_ref_sub:'sin contrato · referencia',
     impact_renovating:'renovando',
     impact_reference:'referencia',
-    impact_footer_ann:'El total de 5 años incluye el contrato más renovaciones para completar el período. El ahorro compara contra renovar año a año los 5 años',
-    impact_footer_7:'con +7% desde año 3',
+    impact_footer_ann:'El total a 5 años incluye el contrato más las renovaciones hasta completar el período. El ahorro se calcula vs renovar año a año los 5 años completos.',
+    impact_footer_7:'con incremento del 7% a partir del año 3',
     renewing_annual:'renovar anualmente', paying_monthly:'pagar mensualmente',
-    comparing_vs:'comparando vs',
+    comparing_vs:'vs',
     yr:'Año',
     onprem_title:'Incluido con On-Premise',
     sh_title:'Incluido con Odoo.sh',
     feat_no_modules:'Sin módulos adicionales de pago',
+    feat_no_modules_sub:'Sin módulos. Sin extras. Sin sorpresas.',
     feat_all_included:'✓ Todo incluido',
     feat_studio_api:'✓ Studio + API incluidos',
-    feat_benefits_title:'Beneficios exclusivos · Contratos multianuales',
-    feat_rate_pill_txt:'💱 Tasa de cambio fija',
+    feat_benefits_title:'Beneficios exclusivos de los contratos multianuales',
+    feat_rate_pill_txt:'💱 Tipo de cambio fijo',
     feat_op1_t:'Cumplimiento normativo estricto',
-    feat_op1_d:'GDPR, ISO 27001, regulaciones bancarias o gubernamentales que exigen datos en servidores propios.',
-    feat_op2_t:'Integración con sistemas legacy',
-    feat_op2_d:'ERP heredados, bases de datos industriales o internas sin exponerlos a internet.',
+    feat_op1_d:'GDPR, ISO 27001, regulaciones bancarias o gubernamentales que exigen que los datos permanezcan en servidores propios.',
+    feat_op2_t:'Integración con sistemas heredados',
+    feat_op2_d:'ERPs legacy, bases de datos industriales o internas que no pueden exponerse a internet.',
     feat_op3_t:'Código fuente abierto',
-    feat_op3_d:'Personalización profunda sin dependencia de vendor. Adapta Odoo a procesos únicos de tu industria.',
-    feat_op4_t:'Módulos personalizados cubiertos',
-    feat_op4_d:'Soporte, upgrade y corrección de bugs en módulos a medida con mantenimiento contratado.',
-    feat_op5_t:'Mantente en versión soportada',
-    feat_op5_d:'Usar una versión fuera de las 3 últimas activas genera un cargo del 25% sobre la tarifa anual. Las actualizaciones en On-Premise son responsabilidad del cliente.',
-    feat_sh1_t:'CI/CD y branches de desarrollo',
-    feat_sh1_d:'Cada commit puede desplegarse automáticamente; prueba en staging antes de afectar producción.',
-    feat_sh2_t:'Entorno de QA dedicado',
-    feat_sh2_d:'Prueba actualizaciones de versión en tu propio código antes de aplicarlas en producción real.',
+    feat_op3_d:'Personalización profunda sin depender de un vendor. Adapta Odoo a los procesos únicos de tu industria.',
+    feat_op4_t:'Módulos personalizados con soporte',
+    feat_op4_d:'Soporte, actualizaciones y corrección de bugs en módulos a medida, incluidos con el mantenimiento contratado.',
+    feat_op5_t:'Mantente en versión con soporte activo',
+    feat_op5_d:'Usar una versión fuera de las 3 más recientes genera un cargo del 25% sobre la tarifa anual. Las actualizaciones en On-Premise son responsabilidad del cliente.',
+    feat_sh1_t:'CI/CD y ramas de desarrollo',
+    feat_sh1_d:'Cada commit puede desplegarse automáticamente. Prueba en staging antes de tocar producción.',
+    feat_sh2_t:'Entorno de QA propio',
+    feat_sh2_d:'Valida actualizaciones de versión en tu propio código antes de subirlas a producción real.',
     feat_sh3_t:'Monitoreo y logs en tiempo real',
-    feat_sh3_d:'Visibilidad completa del servidor sin necesidad de un equipo de DevOps dedicado.',
-    feat_sh4_t:'Recursos escalables',
-    feat_sh4_d:'Workers, storage y staging configurables; servidor dedicado automático al crecer.',
-    feat_sh5_t:'Código fuente accesible',
-    feat_sh5_d:'Personalización vía módulos open source sin dependencia de vendor.',
+    feat_sh3_d:'Visibilidad completa del servidor sin necesitar un equipo de DevOps dedicado.',
+    feat_sh4_t:'Recursos configurables y escalables',
+    feat_sh4_d:'Ajusta workers, storage y stagings según tu crecimiento. El servidor dedicado se activa solo cuando lo necesitas.',
+    feat_sh5_t:'Acceso al código fuente',
+    feat_sh5_d:'Personaliza mediante módulos open source sin atarte a un proveedor.',
     feat_op_label:'On-Premise — Control total de tu infraestructura',
-    feat_op_sub:'Cuando necesitas que tus datos no salgan de tus servidores.',
+    feat_op_sub:'Para cuando los datos no pueden salir de tus servidores.',
     feat_sh_label:'Odoo.sh — La potencia de la nube con control de desarrollador',
-    feat_sh_sub:'Para equipos técnicos que necesitan agilidad sin renunciar a personalización.',
+    feat_sh_sub:'Para equipos técnicos que necesitan agilidad sin renunciar a la personalización.',
     feat_p1_t:'+80 apps incluidas',
-    feat_p1_d:'CRM, Ventas, Contabilidad, RRHH, Inventario, Fabricación, Proyectos, Compras y más — todo sin costo extra.',
+    feat_p1_d:'CRM, Ventas, Contabilidad, RRHH, Inventario, Fabricación, Proyectos, Compras y más — todo en un solo precio.',
     feat_p2_t:'IA integrada',
-    feat_p2_d:'Asistente de redacción, predicción de ventas y detección de anomalías contables sin configuración adicional.',
+    feat_p2_d:'Asistente de redacción, predicción de ventas y detección de anomalías contables, sin configuración adicional.',
     feat_p3_t:'Multi-idioma y multi-moneda',
-    feat_p3_d:'+50 idiomas y cualquier moneda con tipo de cambio automático. Listo para operaciones globales.',
+    feat_p3_d:'+50 idiomas y cualquier moneda con tipo de cambio automático. Listo para operar globalmente.',
     feat_p4_t:'Facturación electrónica local',
-    feat_p4_d:'CFDI México, NF-e Brasil, SAT, SRI, DIAN y más — cumplimiento fiscal localizado incluido en tu plan.',
+    feat_p4_d:'CFDI México, NF-e Brasil, SAT, SRI, DIAN y más — cumplimiento fiscal local incluido en tu plan.',
     feat_p5_t:'App móvil nativa',
     feat_p5_d:'iOS y Android incluidos. Acceso offline a inventario, aprobaciones y CRM desde cualquier dispositivo.',
     feat_p6_t:'Reportes y dashboards',
-    feat_p6_d:'Paneles ejecutivos, reportes personalizables y análisis de negocio integrados sin herramientas externas.',
+    feat_p6_d:'Paneles ejecutivos, reportes personalizables y análisis integrados, sin herramientas adicionales.',
     feat_s1_t:'SSO / SAML 2.0',
-    feat_s1_d:'Integración nativa con Active Directory, Google Workspace y Okta. Un solo login para toda la empresa.',
+    feat_s1_d:'Conéctate con Active Directory, Google Workspace y Okta. Un solo acceso para toda la empresa.',
     feat_s2_t:'Seguridad empresarial',
-    feat_s2_d:'SSL, cifrado de extremo a extremo, autenticación en dos pasos y protección de datos incluidos.',
-    feat_s3_t:'Soporte ilimitado',
-    feat_s3_d:'Tickets, correo electrónico y documentación completa sin límite de consultas ni costo adicional.',
-    feat_s4_t:'Backups automáticos diarios',
-    feat_s4_d:'Respaldos automáticos con posibilidad de restauración a cualquier punto del tiempo.',
-    feat_s5_t:'Soporte 3 últimas versiones',
-    feat_s5_d:'Odoo mantiene soporte activo en las 3 versiones más recientes. Siempre cubierto sin esfuerzo adicional.',
+    feat_s2_d:'SSL, cifrado de extremo a extremo, doble factor de autenticación y protección de datos incluidos.',
+    feat_s3_t:'Soporte sin límites',
+    feat_s3_d:'Tickets, correo y documentación completa sin límite de consultas ni costo adicional.',
+    feat_s4_t:'Backups diarios automáticos',
+    feat_s4_d:'Respaldos automáticos con restauración a cualquier punto en el tiempo.',
+    feat_s5_t:'Soporte en las 3 versiones más recientes',
+    feat_s5_d:'Odoo mantiene soporte activo en sus 3 versiones más recientes. Siempre cubierto, sin esfuerzo de tu parte.',
     feat_s6_t:'Corrección de bugs garantizada',
-    feat_s6_d:'Al corregir un bug en cualquier versión cubierta, Odoo lo corrige en todas las versiones más recientes activas.',
-    feat_s7_t:'Security Advisory anticipado',
+    feat_s6_d:'Si se corrige un bug en cualquier versión cubierta, se aplica en todas las versiones activas.',
+    feat_s7_t:'Alertas de seguridad anticipadas',
     feat_s7_d:'Odoo notifica vulnerabilidades de seguridad al menos 2 semanas antes de hacerlas públicas.',
-    feat_s8_t:'Migraciones asistidas',
-    feat_s8_d:'Soporte oficial para migrar desde versiones anteriores de Odoo, SAP, QuickBooks u otros ERPs.',
-    feat_plan_custom_label:'Plan personalizado',
+    feat_s8_t:'Migraciones con soporte oficial',
+    feat_s8_d:'Asistencia oficial para migrar desde versiones anteriores de Odoo, SAP, QuickBooks u otros ERPs.',
+    feat_plan_custom_label:'Plan Personalizado',
     feat_studio_t:'Odoo Studio',
-    feat_studio_d:'Personaliza formularios, vistas, reportes y flujos de trabajo sin escribir código. Disponible en todos los hospedajes.',
+    feat_studio_d:'Personaliza formularios, vistas, reportes y flujos de trabajo sin escribir código. Disponible en todos los tipos de alojamiento.',
     feat_multicompany_t:'Multiempresa',
-    feat_multicompany_d:'Gestiona múltiples empresas y subsidiarias desde una única cuenta con datos y permisos separados por empresa.',
+    feat_multicompany_d:'Gestiona varias empresas y subsidiarias desde una sola cuenta, con datos y permisos separados por entidad.',
     feat_api_t:'API completa + acceso al código',
-    feat_api_d:'Integra sistemas externos via REST API y webhooks. Acceso al código fuente para personalizaciones profundas. Requiere On-Premise u Odoo.sh.',
+    feat_api_d:'Integra sistemas externos vía REST API y webhooks. Acceso al código fuente para personalizaciones avanzadas. Requiere On-Premise u Odoo.sh.',
     inf_label:'+7% anual en renovaciones',
     cta_select:'Seleccionar plan',
     edit_region:'Región',
@@ -1086,12 +1143,13 @@ var LANG={
     edit_advanced_close:'Cerrar',
     edit_client_ph:'Nombre del cliente...',
     feat_no_modules_sub:'Sin módulos. Sin extras. Sin sorpresas.',
-    footer_note:'Descuento inicial del primer año: tarifa especial para nuevas licencias · Los precios no incluyen IVA',
+    footer_note:'Descuento de lanzamiento año 1: tarifa especial para licencias nuevas · Precios no incluyen IVA',
   },
   en:{
     billing:'BILLING',
     billing_ctx:'Comparison',
-    star_hint:'Click star to mark as recommended', billing_monthly:'Monthly', billing_annual:'Annual',
+    star_hint:'Click the star to mark a plan as recommended',
+    billing_monthly:'Monthly', billing_annual:'Annual',
     view:'VIEW', view_plans:'Plans', view_impact:'Impact',
     toggle_7:'+7% annual · clause 5.2',
     btn_copy:'Copy', btn_pdf:'PDF',
@@ -1100,12 +1158,12 @@ var LANG={
     validity:'VALID FOR (DAYS)', plan_auto:'Auto (best value)',
     host_online:'Online', host_onprem:'On-Premise', host_sh:'Odoo.sh',
     plan_std:'Standard', plan_custom:'Custom',
-    no_date:'No date', no_dedicated:'No dedicated',
-    show_erp:'Visible in proposal', erp_plan:'Plan:',
+    no_date:'No expiry date', no_dedicated:'Shared server',
+    show_erp:'Show in proposal', erp_plan:'Plan:',
     workers:'WORKERS (MAX 256)', storage:'STORAGE GB (MAX 4096)',
-    staging:'STAGING (MAX 20)', dedicated:'With dedicated',
-    plans_lbl:'PLANS', add_disc:'ADD. DISCOUNT',
-    pt_label:'Payment terms:', inv_table:'Investment table',
+    staging:'STAGING (MAX 20)', dedicated:'Dedicated server',
+    plans_lbl:'PLANS', add_disc:'ADDITIONAL DISCOUNT',
+    pt_label:'Payment terms', inv_table:'Investment table',
     max:'max',
     plan_monthly:'Monthly Plan', plan_basic:'Basic Plan', plan_plus:'Plus Plan',
     plan_pro:'Pro Plan', plan_expert:'Expert Plan', plan_smart:'Smart Plan',
@@ -1114,64 +1172,63 @@ var LANG={
     plan_48:'48 months', plan_60:'60 months · Max savings',
     prop_label:'Licensing proposal',
     prop_product:'Odoo Enterprise',
-    prop_client_placeholder:'Set client name',
-    hosting_online:'Online Hosting', hosting_onprem:'On-Premise Hosting',
-    hosting_sh:'Odoo.sh Hosting',
+    prop_client_placeholder:'Client name...',
+    hosting_online:'Online Hosting', hosting_onprem:'On-Premise',
+    hosting_sh:'Odoo.sh',
     normally:'List price', total_monthly:'Monthly',
-    saves:'You save', months_free:'months saved',
+    saves:'You save', months_free:'free months',
     per_user_month:'/ user / month',
     per_month:'/month',
-    desc_initial:'Launch discount', price_frozen:'Rate locked',
-    frozen_through:'Rate locked through',
-    no_7pct:'No annual rate increases', tag_7pct:'+7% annual applied',
+    desc_initial:'Year 1 discount', price_frozen:'Price locked',
+    frozen_through:'Price locked through',
+    no_7pct:'No annual price increase', tag_7pct:'+7% annual applied',
     best_value:'Recommended',
-    includes:'INCLUDES',
+    includes:'WHAT\'S INCLUDED',
     all_apps:'All Odoo apps', auto_updates:'Automatic updates',
-    initial_disc:'First year initial discount', frozen_price:'Price frozen',
-    no_7_inc:'No annual rate increases',
-    inf_label:'+7% annual on renewals', studio:'Odoo Studio',
+    initial_disc:'Year 1 launch discount', frozen_price:'Price locked',
+    no_7_inc:'No annual price increase', studio:'Odoo Studio',
     multicompany:'Multi-company', api_access:'Full API + source code access',
-    pt_title:'Payment term', pt_select:'-- Select a term --',
+    pt_title:'Payment term', pt_select:'Select a payment term',
     pt_approval:'Requires management approval — visible to sales rep only',
     expiry_valid:'Proposal valid until', expiry_expires:'This proposal expires on',
-    expiry_days_left:'days remaining', expiry_act_soon:'— Act soon',
+    expiry_days_left:'days left', expiry_act_soon:'— Act now!',
     expiry_days:'days remaining',
-    plan_smart_warning:'Plan smarter:',
-    plan_smart_text:'Adding users after the contract starts is billed at current list price. Lock in today\'s pricing for all users you\'ll need from day one.',
-    erp_title:'Odoo vs. Enterprise ERPs',
-    erp_sub:'The most complete ERP at the most competitive price on the market',
-    erp_your_price:'✓ Your current price',
-    erp_more_exp:'x more',
+    plan_smart_warning:'Good to know:',
+    plan_smart_text:'Users added after signing are billed at the current list price. If you already know how many users you\'ll need in the coming months, locking them in today guarantees the same preferential rate for the entire contract.',
+    erp_title:'Odoo vs. other enterprise ERPs',
+    erp_sub:'The most complete ERP on the market at the most competitive price',
+    erp_your_price:'✓ Your price with Odoo',
+    erp_more_exp:'x more expensive',
     erp_note_src:'Sources:',
     erp_note_northam:'Essentials $80 / Premium $110 (Nov 2025)',
-    erp_src_europe:'Sources: SAP SE (Apr 2026), Microsoft (nov 2025), Oracle partners EU (2026). Reference prices.',
-    erp_src_latam:'Sources: Microsoft (nov 2025), SAP partners LATAM, Oracle (2026). Reference prices USD.',
-    erp_src_northam:'Sources: Microsoft (nov 2025), SAP SE (Apr 2026), Oracle/BrokenRubik (2026). Reference prices USD.',
-    erp_note_suffix:'Competitor prices include SaaS hosting. Odoo Enterprise includes automatic updates, bug fixes, security advisories and support for the last 3 versions at no additional cost.',
+    erp_src_europe:'Sources: SAP SE (Apr 2026), Microsoft (Nov 2025), Oracle partners EU (2026). Reference prices.',
+    erp_src_latam:'Sources: Microsoft (Nov 2025), SAP partners LATAM, Oracle (2026). Reference prices USD.',
+    erp_src_northam:'Sources: Microsoft (Nov 2025), SAP SE (Apr 2026), Oracle/BrokenRubik (2026). Reference prices USD.',
+    erp_note_suffix:'Competitor prices include SaaS hosting. Odoo Enterprise includes automatic updates, bug fixes, security advisories and support for the last 3 versions at no extra cost.',
     features_title:'Everything your business needs. One price.',
     features_all:'✓ All included',
     feat_platform:'Operate & Grow',
-    feat_security:'Security and support',
+    feat_security:'Security & Support',
     feat_multiyear:'Multi-year contracts also include',
-    feat_multiyear_sub:'Contracting 24 months or more gives you protections not available in monthly or simple annual plans.',
-    feat_frozen_pill:'🔒 Rate locked',
+    feat_multiyear_sub:'Sign for 24 months or more and your price is protected — no increases, no currency surprises, no renegotiations.',
+    feat_frozen_pill:'🔒 Price locked',
     feat_rate_pill:'💱 Fixed exchange rate',
-    feat_7_pill:'🛡️ No annual rate increases',
-    impact_title:'Total cost: multi-year contract vs annual renewals',
-    impact_sub:'Compare the total cost of each multi-year plan vs renewing annually for 5 years',
-    impact_contract:'Total contract price (guaranteed price)',
-    impact_renewing:'Cost renewing that year without contract',
+    feat_7_pill:'🛡️ No annual increases',
+    impact_title:'How much do you save with a multi-year contract?',
+    impact_sub:'We compare the total cost of each plan vs renewing year by year for 5 years',
+    impact_contract:'Total contract price (guaranteed)',
+    impact_renewing:'Cost of renewing that year without a contract',
     impact_rec:'Recommended plan',
     impact_col_total:'5-year total',
     impact_col_total_sub:'contract + renewals',
-    impact_saves:'Savings vs',
+    impact_saves:'You save vs',
     impact_months:'Free months',
-    impact_ref:'Annual renewals (no contract)',
+    impact_ref:'Renewing year by year',
     impact_ref_sub:'no contract · benchmark',
     impact_renovating:'renewing',
-    impact_reference:'reference',
-    impact_footer_ann:'The 5-year total includes the contract plus renewals to complete the period. Savings compared to renewing year to year for 5 years',
-    impact_footer_7:'with +7% from year 3',
+    impact_reference:'benchmark',
+    impact_footer_ann:'The 5-year total includes the contract plus renewals to complete the period. Savings are calculated vs renewing annually for all 5 years.',
+    impact_footer_7:'with 7% annual increase from year 3',
     renewing_annual:'renewing annually', paying_monthly:'paying monthly',
     comparing_vs:'vs',
     yr:'Year',
@@ -1181,68 +1238,69 @@ var LANG={
     feat_no_modules_sub:'No modules. No add-ons. No surprises.',
     feat_all_included:'✓ All included',
     feat_studio_api:'✓ Studio + API included',
-    feat_benefits_title:'Exclusive benefits · Multi-year contracts',
+    feat_benefits_title:'Exclusive multi-year contract benefits',
     feat_rate_pill_txt:'💱 Fixed exchange rate',
     feat_op1_t:'Strict regulatory compliance',
-    feat_op1_d:'GDPR, ISO 27001, banking or government regulations requiring data on your own servers.',
+    feat_op1_d:'GDPR, ISO 27001, banking or government regulations requiring data to stay on your own servers.',
     feat_op2_t:'Legacy system integration',
-    feat_op2_d:'Legacy ERPs, industrial or internal databases without exposing them to the internet.',
+    feat_op2_d:'Connect legacy ERPs, industrial or internal databases without exposing them to the internet.',
     feat_op3_t:'Open source code',
-    feat_op3_d:'Deep customization without vendor dependency. Adapt Odoo to unique industry processes.',
+    feat_op3_d:'Deep customization without vendor lock-in. Adapt Odoo to your industry\'s unique processes.',
     feat_op4_t:'Custom modules covered',
-    feat_op4_d:'Support, upgrades and bug fixes for custom modules with contracted maintenance.',
-    feat_op5_t:'Stay on supported version',
-    feat_op5_d:"Using a version outside the 3 latest active ones incurs a 25% surcharge on the annual rate. Updates on On-Premise are the client's responsibility.",
+    feat_op4_d:'Support, upgrades and bug fixes for custom modules included with contracted maintenance.',
+    feat_op5_t:'Stay on a supported version',
+    feat_op5_d:'Using a version outside the 3 most recent active ones adds a 25% surcharge to the annual rate. On-Premise updates are the client\'s responsibility.',
     feat_sh1_t:'CI/CD and development branches',
-    feat_sh1_d:'Each commit can be deployed automatically; test in staging before affecting production.',
+    feat_sh1_d:'Every commit can be deployed automatically. Test in staging before touching production.',
     feat_sh2_t:'Dedicated QA environment',
-    feat_sh2_d:'Test version updates on your own code before applying them to real production.',
+    feat_sh2_d:'Validate version updates on your own code before pushing to real production.',
     feat_sh3_t:'Real-time monitoring and logs',
-    feat_sh3_d:'Complete server visibility without needing a dedicated DevOps team.',
-    feat_sh4_t:'Scalable resources',
-    feat_sh4_d:'Configurable workers, storage and staging; automatic dedicated server as you grow.',
-    feat_sh5_t:'Accessible source code',
-    feat_sh5_d:'Customization via open source modules without vendor dependency.',
-    feat_op_label:'On-Premise — Full infrastructure control',
-    feat_op_sub:'When you need your data to stay on your own servers.',
+    feat_sh3_d:'Full server visibility without needing a dedicated DevOps team.',
+    feat_sh4_t:'Configurable and scalable resources',
+    feat_sh4_d:'Adjust workers, storage and stagings as you grow. The dedicated server kicks in automatically when you need it.',
+    feat_sh5_t:'Source code access',
+    feat_sh5_d:'Customize via open source modules without locking yourself into a vendor.',
+    feat_op_label:'On-Premise — Full control of your infrastructure',
+    feat_op_sub:'When your data can\'t leave your own servers.',
     feat_sh_label:'Odoo.sh — Cloud power with developer control',
-    feat_sh_sub:'For technical teams that need agility without sacrificing customization.',
+    feat_sh_sub:'For technical teams that need agility without giving up customization.',
     feat_p1_t:'+80 included apps',
-    feat_p1_d:'CRM, Sales, Accounting, HR, Inventory, Manufacturing, Projects, Purchases and more — all at no extra cost.',
-    feat_p2_t:'Integrated AI',
-    feat_p2_d:'Writing assistant, sales prediction and accounting anomaly detection without additional setup.',
+    feat_p1_d:'CRM, Sales, Accounting, HR, Inventory, Manufacturing, Projects, Purchasing and more — all in one price.',
+    feat_p2_t:'Built-in AI',
+    feat_p2_d:'Writing assistant, sales forecasting and accounting anomaly detection — no extra setup needed.',
     feat_p3_t:'Multi-language and multi-currency',
     feat_p3_d:'+50 languages and any currency with automatic exchange rates. Ready for global operations.',
     feat_p4_t:'Local e-invoicing',
-    feat_p4_d:'CFDI Mexico, NF-e Brazil, SAT, SRI, DIAN and more — localized tax compliance included in your plan.',
+    feat_p4_d:'CFDI Mexico, NF-e Brazil, SAT, SRI, DIAN and more — local tax compliance included in your plan.',
     feat_p5_t:'Native mobile app',
     feat_p5_d:'iOS and Android included. Offline access to inventory, approvals and CRM from any device.',
     feat_p6_t:'Reports and dashboards',
-    feat_p6_d:'Executive dashboards, customizable reports and integrated business analytics without external tools.',
+    feat_p6_d:'Executive dashboards, customizable reports and integrated business analytics — no extra tools needed.',
     feat_s1_t:'SSO / SAML 2.0',
-    feat_s1_d:'Native integration with Active Directory, Google Workspace and Okta. Single login for the entire company.',
+    feat_s1_d:'Native integration with Active Directory, Google Workspace and Okta. One login for the entire company.',
     feat_s2_t:'Enterprise security',
     feat_s2_d:'SSL, end-to-end encryption, two-factor authentication and data protection included.',
     feat_s3_t:'Unlimited support',
-    feat_s3_d:'Tickets, email and complete documentation with no query limits or additional cost.',
+    feat_s3_d:'Tickets, email and full documentation with no query limits and no extra cost.',
     feat_s4_t:'Automatic daily backups',
-    feat_s4_d:'Automatic backups with the ability to restore to any point in time.',
-    feat_s5_t:'Support for last 3 versions',
-    feat_s5_d:'Odoo maintains active support for the 3 most recent versions. Always covered without additional effort.',
-    feat_s6_t:'Guaranteed bug fixing',
-    feat_s6_d:'When fixing a bug in any covered version, Odoo fixes it in all currently active recent versions.',
-    feat_s7_t:'Early security advisory',
-    feat_s7_d:'Odoo notifies security vulnerabilities at least 2 weeks before making them public.',
+    feat_s4_d:'Automated backups with point-in-time restore to any moment.',
+    feat_s5_t:'Support for the last 3 versions',
+    feat_s5_d:'Odoo actively supports its 3 most recent versions. You\'re always covered without lifting a finger.',
+    feat_s6_t:'Guaranteed bug fixes',
+    feat_s6_d:'When a bug is fixed in any covered version, Odoo patches it across all currently active versions.',
+    feat_s7_t:'Early security advisories',
+    feat_s7_d:'Odoo alerts you to security vulnerabilities at least 2 weeks before they go public.',
     feat_s8_t:'Assisted migrations',
-    feat_s8_d:'Official support for migrating from previous versions of Odoo, SAP, QuickBooks or other ERPs.',
-    feat_plan_custom_label:'Custom plan',
+    feat_s8_d:'Official support for migrating from older Odoo versions, SAP, QuickBooks or other ERPs.',
+    feat_plan_custom_label:'Custom Plan',
     feat_studio_t:'Odoo Studio',
-    feat_studio_d:'Customize forms, views, reports and workflows without writing code. Available on all hosting options.',
+    feat_studio_d:'Customize forms, views, reports and workflows without writing a single line of code. Available on all hosting options.',
     feat_multicompany_t:'Multi-company',
-    feat_multicompany_d:'Manage multiple companies and subsidiaries from a single account with separate data and permissions per company.',
+    feat_multicompany_d:'Manage multiple companies and subsidiaries from one account, with separate data and permissions per entity.',
     feat_api_t:'Full API + source code access',
-    feat_api_d:'Integrate external systems via REST API and webhooks. Source code access for deep customizations. Requires On-Premise or Odoo.sh.',
-    cta_select:'Select plan',
+    feat_api_d:'Connect external systems via REST API and webhooks. Source code access for deep customizations. Requires On-Premise or Odoo.sh.',
+    inf_label:'+7% annual on renewals',
+    cta_select:'Select this plan',
     edit_region:'Region',
     edit_users:'users',
     edit_plan_label:'Plan',
@@ -1250,63 +1308,64 @@ var LANG={
     edit_advanced:'⚙ Advanced settings',
     edit_advanced_close:'Close',
     edit_client_ph:'Client name...',
-    footer_note:'First year initial discount: special rate for new licenses · Prices do not include VAT',
+    feat_no_modules_sub:'No modules. No add-ons. No surprises.',
+    footer_note:'Year 1 launch discount: special rate for new licenses · Prices do not include VAT',
   },
 
   fr:{
     billing:'FACTURATION',
     billing_ctx:'Comparatif',
-    star_hint:'Cliquez sur l\'étoile pour marquer comme recommandé', billing_monthly:'Mensuel', billing_annual:'Annuel',
+    star_hint:'Cliquez sur l\'étoile pour marquer un plan comme recommandé',
+    billing_monthly:'Mensuel', billing_annual:'Annuel',
     view:'VUE', view_plans:'Plans', view_impact:'Impact',
     toggle_7:'+7% annuel · clause 5.2',
     btn_copy:'Copier', btn_pdf:'PDF',
     region:'RÉGION', users:'UTILISATEURS', plan:'PLAN',
     hosting:'HÉBERGEMENT', company:'ENTREPRISE', erp_compare:'COMPARATIF ERP',
-    validity:'VALABLE (JOURS)', plan_auto:'Auto (meilleure valeur)',
+    validity:'VALABLE (JOURS)', plan_auto:'Automatique (meilleure valeur)',
     host_online:'En ligne', host_onprem:'On-Premise', host_sh:'Odoo.sh',
     plan_std:'Standard', plan_custom:'Personnalisé',
-    no_date:'Sans date', no_dedicated:'Sans dédié',
-    show_erp:'Visible dans la proposition', erp_plan:'Plan :',
+    no_date:'Sans date limite', no_dedicated:'Serveur partagé',
+    show_erp:'Afficher dans la proposition', erp_plan:'Plan :',
     workers:'WORKERS (MAX 256)', storage:'STOCKAGE GB (MAX 4096)',
-    staging:'STAGING (MAX 20)', dedicated:'Avec dédié',
-    plans_lbl:'PLANS', add_disc:'REMISE SUPP.',
-    pt_label:'Échéancier :', inv_table:"Tableau d'investissement",
+    staging:'STAGING (MAX 20)', dedicated:'Serveur dédié',
+    plans_lbl:'PLANS', add_disc:'REMISE SUPPLÉMENTAIRE',
+    pt_label:'Conditions de paiement', inv_table:"Tableau d'investissement",
     max:'max',
     plan_monthly:'Plan Mensuel', plan_basic:'Plan Basique', plan_plus:'Plan Plus',
     plan_pro:'Plan Pro', plan_expert:'Plan Expert', plan_smart:'Plan Intelligent',
     plan_monthly_sub:'Sans engagement',
     plan_12:'12 mois', plan_24:'24 mois', plan_36:'36 mois',
-    plan_48:'48 mois', plan_60:'60 mois · Économies max',
+    plan_48:'48 mois', plan_60:'60 mois · Économies maximales',
     prop_label:'Proposition de licence',
     prop_product:'Odoo Enterprise',
-    prop_client_placeholder:'Configurer le nom du client',
-    hosting_online:'Hébergement en ligne', hosting_onprem:'Hébergement On-Premise',
-    hosting_sh:'Hébergement Odoo.sh',
+    prop_client_placeholder:'Nom du client...',
+    hosting_online:'Hébergement en ligne', hosting_onprem:'On-Premise',
+    hosting_sh:'Odoo.sh',
     normally:'Prix catalogue', total_monthly:'Mensuel',
-    saves:'Vous économisez', months_free:'mois économisés',
+    saves:'Vous économisez', months_free:'mois offerts',
     per_user_month:'/ utilisateur / mois',
     per_month:'/mois',
-    desc_initial:'Remise de lancement', price_frozen:'Tarif garanti',
-    frozen_through:"Tarif garanti jusqu'en",
+    desc_initial:'Remise année 1', price_frozen:'Prix garanti',
+    frozen_through:'Prix garanti jusqu\'au',
     no_7pct:'Sans augmentation annuelle', tag_7pct:'+7% annuel appliqué',
     best_value:'Recommandé',
-    includes:'INCLUT',
+    includes:'CE QUI EST INCLUS',
     all_apps:'Toutes les apps Odoo', auto_updates:'Mises à jour automatiques',
-    initial_disc:'Remise initiale première année', frozen_price:'Tarif garanti',
-    no_7_inc:'Sans augmentation annuelle',
-    inf_label:'+7% annuel sur renouvellements', studio:'Odoo Studio',
+    initial_disc:'Remise de lancement année 1', frozen_price:'Prix garanti',
+    no_7_inc:'Sans augmentation annuelle', studio:'Odoo Studio',
     multicompany:'Multi-société', api_access:'API complète + accès au code source',
-    pt_title:'Condition de paiement', pt_select:'-- Sélectionner une condition --',
+    pt_title:'Condition de paiement', pt_select:'Sélectionner une condition de paiement',
     pt_approval:"Nécessite l'approbation de la direction — visible uniquement pour le commercial",
-    expiry_valid:"Proposition valable jusqu'au", expiry_expires:'Cette proposition expire le',
-    expiry_days_left:'jours restants', expiry_act_soon:'— Agissez rapidement',
+    expiry_valid:'Proposition valable jusqu\'au', expiry_expires:'Cette proposition expire le',
+    expiry_days_left:'jours restants', expiry_act_soon:'— Agissez vite !',
     expiry_days:'jours de validité',
-    plan_smart_warning:'Planifiez intelligemment :',
-    plan_smart_text:"les utilisateurs supplémentaires contractés après l'achat initial sont facturés au prix catalogue en vigueur sans remise initiale. Maximisez les avantages en acquérant le maximum d'utilisateurs dès le début.",
-    erp_title:'Odoo vs. ERPs entreprise',
-    erp_sub:"L'ERP le plus complet au prix le plus compétitif du marché",
-    erp_your_price:'✓ Votre prix actuel',
-    erp_more_exp:'x plus cher',
+    plan_smart_warning:'À savoir :',
+    plan_smart_text:"Les utilisateurs ajoutés après la signature sont facturés au prix catalogue en vigueur. Si vous savez déjà combien d'utilisateurs vous aurez besoin dans les prochains mois, mieux vaut les inclure maintenant pour garantir le même tarif préférentiel.",
+    erp_title:'Odoo vs. autres ERPs enterprise',
+    erp_sub:"L'ERP le plus complet du marché au prix le plus compétitif",
+    erp_your_price:'✓ Votre prix avec Odoo',
+    erp_more_exp:'fois plus cher',
     erp_note_src:'Sources :',
     erp_note_northam:'Essentials $80 / Premium $110 (nov 2025)',
     erp_src_europe:'Sources : SAP SE (avr 2026), Microsoft (nov 2025), Oracle partenaires EU (2026). Prix de référence.',
@@ -1315,28 +1374,28 @@ var LANG={
     erp_note_suffix:"Les prix des concurrents incluent l'hébergement SaaS. Odoo Enterprise inclut les mises à jour automatiques, la correction de bugs, les avis de sécurité et le support des 3 dernières versions sans frais supplémentaires.",
     features_title:'Tout ce dont votre entreprise a besoin. Un seul prix.',
     features_all:'✓ Tout inclus',
-    feat_platform:'Opérer & Croître',
+    feat_platform:'Opérer et croître',
     feat_security:'Sécurité et support',
     feat_multiyear:'Les contrats pluriannuels incluent aussi',
-    feat_multiyear_sub:"Contracter 24 mois ou plus vous offre des protections non disponibles dans les plans mensuels ou annuels simples.",
-    feat_frozen_pill:'🔒 Tarif garanti',
+    feat_multiyear_sub:'En signant pour 24 mois ou plus, votre tarif est protégé : sans hausse, sans surprise de change, sans renégociation.',
+    feat_frozen_pill:'🔒 Prix garanti',
     feat_rate_pill:'💱 Taux de change fixe',
     feat_7_pill:'🛡️ Sans augmentation annuelle',
-    impact_title:'Coût total : contrat pluriannuel vs renouvellements annuels',
-    impact_sub:'Comparez le coût total de chaque plan pluriannuel vs renouveler annuellement sur 5 ans',
-    impact_contract:'Prix total du contrat (prix garanti)',
+    impact_title:'Combien économisez-vous avec un contrat pluriannuel ?',
+    impact_sub:'Comparaison du coût total de chaque plan vs renouveler chaque année pendant 5 ans',
+    impact_contract:'Total du contrat (prix garanti)',
     impact_renewing:'Coût de renouvellement cette année sans contrat',
     impact_rec:'Plan recommandé',
-    impact_col_total:'Total 5 ans',
+    impact_col_total:'Total sur 5 ans',
     impact_col_total_sub:'contrat + renouvellements',
-    impact_saves:'Économies vs',
+    impact_saves:'Vous économisez vs',
     impact_months:'Mois offerts',
-    impact_ref:'Renouvellements annuels (sans contrat)',
+    impact_ref:'Renouvellement annuel',
     impact_ref_sub:'sans contrat · référence',
     impact_renovating:'renouvellement',
     impact_reference:'référence',
-    impact_footer_ann:'Le total sur 5 ans inclut le contrat plus les renouvellements pour compléter la période.',
-    impact_footer_7:"avec +7% à partir de l'an 3",
+    impact_footer_ann:'Le total sur 5 ans inclut le contrat plus les renouvellements pour compléter la période. Les économies sont calculées vs renouveler chaque année pendant 5 ans.',
+    impact_footer_7:'avec hausse de 7% à partir de l\'an 3',
     renewing_annual:'renouvellement annuel', paying_monthly:'paiement mensuel',
     comparing_vs:'vs',
     yr:'An',
@@ -1346,67 +1405,68 @@ var LANG={
     feat_no_modules_sub:'Sans modules. Sans extras. Sans surprises.',
     feat_all_included:'✓ Tout inclus',
     feat_studio_api:'✓ Studio + API inclus',
-    feat_benefits_title:'Avantages exclusifs · Contrats pluriannuels',
+    feat_benefits_title:'Avantages exclusifs des contrats pluriannuels',
     feat_rate_pill_txt:'💱 Taux de change fixe',
     feat_op1_t:'Conformité réglementaire stricte',
-    feat_op1_d:'RGPD, ISO 27001, réglementations bancaires ou gouvernementales exigeant des données sur vos propres serveurs.',
-    feat_op2_t:'Intégration avec les systèmes legacy',
-    feat_op2_d:'ERP hérités, bases de données industrielles ou internes sans les exposer à internet.',
+    feat_op1_d:'RGPD, ISO 27001, réglementations bancaires ou gouvernementales exigeant que les données restent sur vos propres serveurs.',
+    feat_op2_t:'Intégration avec les systèmes existants',
+    feat_op2_d:'ERPs hérités, bases de données industrielles ou internes sans les exposer à internet.',
     feat_op3_t:'Code source ouvert',
     feat_op3_d:'Personnalisation approfondie sans dépendance fournisseur. Adaptez Odoo aux processus uniques de votre secteur.',
-    feat_op4_t:'Modules personnalisés couverts',
-    feat_op4_d:'Support, mises à niveau et corrections de bugs pour les modules personnalisés avec maintenance contractée.',
+    feat_op4_t:'Modules personnalisés pris en charge',
+    feat_op4_d:'Support, mises à niveau et corrections de bugs pour les modules personnalisés, inclus dans la maintenance contractée.',
     feat_op5_t:'Restez sur une version supportée',
-    feat_op5_d:'Utiliser une version en dehors des 3 dernières actives entraîne une majoration de 25% sur le tarif annuel. Les mises à jour On-Premise sont de la responsabilité du client.',
+    feat_op5_d:"Utiliser une version en dehors des 3 dernières actives entraîne une majoration de 25% sur le tarif annuel. Les mises à jour On-Premise sont de la responsabilité du client.",
     feat_sh1_t:'CI/CD et branches de développement',
-    feat_sh1_d:"Chaque commit peut être déployé automatiquement ; testez en staging avant d'affecter la production.",
+    feat_sh1_d:"Chaque commit peut être déployé automatiquement. Testez en staging avant de toucher la production.",
     feat_sh2_t:'Environnement QA dédié',
-    feat_sh2_d:'Testez les mises à jour de version sur votre propre code avant de les appliquer en production réelle.',
+    feat_sh2_d:'Validez les mises à jour de version sur votre propre code avant de les passer en production réelle.',
     feat_sh3_t:'Surveillance et logs en temps réel',
     feat_sh3_d:"Visibilité complète du serveur sans avoir besoin d'une équipe DevOps dédiée.",
-    feat_sh4_t:'Ressources évolutives',
-    feat_sh4_d:'Workers, stockage et staging configurables ; serveur dédié automatique à mesure que vous grandissez.',
-    feat_sh5_t:'Code source accessible',
-    feat_sh5_d:'Personnalisation via des modules open source sans dépendance fournisseur.',
+    feat_sh4_t:'Ressources configurables et évolutives',
+    feat_sh4_d:'Ajustez workers, stockage et stagings selon votre croissance. Le serveur dédié se déclenche automatiquement quand vous en avez besoin.',
+    feat_sh5_t:'Accès au code source',
+    feat_sh5_d:'Personnalisez via des modules open source sans vous attacher à un fournisseur.',
     feat_op_label:'On-Premise — Contrôle total de votre infrastructure',
-    feat_op_sub:'Quand vous avez besoin que vos données restent sur vos propres serveurs.',
+    feat_op_sub:'Pour quand vos données ne peuvent pas quitter vos propres serveurs.',
     feat_sh_label:'Odoo.sh — La puissance du cloud avec le contrôle développeur',
     feat_sh_sub:"Pour les équipes techniques qui ont besoin d'agilité sans renoncer à la personnalisation.",
     feat_p1_t:'+80 apps incluses',
-    feat_p1_d:'CRM, Ventes, Comptabilité, RH, Inventaire, Fabrication, Projets, Achats et plus — tout sans frais supplémentaires.',
+    feat_p1_d:'CRM, Ventes, Comptabilité, RH, Inventaire, Fabrication, Projets, Achats et plus — tout en un seul prix.',
     feat_p2_t:'IA intégrée',
-    feat_p2_d:"Assistant de rédaction, prédiction des ventes et détection d'anomalies comptables sans configuration supplémentaire.",
+    feat_p2_d:"Assistant de rédaction, prévision des ventes et détection d'anomalies comptables — sans configuration supplémentaire.",
     feat_p3_t:'Multi-langue et multi-devise',
-    feat_p3_d:'+50 langues et toute devise avec taux de change automatique. Prêt pour les opérations mondiales.',
+    feat_p3_d:'+50 langues et toute devise avec taux de change automatique. Prêt pour opérer à l\'échelle mondiale.',
     feat_p4_t:'Facturation électronique locale',
-    feat_p4_d:'CFDI Mexique, NF-e Brésil, SAT, SRI, DIAN et plus — conformité fiscale localisée incluse dans votre plan.',
+    feat_p4_d:'CFDI Mexique, NF-e Brésil, SAT, SRI, DIAN et plus — conformité fiscale locale incluse dans votre plan.',
     feat_p5_t:'Application mobile native',
     feat_p5_d:"iOS et Android inclus. Accès hors ligne à l'inventaire, aux approbations et au CRM depuis n'importe quel appareil.",
     feat_p6_t:'Rapports et tableaux de bord',
-    feat_p6_d:'Tableaux de bord exécutifs, rapports personnalisables et analyses commerciales intégrées sans outils externes.',
+    feat_p6_d:'Tableaux de bord exécutifs, rapports personnalisables et analyses intégrées — sans outils supplémentaires.',
     feat_s1_t:'SSO / SAML 2.0',
-    feat_s1_d:"Intégration native avec Active Directory, Google Workspace et Okta. Un seul login pour toute l'entreprise.",
-    feat_s2_t:"Sécurité d'entreprise",
-    feat_s2_d:'SSL, chiffrement de bout en bout, authentification à deux facteurs et protection des données inclus.',
-    feat_s3_t:'Support illimité',
+    feat_s1_d:"Intégration native avec Active Directory, Google Workspace et Okta. Un seul accès pour toute l'entreprise.",
+    feat_s2_t:"Sécurité entreprise",
+    feat_s2_d:'SSL, chiffrement de bout en bout, double authentification et protection des données inclus.',
+    feat_s3_t:'Support sans limite',
     feat_s3_d:'Tickets, e-mail et documentation complète sans limite de requêtes ni coût supplémentaire.',
-    feat_s4_t:'Sauvegardes automatiques quotidiennes',
-    feat_s4_d:"Sauvegardes automatiques avec possibilité de restauration à n'importe quel moment.",
+    feat_s4_t:'Sauvegardes quotidiennes automatiques',
+    feat_s4_d:"Sauvegardes automatiques avec restauration à n'importe quel point dans le temps.",
     feat_s5_t:'Support des 3 dernières versions',
-    feat_s5_d:'Odoo maintient un support actif pour les 3 versions les plus récentes. Toujours couvert sans effort supplémentaire.',
+    feat_s5_d:'Odoo maintient un support actif pour ses 3 versions les plus récentes. Toujours couvert, sans effort de votre part.',
     feat_s6_t:'Correction de bugs garantie',
-    feat_s6_d:"Lors de la correction d'un bug dans toute version couverte, Odoo le corrige dans toutes les versions récentes actives.",
-    feat_s7_t:'Avis de sécurité anticipé',
-    feat_s7_d:'Odoo notifie les vulnérabilités de sécurité au moins 2 semaines avant de les rendre publiques.',
+    feat_s6_d:"Quand un bug est corrigé dans une version couverte, Odoo le corrige dans toutes les versions actives.",
+    feat_s7_t:'Alertes de sécurité anticipées',
+    feat_s7_d:'Odoo vous prévient des vulnérabilités au moins 2 semaines avant de les rendre publiques.',
     feat_s8_t:'Migrations assistées',
-    feat_s8_d:"Support officiel pour migrer depuis les versions précédentes d'Odoo, SAP, QuickBooks ou d'autres ERP.",
-    feat_plan_custom_label:'Plan personnalisé',
+    feat_s8_d:"Support officiel pour migrer depuis des versions antérieures d'Odoo, SAP, QuickBooks ou d'autres ERPs.",
+    feat_plan_custom_label:'Plan Personnalisé',
     feat_studio_t:'Odoo Studio',
-    feat_studio_d:"Personnalisez les formulaires, vues, rapports et flux de travail sans écrire de code. Disponible sur tous les hébergements.",
+    feat_studio_d:"Personnalisez formulaires, vues, rapports et flux de travail sans écrire une seule ligne de code. Disponible sur tous les hébergements.",
     feat_multicompany_t:'Multi-société',
-    feat_multicompany_d:"Gérez plusieurs entreprises et filiales depuis un seul compte avec des données et autorisations séparées par entreprise.",
+    feat_multicompany_d:"Gérez plusieurs entreprises et filiales depuis un seul compte, avec des données et autorisations séparées par entité.",
     feat_api_t:"API complète + accès au code source",
-    feat_api_d:"Intégrez des systèmes externes via REST API et webhooks. Accès au code source pour des personnalisations approfondies. Nécessite On-Premise ou Odoo.sh.",
+    feat_api_d:"Connectez des systèmes externes via REST API et webhooks. Accès au code source pour des personnalisations avancées. Nécessite On-Premise ou Odoo.sh.",
+    inf_label:'+7% annuel sur les renouvellements',
     cta_select:'Choisir ce plan',
     edit_region:'Région',
     edit_users:'utilisateurs',
@@ -1415,10 +1475,10 @@ var LANG={
     edit_advanced:'⚙ Paramètres avancés',
     edit_advanced_close:'Fermer',
     edit_client_ph:'Nom du client...',
-    footer_note:"Remise initiale première année : tarif spécial pour les nouvelles licences · Les prix n'incluent pas la TVA",
+    feat_no_modules_sub:'Sans modules. Sans extras. Sans surprises.',
+    footer_note:"Remise de lancement année 1 : tarif spécial pour les nouvelles licences · Prix hors taxes",
   }
 };
-
 function setLang(l){
   lang=l;
   document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('on',b.dataset.lang===l));
@@ -1593,14 +1653,29 @@ const PT_RULES={
 
 // ══ STATE ══════════════════════════════════════════════
 let curPlan='Standard',curHost='online',curDed=false,billing='monthly';
-let discs={2:0,3:7,4:0,5:12.5}; // 36m=7%, 60m=12.5% default
+let discs={2:0,3:0,4:0,5:0};
 let visPlans=new Set([1,3,5]); // default: 12, 36, 60 meses Plan mensual (0) NOT default
 let infOn=false,infRate=7,view='plans',ptTargetPlans=new Set(),ptSelectedTerm={},erpPlanOverride=-1; // ptSelectedTerm[yrs] = chosen term label
+
+// ══ STAIRS STATE ════════════════════════════════════════
+let stairOn={2:false,3:false,4:false,5:false};
+let stairs={
+  2:[{users:0,month:3}],
+  3:[{users:0,month:5}],
+  4:[{users:0,month:6},{users:0,month:12}],
+  5:[{users:0,month:6},{users:0,month:12}]
+};
+const STAIR_LIMITS={2:{maxTiers:1,maxMonth:6},3:{maxTiers:1,maxMonth:9},4:{maxTiers:2,maxMonth:15},5:{maxTiers:2,maxMonth:15}};
 
 // ══ INIT ═══════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded',()=>{
   try{
     buildChips();buildPtChips();buildDiscFields();renderErp();upd();
+    updateBillingPips();
+    // Force sync users pill after upd()
+    const pipU=document.getElementById('pip-users-input');
+    const unum=document.getElementById('unum');
+    if(pipU&&unum) pipU.value=unum.value;
   }catch(e){console.error('Init error:',e);}
 });
 
@@ -1643,19 +1718,21 @@ function clampSh(){
 }
 function checkDed(){
   if(curHost!=='sh'){curDed=false;return;}
-  const wk=parseInt(document.getElementById('wk').value)||1;
-  const gb=parseInt(document.getElementById('gb').value)||1;
-  const stg=parseInt(document.getElementById('stg').value)||0;
-  const u=parseInt(document.getElementById('unum').value)||1;
-  curDed=(wk>8||gb>512||stg>20||u>200);
+  const wk=parseInt(document.getElementById('wk')?.value)||1;
+  const gb=parseInt(document.getElementById('gb')?.value)||1;
+  const stg=parseInt(document.getElementById('stg')?.value)||0;
+  curDed=(wk>8||gb>512||stg>20);
   const b=document.getElementById('ded-badge');
-  b.textContent=curDed?'⚡ Dedicado':t('no_dedicated');
-  b.className='db '+(curDed?'db-hot':'db-ok');
+  const limHint=document.getElementById('ded-limits');
+  if(b){
+    b.textContent=curDed?'⚡ Servidor dedicado':'Sin dedicado';
+    b.className='db '+(curDed?'db-hot':'db-ok');
+  }
+  if(limHint) limHint.style.display=curDed?'none':'block';
 }
 function toggleInf(){
   infOn=!infOn;
   document.getElementById('inf-chk').checked=infOn;
-  document.getElementById('inf-wrap').classList.toggle('on',infOn);
   upd();
 }
 function toggleSection(section,show){
@@ -1709,11 +1786,20 @@ function buildUnifiedPlanChips(){
           ${isOn?`<div class="upc-star ${isBest?'upc-star-on':''}" onclick="setBestValue(${y})" title="${lang==='en'?'Mark as recommended':lang==='fr'?'Marquer comme recommandé':'Marcar como recomendado'}">★</div>`:''}
         </div>
         ${isOn&&hasDmax?`<div class="upc-disc">
-          <input type="number" class="upc-input" min="0" max="${DMAX[y]}" step="0.5" value="${discVal}"
-            oninput="this.style.width=Math.max(2,(this.value+'').length+0.5)+'ch';setDisc(${y},this.value)" onclick="event.stopPropagation()"
-            style="width:${Math.max(2,(discVal+'').length+0.5)}ch"
-            placeholder="0" title="${t('max')} ${DMAX[y]}%">
-          <span class="upc-pct">%</span>
+          <input type="text" inputmode="decimal" class="upc-input" value="${discVal}"
+            oninput="
+              let v=parseFloat(this.value)||0;
+              this.style.color=v>DMAX[${y}]?'#C62828':'var(--p)';
+              this.style.borderBottom=v>DMAX[${y}]?'1px solid #C62828':'none';
+              setDisc(${y},Math.min(v,DMAX[${y}]))"
+            onblur="
+              let v=parseFloat(this.value)||0;
+              if(v>DMAX[${y}]){this.value=DMAX[${y}];}
+              this.style.color='var(--p)';this.style.borderBottom='none';
+              setDisc(${y},parseFloat(this.value)||0)"
+            onclick="event.stopPropagation()"
+            style="width:44px" placeholder="0" title="${t('max')} ${DMAX[y]}%">
+          <span class="upc-pct">% <span style="font-size:9px;color:var(--g400)">(máx ${DMAX[y]})</span></span>
         </div>`:''}
       </div>`;
     }).join('')}
@@ -1885,6 +1971,196 @@ function calcP(yrs,plan,u,_shm,isAnn){
   const monthlyCostPerMonth=plan.mon.y2*u;
   const mesesAhorrados=monthlyCostPerMonth>0?saving/monthlyCostPerMonth:0;
   return{yrs,disc,licY1,licY2,licTotal,shTotal,total,saving,avgRate,rY1,rY2,baseRef:baseRefWithSh,mesesAhorrados};
+}
+
+// ══ STAIRS ══════════════════════════════════════════════
+
+// Calculate total contract cost WITH stairs for a given plan
+// Returns {total, totalNoStair, saving, tiers:[{users,month,cost}]}
+function calcStairs(yrs, plan, totalUsers, disc){
+  if(!stairOn[yrs]) return null;
+  const s = stairs[yrs] || [];
+  const lim = STAIR_LIMITS[yrs];
+  const d = disc; // multiyear discount (0-1)
+  const rY1 = plan.ann.y1;
+  const rY2 = plan.ann.y2;
+  const totalMonths = yrs * 12;
+
+  // Build tiers: T0 = base users (totalUsers minus all stair users), T1, T2
+  let stairUsers = s.reduce((sum, t) => sum + (parseInt(t.users)||0), 0);
+  const t0Users = Math.max(1, totalUsers - stairUsers);
+
+  const tiers = [{users: t0Users, month: 1}, ...s.map(t=>({users: parseInt(t.users)||0, month: parseInt(t.month)||1}))];
+
+  // Cost per tier: prorate months not used, Y1 price if enters year 1, Y2 otherwise
+  let licTotal = 0;
+  const tierCalcs = tiers.map((tier, i) => {
+    if(tier.users <= 0) return {users: tier.users, month: tier.month, cost: 0};
+    const startMonth = tier.month;
+    const monthsUsed = totalMonths - startMonth + 1;
+    if(monthsUsed <= 0) return {users: tier.users, month: tier.month, cost: 0};
+
+    let cost = 0;
+    if(startMonth <= 12){
+      // Enters year 1 — gets Y1 price for remaining year 1 months, Y2 for rest
+      const yr1Months = 13 - startMonth; // months in year 1
+      const yr2PlusMonths = Math.max(0, monthsUsed - yr1Months);
+      cost = (rY1 * tier.users * yr1Months + rY2 * tier.users * yr2PlusMonths) * (1 - d);
+    } else {
+      // Enters year 2+ — always Y2
+      cost = rY2 * tier.users * monthsUsed * (1 - d);
+    }
+    licTotal += cost;
+    return {users: tier.users, month: tier.month, cost};
+  });
+
+  // Odoo.sh flat (no prorate)
+  const shTotal = curHost === 'sh' ? shCost(true) * 12 * yrs : 0;
+  const total = licTotal + shTotal;
+
+  // Compare vs no stairs (all users from day 1)
+  const noStair = calcP(yrs, plan, totalUsers, 0, true);
+  const saving = noStair.total - total;
+
+  return {total, totalNoStair: noStair.total, saving, tiers: tierCalcs, licTotal, shTotal, disc: d};
+}
+
+// Validate stairs for a plan — returns array of warning strings
+function validateStairs(yrs, totalUsers){
+  if(!stairOn[yrs]) return [];
+  const s = stairs[yrs] || [];
+  const lim = STAIR_LIMITS[yrs];
+  const warns = [];
+
+  s.forEach((t, i) => {
+    const m = parseInt(t.month)||1;
+    if(m > lim.maxMonth) warns.push(`Tier ${i+1}: mes ${m} excede el máximo permitido (mes ${lim.maxMonth})`);
+    if(m < 2) warns.push(`Tier ${i+1}: debe entrar después del mes 1`);
+  });
+
+  // For 48/60: T0+T1 >= 40% of total
+  if((yrs===4||yrs===5) && s.length >= 1){
+    const t0 = totalUsers - s.reduce((sum,t)=>sum+(parseInt(t.users)||0),0);
+    const t1 = parseInt(s[0]?.users)||0;
+    const pct = (t0 + t1) / totalUsers;
+    if(pct < 0.4) warns.push(`⚠ T0+T1 representa ${Math.round(pct*100)}% del total (recomendado ≥ 40%)`);
+  }
+
+  // Total stair users shouldn't exceed totalUsers
+  const stairSum = s.reduce((sum,t)=>sum+(parseInt(t.users)||0),0);
+  if(stairSum >= totalUsers) warns.push('Los usuarios de escaleras superan el total');
+
+  return warns;
+}
+
+// Build the PASO 04 stair UI for all active multiyear plans
+function buildStairUI(){
+  const container = document.getElementById('stair-plans-container');
+  if(!container) return;
+  const u = parseInt(document.getElementById('unum')?.value)||10;
+  const multiPlans = [...visPlans].filter(y => y >= 2).sort((a,b)=>a-b);
+
+  if(multiPlans.length === 0){
+    container.innerHTML = '<span style="font-size:11px;color:var(--g400)">Activa planes multianuales (24m+) en el Paso 01 para configurar escaleras.</span>';
+    return;
+  }
+
+  // Check if the container already has the right plan panels — if so, just update dynamic parts
+  const existingPlans = [...container.querySelectorAll('[data-stair-plan]')].map(el=>parseInt(el.dataset.stairPlan));
+  const needsFullRebuild = JSON.stringify(existingPlans) !== JSON.stringify(multiPlans);
+
+  if(needsFullRebuild){
+    buildStairUIFull(container, multiPlans, u);
+  } else {
+    // Just update Tier 0 count and warnings without rebuilding inputs (preserves focus)
+    multiPlans.forEach(y => {
+      const s = stairs[y];
+      const stairSum = s.reduce((sum,t)=>sum+(parseInt(t.users)||0),0);
+      const t0Users = Math.max(0, u - stairSum);
+      const t0El = container.querySelector(`[data-t0-count="${y}"]`);
+      if(t0El) t0El.textContent = t0Users;
+      const warnEl = container.querySelector(`[data-stair-warns="${y}"]`);
+      if(warnEl && stairOn[y]){
+        const warns = validateStairs(y, u);
+        warnEl.innerHTML = warns.map(w=>`<div class="stair-warn">⚠ ${w}</div>`).join('');
+      }
+    });
+  }
+}
+
+function buildStairUIFull(container, multiPlans, u){
+  const planLabels = {2:'24 meses',3:'36 meses',4:'48 meses',5:'60 meses'};
+  const tierColors = ['stair-t0','stair-t1','stair-t2'];
+
+  container.innerHTML = multiPlans.map(y => {
+    const lim = STAIR_LIMITS[y];
+    const isOn = stairOn[y];
+    const s = stairs[y];
+    const warns = isOn ? validateStairs(y, u) : [];
+    const stairSum = s.reduce((sum,t)=>sum+(parseInt(t.users)||0),0);
+    const t0Users = Math.max(0, u - stairSum);
+
+    const tierRows = s.slice(0, lim.maxTiers).map((tier, i) => `
+      <div class="stair-tier-row">
+        <span class="stair-tier-badge ${tierColors[i+1]}">Tier ${i+1}</span>
+        <input type="text" inputmode="numeric" class="stair-input" value="${tier.users}"
+          placeholder="usu"
+          onchange="stairs[${y}][${i}].users=parseInt(this.value)||0;buildStairUI();upd()"
+          style="width:65px">
+        <span class="stair-input-lbl">usu · mes</span>
+        <input type="text" inputmode="numeric" class="stair-input" value="${tier.month}"
+          placeholder="mes"
+          onchange="let v=Math.min(${lim.maxMonth},Math.max(2,parseInt(this.value)||2));stairs[${y}][${i}].month=v;this.value=v;buildStairUI();upd()"
+          style="width:50px">
+        <span class="stair-input-lbl" style="color:var(--g300)">(máx mes ${lim.maxMonth})</span>
+      </div>`).join('');
+
+    return `<div class="stair-adv-plan" style="min-width:260px;flex:1" data-stair-plan="${y}">
+      <div class="stair-adv-plan-hdr">
+        <span class="stair-adv-plan-lbl">${planLabels[y]}</span>
+        <label class="stair-toggle">
+          <input type="checkbox" ${isOn?'checked':''} onchange="stairOn[${y}]=this.checked;buildStairUIFull(document.getElementById('stair-plans-container'),[...visPlans].filter(y=>y>=2).sort((a,b)=>a-b),parseInt(document.getElementById('unum')?.value)||10);upd()">
+          <span class="stair-slider"></span>
+        </label>
+      </div>
+      ${isOn?`
+        <div class="stair-tier-row" style="opacity:.6">
+          <span class="stair-tier-badge stair-t0">Tier 0</span>
+          <span data-t0-count="${y}" style="font-size:12px;font-weight:700;font-family:'DM Mono',monospace;color:var(--g700)">${t0Users}</span>
+          <span class="stair-input-lbl">usu · mes 1 (calculado)</span>
+        </div>
+        ${tierRows}
+        <div data-stair-warns="${y}">${warns.map(w=>`<div class="stair-warn">⚠ ${w}</div>`).join('')}</div>
+      `:'<span style="font-size:10px;color:var(--g400)">Activar para configurar despliegue escalonado</span>'}
+    </div>`;
+  }).join('');
+}
+
+// Build stair diagram for a card — NO warnings, NO summary (both in price block already)
+function buildStairDiagram(yrs, plan, totalUsers, cur, disc){
+  if(!stairOn[yrs]) return '';
+  const calc = calcStairs(yrs, plan, totalUsers, disc);
+  if(!calc) return '';
+  const tierColors = ['var(--p)','var(--s)','#E65100'];
+  const tierLabel = ['Tier 0','Tier 1','Tier 2'];
+  const tierClass = ['stair-t0','stair-t1','stair-t2'];
+
+  const nodes = calc.tiers.map((t, i) => `
+    <div class="stair-node">
+      <div class="stair-line"></div>
+      <span class="stair-tier-lbl ${tierClass[i]}">${tierLabel[i]}</span>
+      <div class="stair-dot" style="background:${tierColors[i]}"></div>
+      <div class="stair-month">Mes ${t.month}</div>
+      <div class="stair-users" style="color:${tierColors[i]}">+${t.users}</div>
+      <div class="stair-users-lbl">usu.</div>
+    </div>`).join('');
+
+  return `<div class="stair-diagram">
+    <div style="font-size:9px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--g400);margin-bottom:10px">
+      ${lang==='en'?'Stairs · Staggered deployment':lang==='fr'?'Escaliers · Déploiement échelonné':'Escaleras · Despliegue escalonado'}
+    </div>
+    <div class="stair-timeline">${nodes}</div>
+  </div>`;
 }
 
 // ══ PT ══════════════════════════════════════════════════
@@ -2254,11 +2530,12 @@ function upd(){
   const shm=shMon();
 
   if(curHost==='sh'){
-    // Display bar shows both rates for reference
     const shAnnRate=shCost(true);
     const shMonRate=shCost(false);
-    document.getElementById('sh-cost-val').textContent=
-      `${t('billing_annual')}: ${fN(shAnnRate,cur)} ${t('per_user_month')} · ${t('billing_monthly')}: ${fN(shMonRate,cur)} ${t('per_user_month')}`;
+    const costEl=document.getElementById('sh-cost-val');
+    if(costEl) costEl.textContent=
+      `Anual: ${fN(shAnnRate,cur)}/mes · Mensual: ${fN(shMonRate,cur)}/mes`;
+    updateShSuggestions();
   }
 
   // Header
@@ -2267,9 +2544,8 @@ function upd(){
   const hostLabel=curHost==='online'?t('hosting_online'):curHost==='onprem'?t('hosting_onprem'):t('hosting_sh');
   const subText=`${u} ${t('users').toLowerCase().replace(/es$/,'').replace(/s$/,'')}${u>1?'s':''} · ${planLabel} · ${hostLabel}`;
   // Proposal header
-  const clientEl=document.getElementById('content-sub');
-  if(clientEl)clientEl.textContent=cl||t('prop_client_placeholder');
-  const detEl=document.getElementById('content-detail');
+  // Proposal header — update pills row
+  const detEl=document.getElementById('ph-pills-row');
   if(detEl)detEl.innerHTML=
     `<span class="ph-pill-hl">${u} ${t('users').toLowerCase().replace(/es$/,'').replace(/s$/,'')}${u>1?'s':''}</span>`+
     `<span class="ph-pill">${planLabel}</span>`+
@@ -2291,10 +2567,12 @@ function upd(){
   // GRID — always N columns (one per plan)
   const vigDays=parseInt(document.getElementById('vig-days').value)||0;
   // Reorder: put recommended card in center
-  // Use override or automatic for centering
-  const recYear=erpPlanOverride>0&&visPlans.has(erpPlanOverride)
-    ?erpPlanOverride
-    :sorted[bestIdx];
+  // Priority: manual star > erpPlanOverride > auto best saving
+  const recYear=bestValuePlan!==null&&visPlans.has(bestValuePlan)
+    ?bestValuePlan
+    :erpPlanOverride>0&&visPlans.has(erpPlanOverride)
+      ?erpPlanOverride
+      :sorted[bestIdx];
   if(sorted.length>1){
     const rest=sorted.filter(y=>y!==recYear);
     const mid=Math.floor(rest.length/2);
@@ -2351,17 +2629,16 @@ function upd(){
       const planTerms=getPT(planTotalUSD,d.rgn);
       const chosen=ptSelectedTerm[y]||'';
       const mLabel={0:t('billing_monthly'),1:'12 m.',2:'24 m.',3:'36 m.',4:'48 m.',5:'60 m.'}[y];
-      const spNote=chosen&&planTerms.find(pt=>pt.lk===chosen&&pt.sp)?
-        `<div class="np" style="font-size:10px;color:#F57F17;margin-top:4px">${t("pt_approval")}</div>`:'';
+      const spNote=chosen&&planTerms.find(pt=>pt.l===chosen&&pt.sp)?
+        `<div class="np" style="font-size:10px;color:#F57F17;margin-top:4px">⚠️ ${t("pt_approval")}</div>`:'';
       ptHtml=`<div class="pc-pt">
         <div class="pc-pt-ttl">${t('pt_title')} · ${mLabel}</div>
         <select class="np" style="width:100%;padding:5px 7px;border:1px solid var(--g200);border-radius:5px;font-size:11px;font-family:inherit;margin-top:4px;background:white;color:var(--g900)"
           onchange="ptSelectedTerm[${y}]=this.value;upd()">
           <option value="">${t('pt_select')}</option>
-          ${planTerms.map(pt=>`<option value="${pt.lk}" ${chosen===pt.lk?'selected':''}>${pt.def?'⭐ ':''}${window._tl?window._tl(pt.lk):pt.lk}</option>`).join('')}
+          ${planTerms.map(pt=>`<option value="${pt.l}" ${chosen===pt.l?'selected':''}>${pt.def?'⭐ ':''}${pt.l}</option>`).join('')}
         </select>
-        ${chosen?`<div class="np" style="margin-top:5px;padding:5px 8px;background:var(--pp);border-radius:5px;font-size:11px;font-weight:600;color:var(--p)">✓ ${chosen}${spNote}</div>`:''}
-        ${chosen?`<div class="pc-pt-chosen" style="margin-top:5px;padding:5px 8px;background:var(--pp);border-radius:5px;font-size:11px;font-weight:600;color:var(--p)">✓ ${t(chosen)}</div>`:''}
+        ${chosen?`<div class="np" style="margin-top:5px;padding:5px 8px;background:var(--pp);border-radius:5px;font-size:11px;font-weight:600;color:var(--p)">✓ ${chosen}</div>${spNote}`:''}
       </div>`;
     }
 
@@ -2389,26 +2666,37 @@ function upd(){
 
       <!-- PRICE BLOCK -->
       <div class="pc-ph" style="padding:16px 16px 12px">
-        <div class="pc-normally-row">
-          <span class="pc-normally-lbl">${t('normally')}</span>
-          <div class="pc-strike-wrap">
-            <span class="pc-strike">${normTotal}</span>
-            <div class="pc-strike-line"></div>
+        ${(()=>{
+          const sc = y>=2&&stairOn[y] ? calcStairs(y,plan,u,c.disc) : null;
+          const displayTotal = sc ? sc.total : c.total;
+          const displaySaving = sc ? sc.saving : c.saving;
+          const displayNorm = sc ? fN(sc.totalNoStair,cur) : normTotal;
+          const monthlyCostPerMonth = plan.mon.y2*u;
+          const stairMesesGratis = sc && sc.saving>0 && monthlyCostPerMonth>0
+            ? (sc.saving/monthlyCostPerMonth).toFixed(1)+' '+t('months_free')
+            : mesesGratis;
+          const stairBadge = sc ? '<div style="font-size:9px;font-weight:600;color:var(--p);background:var(--pp);padding:2px 7px;border-radius:8px;display:inline-block;margin-bottom:6px">\u{1F4CA} '+(lang==='en'?'With stairs':lang==='fr'?'Avec escaliers':'Con escaleras')+'</div>' : '';
+          return `
+          ${stairBadge}
+          <div class="pc-normally-row">
+            <span class="pc-normally-lbl">${t('normally')}</span>
+            <div class="pc-strike-wrap">
+              <span class="pc-strike">${displayNorm}</span>
+              <div class="pc-strike-line"></div>
+            </div>
           </div>
-        </div>
-        <div class="pc-total-big" style="color:${isRec?'var(--s)':'var(--g900)'}">${fN(c.total,cur)}</div>
-        <div class="pc-per-user-inline">${fN(c.avgRate,cur)} ${t('per_user_month')}${curHost==='sh'?' · '+shLabel:''}</div>
-
-        <!-- SAVINGS HERO -->
-        ${c.saving>0?`
-        <div class="pc-savings-block">
-          <div class="pc-savings-months">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:1px"><rect x="3" y="4" width="18" height="18" rx="2" stroke="#059669" stroke-width="2"/><path d="M3 9h18" stroke="#059669" stroke-width="2"/><path d="M8 2v3M16 2v3" stroke="#059669" stroke-width="2" stroke-linecap="round"/></svg>
-            ${mesesGratis}
-          </div>
-          <div class="pc-savings-amount">${t('saves')} ${fN(c.saving,cur)}</div>
-        </div>`:''}
-
+          <div class="pc-total-big" style="color:${isRec?'var(--s)':'var(--g900)'}">${fN(displayTotal,cur)}</div>
+          <div class="pc-per-user-inline">${sc?(u+' '+t('edit_users')+' · '+(lang==='en'?'staggered deployment':lang==='fr'?'déploiement échelonné':'despliegue escalonado')):(fN(c.avgRate,cur)+' '+t('per_user_month'))}${curHost==='sh'?' · '+shLabel:''}</div>
+          ${displaySaving>0?`
+          <div class="pc-savings-block">
+            <div class="pc-savings-months">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;margin-top:1px"><rect x="3" y="4" width="18" height="18" rx="2" stroke="#059669" stroke-width="2"/><path d="M3 9h18" stroke="#059669" stroke-width="2"/><path d="M8 2v3M16 2v3" stroke="#059669" stroke-width="2" stroke-linecap="round"/></svg>
+              ${stairMesesGratis}
+            </div>
+            <div class="pc-savings-amount">${t('saves')} ${fN(displaySaving,cur)}</div>
+          </div>`:''}
+          `;
+        })()}
         <!-- TAGS -->
         <div class="pc-tags" style="margin-top:10px">${tags}</div>
       </div>
@@ -2427,7 +2715,7 @@ function upd(){
           </div>`:''}
         </div>
         ${ptHtml}
-
+        ${y>=2?buildStairDiagram(y,plan,u,cur,c.disc):''}
       </div>
     </div>`;
   }).join('');
@@ -2435,6 +2723,7 @@ function upd(){
 
   autoSetErpRegion(reg);
   buildFeatures();
+  buildStairUI();
   if(document.getElementById('show-impact')?.checked)buildImpact();
   if(document.getElementById('show-inv-table')?.checked)buildInvTable();
   // Update inline pills
@@ -2443,9 +2732,11 @@ function upd(){
 
 // ══ INVESTMENT TABLE ══════════════════════════════════════
 function toggleInvTable(){
-  const show=document.getElementById('show-inv-table').checked;
-  document.getElementById('inv-table-section').classList.toggle('hidden',!show);
-  if(show) buildInvTable();
+  const cb=document.getElementById('show-inv-table');
+  const sec=document.getElementById('inv-table-section');
+  if(!cb||!sec) return;
+  sec.classList.toggle('hidden',!cb.checked);
+  if(cb.checked) buildInvTable();
 }
 
 function buildInvTable(){
@@ -2612,8 +2903,10 @@ function buildInvTable(){
   });
 
   html+='</tbody>';
-  document.getElementById('inv-table').innerHTML=html;
-  document.getElementById('inv-subtitle').textContent=
+  const invTable=document.getElementById('inv-table');
+  if(invTable) invTable.innerHTML=html;
+  const invSub=document.getElementById('inv-subtitle');
+  if(invSub) invSub.textContent=
     `${u} ${t('users').toLowerCase().replace(/es$/,'').replace(/s$/,'')}${u>1?'s':''} · Plan ${curPlan==='Standard'?t('plan_std'):t('plan_custom')} · ${reg}${infOn?' · '+t('inf_label'):''}`;
 }
 
@@ -2950,10 +3243,11 @@ function updateAllPips(){
     const pip=document.getElementById('pip-host-'+h);
     if(!pip) return;
     const isActive=h===curHost;
-    pip.style.background=isActive?'var(--s)':'transparent';
-    pip.style.color=isActive?'white':'var(--g600)';
-    pip.style.fontWeight=isActive?'600':'500';
+    pip.style.background='white';
+    pip.style.color=isActive?'var(--p)':'var(--g300)';
+    pip.style.fontWeight=isActive?'700':'500';
     pip.classList.toggle('pip-host-active',isActive);
+    pip.querySelectorAll('svg').forEach(svg=>{svg.style.stroke=isActive?'var(--p)':'currentColor';});
   });
 
   // On-Premise: only available with Annual → show badge, disable if Monthly
@@ -2976,12 +3270,6 @@ function updateAllPips(){
   const pipCus=document.getElementById('pip-cus');
   if(pipStd){pipStd.classList.toggle('pip-active',isStd);pipStd.style.background=isStd?'var(--p)':'white';pipStd.style.color=isStd?'white':'var(--g600)';}
   if(pipCus){pipCus.classList.toggle('pip-active',!isStd);pipCus.style.background=!isStd?'var(--p)':'white';pipCus.style.color=!isStd?'white':'var(--g600)';}
-
-  // Adv panel plan buttons sync
-  const advStd=document.getElementById('adv-tab-std');
-  const advCus=document.getElementById('adv-tab-cus');
-  if(advStd){advStd.style.background=isStd?'var(--p)':'white';advStd.style.color=isStd?'white':'var(--g500)';}
-  if(advCus){advCus.style.background=!isStd?'var(--p)':'white';advCus.style.color=!isStd?'white':'var(--g500)';}
 
   // Adv hosting buttons sync
   ['online','onprem','sh'].forEach(h=>{
@@ -3006,7 +3294,7 @@ function updateAllPips(){
     const reg=document.getElementById('region')?.value||'North America';
     const cur=(PD[reg]||PD['North America']).cur||'$';
     const ann=shCost(true),mon=shCost(false);
-    shInlineCost.textContent=`${t('billing_annual')}: ${fN(ann/12,cur)}${t('per_month')} · ${t('billing_monthly')}: ${fN(mon/12,cur)}${t('per_month')}`;
+    shInlineCost.textContent=`Costo Odoo.sh — Anual: ${fN(ann,cur)}/mes · Mensual: ${fN(mon,cur)}/mes`;
   } else if(shInlineCost) shInlineCost.textContent='';
   // Sync pip labels via t()
   const pipMonthly=document.getElementById('pip-lbl-monthly');
@@ -3032,6 +3320,7 @@ function setHostInline(h){
   curHost=h;
   if(h==='sh') initShDefaults();
   upd();
+  updateAllPips();
 }
 
 function initShDefaults(){
@@ -3044,7 +3333,23 @@ function initShDefaults(){
   if(wkEl) wkEl.value=wkVal;
   if(gbEl) gbEl.value=gbVal;
   if(stgEl) stgEl.value=1;
+  updateShSuggestions();
   checkDed();
+}
+
+function updateShSuggestions(){
+  const u=parseInt(document.getElementById('unum')?.value)||10;
+  const sugWk=Math.max(1,Math.ceil(u/25));
+  const sugGb=Math.max(20,u*2);
+  const wkHint=document.getElementById('wk-suggest');
+  const gbHint=document.getElementById('gb-suggest');
+  const suggest=document.getElementById('sh-suggest');
+  if(wkHint){wkHint.textContent='sugerido: '+sugWk;wkHint.style.display='inline';}
+  if(gbHint){gbHint.textContent='sugerido: '+sugGb+' GB';gbHint.style.display='inline';}
+  if(suggest){
+    suggest.textContent=`Valores sugeridos para ${u} usuarios: ${sugWk} worker${sugWk>1?'s':''} · ${sugGb} GB storage · 1 staging`;
+    suggest.style.display='block';
+  }
 }
 
 function setVig(d){
@@ -3070,7 +3375,14 @@ function toggleAdvPanel(){
 
 // Add inline pill updates to DOMContentLoaded
 document.addEventListener('DOMContentLoaded',()=>{
-  setTimeout(initInlinePills, 50);
+  setTimeout(()=>{
+    initInlinePills();
+    // Double-ensure users input shows correct value
+    const pipU=document.getElementById('pip-users-input');
+    const unum=document.getElementById('unum');
+    if(pipU&&unum&&unum.value) pipU.value=unum.value;
+    updateAllPips();
+  }, 80);
 });
 
 </script>
